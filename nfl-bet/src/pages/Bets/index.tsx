@@ -1,5 +1,6 @@
 import React from "react";
+import BetCardContainer from "../../components/BetCard/BetCardContainer";
 
 export default function Bets() {
-  return <div>Hello</div>;
+  return <BetCardContainer />;
 }

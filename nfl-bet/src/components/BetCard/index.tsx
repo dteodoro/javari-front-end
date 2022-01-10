@@ -14,9 +14,8 @@ import { ISchedule } from "../../types/schedule";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "450px",
     display: "grid",
-    gridTemplateRows: "10% 75% 10% 5%",
+    gridTemplateRows: "5% 85% 10%",
   },
   cardMedia: {
     maxWidth: "70px",
@@ -96,19 +95,17 @@ const BetCard = ({ schedule }: { schedule: ISchedule }) => {
           </Typography>
         </Box>
       </CardContent>
-
-      <ButtonGroup
-        variant="contained"
-        color="secondary"
-        className={classes.buttonGroup}
-        disableElevation
-      >
-        <Button>{schedule.competitors.homeTeam.shortName}</Button>
-        <Button>DAW</Button>
-        <Button>{schedule.competitors.awayTeam.shortName}</Button>
-      </ButtonGroup>
-
-      <CardActions></CardActions>
+      <CardActions className={classes.buttonGroup}>
+        <ButtonGroup
+          variant="contained"
+          color="secondary"
+          disableElevation
+        >
+          <Button>{schedule.competitors.homeTeam.shortName}</Button>
+          <Button>DAW</Button>
+          <Button>{schedule.competitors.awayTeam.shortName}</Button>
+        </ButtonGroup>
+      </CardActions>
     </Card>
   );
 };

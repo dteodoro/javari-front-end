@@ -1,17 +1,17 @@
 import { createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/styles";
-import React from "react";
-import BetCardContainer from "../../components/BetCard/BetCardContainer";
+
 import Layout from "../Layout";
+import AppRoutes from "../AppRoutes";
 
 const theme = createTheme({});
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Layout>
-        <CssBaseline />
-        <BetCardContainer />
+        <AppRoutes />
       </Layout>
     </ThemeProvider>
   );

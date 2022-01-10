@@ -4,11 +4,12 @@ import { makeStyles } from "@mui/styles";
 import BetCard from "..";
 import { ISchedule } from "../../../types/schedule";
 
-const bets = [1, 2, 3, 4];
+const bets = [1, 2, 3, 4, 5, 6, 7];
 
 const useStyles = makeStyles({
   root: {
     backgroundColor: "#f6f6f6",
+    margin: "0 auto",
   },
 });
 
@@ -41,7 +42,7 @@ const BetCardContainer = () => {
     <Container className={classes.root}>
       <Grid container spacing={2}>
         {bets.map((bet) => (
-          <Grid key={bet} item xs={12} sm={6} md={5} lg={5} xl={5}>
+          <Grid key={bet} item xs={12} sm={6} md={6} lg={4} xl={4}>
             <BetCard schedule={schedule} />
           </Grid>
         ))}
