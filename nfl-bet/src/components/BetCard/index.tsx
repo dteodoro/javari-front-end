@@ -26,7 +26,6 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "40% 20% 40%",
     alignItems: "center",
-    paddingBottom: "8px",
   },
   cardHeader: {
     display: "flex",
@@ -96,11 +95,7 @@ const BetCard = ({ schedule }: { schedule: ISchedule }) => {
         </Box>
       </CardContent>
       <CardActions className={classes.buttonGroup}>
-        <ButtonGroup
-          variant="contained"
-          color="secondary"
-          disableElevation
-        >
+        <ButtonGroup variant="contained" color="secondary" disableElevation>
           <Button>{schedule.competitors.homeTeam.shortName}</Button>
           <Button>DAW</Button>
           <Button>{schedule.competitors.awayTeam.shortName}</Button>

@@ -1,6 +1,8 @@
 import React from "react";
 import BetCardContainer from "../../components/BetCard/BetCardContainer";
 
-export default function Bets() {
+const Bets = () => {
   return <BetCardContainer />;
-}
+};
+
+export default Bets;

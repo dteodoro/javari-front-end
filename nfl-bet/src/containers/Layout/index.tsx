@@ -2,7 +2,6 @@ import {
   AppBar,
   Button,
   Drawer,
-  Icon,
   IconButton,
   List,
   ListItem,
@@ -31,8 +30,9 @@ const useStyles = makeStyles((open) => {
       margin: "0 auto",
     },
     page: {
-      display: "flex",
+      display: "block",
       margin: "8px auto",
+      width: "100%",
     },
     drawer: {
       width: drawerWidth,
@@ -50,7 +50,7 @@ const useStyles = makeStyles((open) => {
 });
 
 export default function Layout({ children }: any) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const classes = useStyles(open);
   const navigate = useNavigate();
 
@@ -98,7 +98,10 @@ export default function Layout({ children }: any) {
             <ListItem
               key={item.name}
               button
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                setOpen(false);
+                navigate(item.path);
+              }}
             >
               <ListItemIcon>{<item.icon />}</ListItemIcon>
               <ListItemText primary={item.name} />
@@ -106,11 +109,7 @@ export default function Layout({ children }: any) {
           ))}
         </List>
       </Drawer>
-      <div>filters</div>
       <div className={classes.page}>{children}</div>
     </div>
   );
-}
-function useHistory() {
-  throw new Error("Function not implemented.");
 }
