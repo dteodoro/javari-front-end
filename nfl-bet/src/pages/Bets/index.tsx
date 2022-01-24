@@ -1,5 +1,5 @@
 import React from "react";
-import BetCardContainer from "../../components/BetCard/BetCardContainer";
+import BetCardContainer from "../../containers/BetCardContainer";
 
 const Bets = () => {
   return <BetCardContainer />;

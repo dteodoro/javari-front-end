@@ -30,8 +30,8 @@ const useStyles = makeStyles((open) => {
       margin: "0 auto",
     },
     page: {
-      display: "block",
-      margin: "8px auto",
+      display: "flex",
+      margin: "0 auto",
       width: "100%",
     },
     drawer: {

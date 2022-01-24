@@ -1,15 +1,10 @@
-import {
-  Box,
-  Container,
-  Grid,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, MenuItem, Typography } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { makeStyles } from "@mui/styles";
+import { useState } from "react";
 
-import BetCard from "..";
-import { ISchedule } from "../../../types/schedule";
+import BetCard from "../../components/BetCard";
+import { ISchedule } from "../../types/schedule";
 
 const bets = [1, 2, 3, 4, 5, 6, 7];
 
@@ -20,26 +15,29 @@ const useStyles = makeStyles({
   },
   filterBar: {
     width: "100%",
-    height: "8%",
-    backgroundColor: "#f9f9f9",
-    margin: "0 auto",
+    height: "10%",
+    backgroundColor: "#4a58a5",
+    margin: "10px auto",
     display: "block",
     marginBottom: "16px",
     borderBottom: "solid 1px #e4e0e0",
   },
   filterBarTitle: {
     padding: "8px 8px",
+    paddingBottom: "16px",
     margin: "16px 0",
   },
   selectsGroup: {
     display: "flex",
   },
   selectItem: {
-    marginBottom: "16px",
-    width: "50%",
+    marginLeft: "8px",
+    marginBottom: "8px",
+    width: "30%",
   },
   lastSelect: {
-    marginLeft: "16px",
+    marginRight: "8px",
+    flexGrow: "2",
   },
 });
 
@@ -53,7 +51,7 @@ const weeks = [
   "Week 6",
   "Week 7",
   "Week 8",
-  "Week 8",
+  "CONFERENCE CHAMPIONSHIP",
 ];
 
 const schedule: ISchedule = {
@@ -81,25 +79,49 @@ const schedule: ISchedule = {
 
 const BetCardContainer = () => {
   const classes = useStyles();
+  const [year, setYear] = useState("");
+  const [week, setWeek] = useState("");
+
+  const handleChangeWeek = (event: SelectChangeEvent) =>
+    setWeek(event.target.value as string);
+
+  const handleChangeYear = (event: SelectChangeEvent) =>
+    setYear(event.target.value as string);
+
   return (
     <Container className={classes.root}>
       <Box className={classes.filterBar}>
         <Typography
           fontWeight="bold"
-          variant="h5"
+          variant="h6"
           className={classes.filterBarTitle}
         >
-          2021 — WEEK 18
+          NFL SCHEDULE
+        </Typography>
+        <Typography
+          fontWeight="bold"
+          variant="h6"
+          className={classes.filterBarTitle}
+        >
+          {year && week && `${year} - ${week}`}
         </Typography>
         <Box className={classes.selectsGroup}>
-          <Select className={classes.selectItem}>
+          <Select
+            className={classes.selectItem}
+            onChange={handleChangeYear}
+            value={year}
+          >
             {years.map((year) => (
               <MenuItem key={year} value={year}>
                 {year}
               </MenuItem>
             ))}
           </Select>
-          <Select className={`${classes.selectItem} ${classes.lastSelect}`}>
+          <Select
+            className={`${classes.selectItem} ${classes.lastSelect}`}
+            onChange={handleChangeWeek}
+            value={week}
+          >
             {weeks.map((week) => (
               <MenuItem key={week} value={week}>
                 {week}
