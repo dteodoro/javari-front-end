@@ -25,7 +25,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((open) => {
   return {
     root: {
-      backgroundColor: "#f9f9f9",
+      // backgroundColor: "#f9f9f9",
       width: "100%",
       margin: "0 auto",
     },
@@ -46,6 +46,9 @@ const useStyles = makeStyles((open) => {
       padding: "8px 8px",
       height: "64px",
     },
+    appBar: {
+      zIndex: 999,
+    },
   };
 });
 
@@ -56,7 +59,7 @@ export default function Layout({ children }: any) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky">
+      <AppBar position="sticky" className={classes.appBar}>
         <Toolbar>
           <IconButton
             size="large"
