@@ -6,16 +6,18 @@ import GroupsIcon from "@mui/icons-material/Groups";
 
 import Home from "./pages/Home";
 import Bets from "./pages/Bets";
-import Rank from "./pages/Rank";
-import Teams from "./pages/Teams";
+import Teams from './pages/Teams';
+import Standings from "./pages/Standings";
+import Team from "./pages/Team";
 
 export enum RoutePath {
   LOG_IN = "/login",
   FORGOT_PASSWORD = "/forgot_password",
   HOME = "/home",
   BETS = "/bets",
-  RANK = "/rank",
   TEAMS = "/teams",
+  TEAM = "/team/:id",
+  STANDINGS = "/standings"
 }
 
 export const navItem: SideBarNavItem[] = [
@@ -30,14 +32,14 @@ export const navItem: SideBarNavItem[] = [
     icon: SportsFootballIcon,
   },
   {
-    name: "Rank",
-    path: RoutePath.RANK,
-    icon: EmojiEventsIcon,
-  },
-  {
     name: "Teams",
     path: RoutePath.TEAMS,
     icon: GroupsIcon,
+  },
+  {
+    name: "Standings",
+    path: RoutePath.STANDINGS,
+    icon: EmojiEventsIcon,
   },
 ];
 
@@ -55,16 +57,21 @@ export const routes: Route[] = [
     component: Bets,
   },
   {
-    name: "rank",
-    path: RoutePath.RANK,
-    sideBarNavItem: navItem,
-    component: Rank,
-  },
-  {
-    name: "teams",
+    name: "Teams",
     path: RoutePath.TEAMS,
     sideBarNavItem: navItem,
     component: Teams,
+  },
+  {
+    name: "Team",
+    path: RoutePath.TEAM,
+    component: Team,
+  },
+  {
+    name: "Standings",
+    path: RoutePath.STANDINGS,
+    sideBarNavItem: navItem,
+    component: Standings,
   },
 ];
 
