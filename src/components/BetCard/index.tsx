@@ -42,6 +42,12 @@ const useStyles = makeStyles({
   buttonGroup: {
     justifyContent: "center",
   },
+  // matchStatus: {
+  //   backgroundColor: "green",
+  //   borderRadius: "0 0 0 5px",
+  //   color: "white",
+  //   padding: "1px 2px 0 2px",
+  // },
 });
 
 const BetCard = ({ schedule }: { schedule: ISchedule }) => {
@@ -56,7 +62,11 @@ const BetCard = ({ schedule }: { schedule: ISchedule }) => {
         >
           {format(schedule.matchDate, "EEE dd/MM").toUpperCase()}
         </Typography>
-        <Typography variant="caption" fontWeight="bold">
+        <Typography
+          variant="caption"
+          fontWeight="bold"
+          // className={classes.matchStatus}
+        >
           {schedule.matchStatus}
         </Typography>
       </Box>
