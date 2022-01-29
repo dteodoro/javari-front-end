@@ -9,23 +9,26 @@ import style from ".styles.module.scss";
 const bets = [1, 2, 3, 4, 5, 6, 7];
 
 const schedule: ISchedule = {
+  id: 1,
   matchDate: new Date(),
   matchStatus: "NOT STARTED",
   competitors: {
     homeTeam: {
       id: 1,
       logo: "/nfl.svg",
-      fullName: "Home Team",
-      mediumName: "Team 1",
-      shortName: "TM1",
+      name: "Raiders",
+      nickName: "Las Vegas",
+      displayName: "Las Vegas Raiders",
+      abbreviation: "LV",
       stats: "(2-3-1)",
     },
     awayTeam: {
       id: 1,
       logo: "/nfl.svg",
-      fullName: "Away Team",
-      mediumName: "Team 2",
-      shortName: "TM2",
+      name: "Rams",
+      nickName: "Los Angeles",
+      displayName: "Los Angeles Rams",
+      abbreviation: "LAR",
       stats: "(5-1)",
     },
   },
