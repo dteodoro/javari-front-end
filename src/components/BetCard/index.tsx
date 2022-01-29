@@ -43,7 +43,7 @@ const BetCard = ({ schedule }: Props) => {
             className={style.cardMedia}
           />
           <Typography margin={0} variant="h6">
-            {schedule.competitors.homeTeam.mediumName}
+            {schedule.competitors.homeTeam.name}
           </Typography>
           <Typography margin={0} variant="caption">
             {schedule.competitors.homeTeam.stats}
@@ -60,7 +60,7 @@ const BetCard = ({ schedule }: Props) => {
             className={style.cardMedia}
           />
           <Typography margin={0} variant="h6">
-            {schedule.competitors.awayTeam.mediumName}
+            {schedule.competitors.awayTeam.name}
           </Typography>
           <Typography margin={0} variant="caption">
             {schedule.competitors.awayTeam.stats}
@@ -69,9 +69,9 @@ const BetCard = ({ schedule }: Props) => {
       </CardContent>
       <CardActions className={style.buttonGroup}>
         <ButtonGroup variant="contained" color="secondary" disableElevation>
-          <Button>{schedule.competitors.homeTeam.shortName}</Button>
+          <Button>{schedule.competitors.homeTeam.abbreviation}</Button>
           <Button>DAW</Button>
-          <Button>{schedule.competitors.awayTeam.shortName}</Button>
+          <Button>{schedule.competitors.awayTeam.abbreviation}</Button>
         </ButtonGroup>
       </CardActions>
     </Card>

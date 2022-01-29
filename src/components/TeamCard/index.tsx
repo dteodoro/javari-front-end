@@ -24,15 +24,15 @@ const TeamCard = ({ team }: Props) => {
           <CardMedia
             component="img"
             image={team.logo}
-            alt={team.shortName}
+            alt={team.displayName}
             className={style.cardMedia}
           />
           <Box>
             <Typography margin={0} variant="caption">
-              {team.fullName}
+              {team.nickName}
             </Typography>
             <Typography margin={0} variant="h6">
-              {team.mediumName}
+              {team.name}
             </Typography>
           </Box>
           <Box className={style.stats}>
