@@ -50,7 +50,11 @@ const useStyles = makeStyles({
   // },
 });
 
-const BetCard = ({ schedule }: { schedule: ISchedule }) => {
+interface Props {
+  schedule: ISchedule;
+}
+
+const BetCard = ({ schedule }: Props) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} elevation={2}>

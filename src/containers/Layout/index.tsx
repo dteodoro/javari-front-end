@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import React, { RefCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -52,7 +52,11 @@ const useStyles = makeStyles((open) => {
   };
 });
 
-export default function Layout({ children }: any) {
+interface Props {
+  children?: React.ReactNode;
+}
+
+export default function Layout({ children }: Props) {
   const [open, setOpen] = useState(false);
   const classes = useStyles(open);
   const navigate = useNavigate();

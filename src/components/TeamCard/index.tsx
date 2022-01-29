@@ -33,7 +33,11 @@ const useStyle = makeStyles({
   },
 });
 
-const TeamCard = ({ team }: { team: ITeam }) => {
+interface Props {
+  team: ITeam;
+}
+
+const TeamCard = ({ team }: Props) => {
   const classes = useStyle();
   console.log(team);
   return (
