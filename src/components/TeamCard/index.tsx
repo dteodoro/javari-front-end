@@ -10,45 +10,22 @@ import {
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { ITeam } from "../../types/team";
-// import { Container } from './styles';
-
-const useStyle = makeStyles({
-  root: {
-    padding: "8px 16px 8px 4px",
-    minWidth: "295px",
-  },
-  cardContent: {
-    display: "flex",
-    alignItems: "stretch",
-    padding: "0",
-  },
-  cardMedia: {
-    maxWidth: "70px",
-    maxHeight: "70px",
-  },
-  stats: {
-    alignSelf: "center",
-    textAlign: "right",
-    flexGrow: "3",
-  },
-});
-
+import style from "./styles.module.scss";
 interface Props {
   team: ITeam;
 }
 
 const TeamCard = ({ team }: Props) => {
-  const classes = useStyle();
   console.log(team);
   return (
     <Card>
-      <div className={classes.root}>
-        <Box className={classes.cardContent}>
+      <div className={style.root}>
+        <Box className={style.cardContent}>
           <CardMedia
             component="img"
             image={team.logo}
             alt={team.shortName}
-            className={classes.cardMedia}
+            className={style.cardMedia}
           />
           <Box>
             <Typography margin={0} variant="caption">
@@ -58,7 +35,7 @@ const TeamCard = ({ team }: Props) => {
               {team.mediumName}
             </Typography>
           </Box>
-          <Box className={classes.stats}>
+          <Box className={style.stats}>
             <Typography margin={0} variant="caption">
               {team.stats}
             </Typography>

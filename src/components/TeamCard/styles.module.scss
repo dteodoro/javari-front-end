@@ -1,0 +1,18 @@
+.root {
+  padding: 8px 16px 8px 4px;
+  min-width: 295px;
+}
+.cardContent {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+}
+.cardMedia {
+  max-width: 70px;
+  max-height: 70px;
+}
+.stats {
+  align-self: center;
+  text-align: right;
+  flex-grow: 3;
+}

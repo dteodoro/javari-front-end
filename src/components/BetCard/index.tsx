@@ -12,76 +12,35 @@ import { makeStyles } from "@mui/styles";
 import { format } from "date-fns";
 import { ISchedule } from "../../types/schedule";
 
-const useStyles = makeStyles({
-  root: {
-    display: "grid",
-    gridTemplateRows: "5% 85% 10%",
-  },
-  cardMedia: {
-    maxWidth: "70px",
-    maxHeight: "70px",
-    margin: "auto",
-  },
-  cardContent: {
-    display: "grid",
-    gridTemplateColumns: "40% 20% 40%",
-    alignItems: "center",
-  },
-  cardHeader: {
-    display: "flex",
-    margin: "0 4px",
-  },
-  date: {
-    flexGrow: 1,
-  },
-  teams: {
-    display: "grid",
-    margin: "auto",
-    textAlign: "center",
-  },
-  buttonGroup: {
-    justifyContent: "center",
-  },
-  // matchStatus: {
-  //   backgroundColor: "green",
-  //   borderRadius: "0 0 0 5px",
-  //   color: "white",
-  //   padding: "1px 2px 0 2px",
-  // },
-});
+import style from "./styles.module.scss";
 
 interface Props {
   schedule: ISchedule;
 }
 
 const BetCard = ({ schedule }: Props) => {
-  const classes = useStyles();
   return (
-    <Card className={classes.root} elevation={2}>
-      <Box className={classes.cardHeader}>
-        <Typography
-          fontWeight="bold"
-          variant="caption"
-          className={classes.date}
-        >
+    <Card className={style.root} elevation={2}>
+      <Box className={style.cardHeader}>
+        <Typography fontWeight="bold" variant="caption" className={style.date}>
           {format(schedule.matchDate, "EEE dd/MM").toUpperCase()}
         </Typography>
         <Typography
           variant="caption"
           fontWeight="bold"
-          // className={classes.matchStatus}
+          // className={style.matchStatus}
         >
           {schedule.matchStatus}
         </Typography>
       </Box>
 
-      <CardContent className={classes.cardContent}>
-        <Box className={classes.teams}>
+      <CardContent className={style.cardContent}>
+        <Box className={style.teams}>
           <CardMedia
             component="img"
             image={schedule.competitors.homeTeam.logo}
             alt="Live from space album cover"
-            className={classes.cardMedia}
+            className={style.cardMedia}
           />
           <Typography margin={0} variant="h6">
             {schedule.competitors.homeTeam.mediumName}
@@ -93,12 +52,12 @@ const BetCard = ({ schedule }: Props) => {
         <Typography margin={0} variant="h6" textAlign={"center"}>
           VS
         </Typography>
-        <Box className={classes.teams}>
+        <Box className={style.teams}>
           <CardMedia
             component="img"
             image={schedule.competitors.awayTeam.logo}
             alt="Live from space album cover"
-            className={classes.cardMedia}
+            className={style.cardMedia}
           />
           <Typography margin={0} variant="h6">
             {schedule.competitors.awayTeam.mediumName}
@@ -108,7 +67,7 @@ const BetCard = ({ schedule }: Props) => {
           </Typography>
         </Box>
       </CardContent>
-      <CardActions className={classes.buttonGroup}>
+      <CardActions className={style.buttonGroup}>
         <ButtonGroup variant="contained" color="secondary" disableElevation>
           <Button>{schedule.competitors.homeTeam.shortName}</Button>
           <Button>DAW</Button>

@@ -1,0 +1,41 @@
+.root {
+  background-color: transparent !important  ;
+  position: relative;
+  width: 100%;
+  padding: 16px 0 16px 0;
+  background: linear-gradient(
+    110deg,
+    transparent 61%,
+    #181818 62%,
+    #00295b 63%
+  );
+}
+.teamInfo {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+.logoContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0 8px 0 8px;
+}
+.teamLogo {
+  padding-left: 0;
+  min-width: 100px;
+  max-width: 350px;
+  max-height: 350px;
+}
+.backgroundLogo {
+  position: absolute;
+  background-image: url("../../../public/SVG-rams-logo.svg");
+  background-size: cover;
+  overflow: hidden;
+  width: 300%;
+  height: 100%;
+  opacity: 0.03;
+  top: 0;
+  left: -100%;
+  object-fit: cover;
+  z-index: -1;
+}

@@ -1,0 +1,35 @@
+.root {
+  display: grid;
+  grid-template-rows: 5% 85% 10%;
+}
+.cardMedia {
+  max-width: 70px;
+  max-height: 70px;
+  margin: auto;
+}
+.cardContent {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+  align-items: center;
+}
+.cardHeader {
+  display: flex;
+  margin: 0 4px;
+}
+.date {
+  flex-grow: 1;
+}
+.teams {
+  display: grid;
+  margin: auto;
+  text-align: center;
+}
+.buttonGroup {
+  justify-content: center;
+}
+// matchStatus: {
+//   background-color:  green  ;
+//   border-radius:  0 0 0 5px  ;
+//   color:  white  ;
+//   padding:  1px 2px 0 2px  ;
+// } ;
