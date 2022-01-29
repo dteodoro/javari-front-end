@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import NavigateButtons from "../../components/NavigateButtons";
 import TeamCard from "../../components/TeamCard";
 import { IDivision } from "../../types/division";
 import { ITeam } from "../../types/team";
@@ -15,34 +16,38 @@ const teamData: ITeam[] = [
   {
     id: 1,
     logo: "/nfl.svg",
-    fullName: "Tampa Bay",
-    mediumName: "Buccaneers",
-    shortName: "TBB",
+    name: "Raiders",
+    nickName: "Las Vegas",
+    displayName: "Las Vegas Raiders",
+    abbreviation: "LV",
     stats: "(2-3-1)",
   },
   {
     id: 2,
     logo: "/nfl.svg",
-    fullName: "Away Team",
-    mediumName: "Team 2",
-    shortName: "TM2",
-    stats: "(5-1)",
+    name: "Raiders",
+    nickName: "Las Vegas",
+    displayName: "Las Vegas Raiders",
+    abbreviation: "LV",
+    stats: "(2-3-1)",
   },
   {
     id: 3,
     logo: "/nfl.svg",
-    fullName: "Away Team",
-    mediumName: "Team 2",
-    shortName: "TM2",
-    stats: "(5-1)",
+    name: "Raiders",
+    nickName: "Las Vegas",
+    displayName: "Las Vegas Raiders",
+    abbreviation: "LV",
+    stats: "(2-3-1)",
   },
   {
     id: 4,
     logo: "/nfl.svg",
-    fullName: "Away Team",
-    mediumName: "Team 2",
-    shortName: "TM2",
-    stats: "(5-1)",
+    name: "Raiders",
+    nickName: "Las Vegas",
+    displayName: "Las Vegas Raiders",
+    abbreviation: "LV",
+    stats: "(2-3-1)",
   },
 ];
 
@@ -69,18 +74,11 @@ const Standings = () => {
   return (
     <div>
       <div className={style.pageButtons}>
-        <Box textAlign="center">
-          <ButtonGroup
-            variant="contained"
-            color="primary"
-            disableElevation
-            className={style.buttonGroup}
-          >
-            <Button>Division</Button>
-            <Button disabled>Conference</Button>
-            <Button disabled>League</Button>
-          </ButtonGroup>
-        </Box>
+        <NavigateButtons>
+          <Button>Division</Button>
+          <Button disabled>Conference</Button>
+          <Button disabled>League</Button>
+        </NavigateButtons>
       </div>
       <div className={style.divisionContainer}>
         {divisions.map((d) => (
