@@ -1,5 +1,6 @@
 import React from "react";
 import TeamHero from "../../components/TeamHero";
+import style from "./styles.module.scss";
 
 // import { Container } from './styles';
 

@@ -6,12 +6,10 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { minWidth } from "@mui/system";
-import { relative } from "path/posix";
 import TeamCard from "../../components/TeamCard";
 import { IDivision } from "../../types/division";
 import { ITeam } from "../../types/team";
+import style from "./styles.module.scss";
 
 const teamData: ITeam[] = [
   {
@@ -67,56 +65,16 @@ const divisions: IDivision[] = [
   },
 ];
 
-const useStyles = makeStyles({
-  pageButtons: {
-    position: "fixed",
-    width: "100%",
-    height: "56px",
-    backgroundColor: "#f6f6f6",
-  },
-  divisionContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    width: "100%",
-    // backgroundColor: "green",
-  },
-  classificationContent: {
-    display: "flex",
-    marginTop: "56px",
-    padding: "8px",
-    width: "10%",
-  },
-  buttonGroup: {
-    marginTop: "8px",
-  },
-  cardContainer: {
-    display: "flex",
-    flexDirection: "row",
-    padding: "4px",
-  },
-  actionButton: {
-    color: "red",
-  },
-  divisionTitle: {
-    margin: "8px 0 8px 8px",
-  },
-  cardItem: {
-    width: "100%",
-  },
-});
-
 const Standings = () => {
-  const classes = useStyles();
   return (
     <div>
-      <div className={classes.pageButtons}>
+      <div className={style.pageButtons}>
         <Box textAlign="center">
           <ButtonGroup
             variant="contained"
             color="primary"
             disableElevation
-            className={classes.buttonGroup}
+            className={style.buttonGroup}
           >
             <Button>Division</Button>
             <Button disabled>Conference</Button>
@@ -124,25 +82,25 @@ const Standings = () => {
           </ButtonGroup>
         </Box>
       </div>
-      <div className={classes.divisionContainer}>
+      <div className={style.divisionContainer}>
         {divisions.map((d) => (
           <Grid
             container
-            className={classes.classificationContent}
+            className={style.classificationContent}
             xs={12}
             sm={6}
             md={6}
             lg={4}
             xl={4}
           >
-            <div className={classes.divisionTitle}>
+            <div className={style.divisionTitle}>
               <Typography margin={0} variant="h6">
                 {d.name}
               </Typography>
             </div>
-            <Grid container spacing={0.5} className={classes.cardContainer}>
+            <Grid container spacing={0.5} className={style.cardContainer}>
               {d.teams.map((team) => (
-                <Grid key={team.id} item className={classes.cardItem}>
+                <Grid key={team.id} item className={style.cardItem}>
                   <TeamCard team={team} />
                 </Grid>
               ))}

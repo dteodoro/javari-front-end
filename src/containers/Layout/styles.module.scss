@@ -1,0 +1,27 @@
+$drawer-width: 240px;
+
+.root {
+  // backgroundColor:  #f9f9f9  ;
+  width: 100%;
+  margin: 0 auto;
+}
+.page {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+}
+.drawer {
+  width: $drawer-width;
+  display: flex;
+}
+.drawerPaper {
+  width: $drawer-width;
+}
+.drawerHeader {
+  background-color: lightblue;
+  padding: 8px 8px;
+  height: 64px;
+}
+.appBar {
+  z-index: 999;
+}

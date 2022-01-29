@@ -1,20 +1,12 @@
 import { Box, Container, Grid, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 
 import BetCard from "../../components/BetCard";
 import { ISchedule } from "../../types/schedule";
+import style from ".styles.module.scss";
 
 const bets = [1, 2, 3, 4, 5, 6, 7];
-
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: "#f6f6f6",
-    margin: "0 auto",
-    padding: "0",
-  },
-});
 
 const schedule: ISchedule = {
   matchDate: new Date(),
@@ -40,7 +32,6 @@ const schedule: ISchedule = {
 };
 
 const BetCardContainer = () => {
-  const classes = useStyles();
   return (
     <Box p={0} m={0}>
       <Grid container spacing={2}>

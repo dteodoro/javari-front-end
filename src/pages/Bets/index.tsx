@@ -1,8 +1,8 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import BetCardContainer from "../../containers/BetCardContainer";
+import style from "./styles.module.scss";
 
 const bets = [1, 2, 3, 4, 5, 6, 7];
 
@@ -19,39 +19,7 @@ const weeks = [
   "CONFERENCE CHAMPIONSHIP",
 ];
 
-const useStyles = makeStyles({
-  filterBar: {
-    width: "100%",
-    margin: "10px auto",
-    display: "block",
-    marginBottom: "16px",
-    borderBottom: "solid 1px #f6f6f6",
-  },
-  filterBarTitle: {
-    padding: "8px 8px",
-    paddingBottom: "16px",
-    margin: "16px 0",
-  },
-  selectsGroup: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-  },
-  selectItem: {
-    marginBottom: "8px",
-    marginRight: "8px",
-    width: "30%",
-    maxWidth: "200px",
-  },
-  lastSelect: {
-    marginRight: "auto",
-    flexGrow: "2",
-    maxWidth: "350px",
-  },
-});
-
 const Bets = () => {
-  const classes = useStyles();
   const [year, setYear] = useState("");
   const [week, setWeek] = useState("");
 
@@ -62,7 +30,7 @@ const Bets = () => {
     setYear(event.target.value as string);
   return (
     <Container>
-      <Box className={classes.filterBar}>
+      <Box className={style.filterBar}>
         <Typography
           fontWeight="bold"
           variant="subtitle1"
@@ -73,13 +41,13 @@ const Bets = () => {
         <Typography
           fontWeight="bold"
           variant="subtitle2"
-          className={classes.filterBarTitle}
+          className={style.filterBarTitle}
         >
           {year && week && `${year} - ${week}`}
         </Typography>
-        <Box className={classes.selectsGroup}>
+        <Box className={style.selectsGroup}>
           <Select
-            className={classes.selectItem}
+            className={style.selectItem}
             onChange={handleChangeYear}
             value={year}
           >
@@ -90,7 +58,7 @@ const Bets = () => {
             ))}
           </Select>
           <Select
-            className={`${classes.selectItem} ${classes.lastSelect}`}
+            className={`${style.selectItem} ${style.lastSelect}`}
             onChange={handleChangeWeek}
             value={week}
           >
@@ -102,7 +70,7 @@ const Bets = () => {
           </Select>
         </Box>
       </Box>
-      <BetCardContainer />;
+      <BetCardContainer />
     </Container>
   );
 };

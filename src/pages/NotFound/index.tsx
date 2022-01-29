@@ -1,6 +1,6 @@
 import React from "react";
 
-// import { Container } from './styles';
+import style from ".styles.module.scss";
 
 const NotFound: React.FC = () => {
   return (

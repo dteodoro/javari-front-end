@@ -11,59 +11,25 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { makeStyles } from "@mui/styles";
 import React, { RefCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import style from "./styles.module.scss";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { navItem } from "../../routes";
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles((open) => {
-  return {
-    root: {
-      // backgroundColor: "#f9f9f9",
-      width: "100%",
-      margin: "0 auto",
-    },
-    page: {
-      display: "flex",
-      margin: "0 auto",
-      width: "100%",
-    },
-    drawer: {
-      width: drawerWidth,
-      display: "flex",
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerHeader: {
-      backgroundColor: "lightblue",
-      padding: "8px 8px",
-      height: "64px",
-    },
-    appBar: {
-      zIndex: 999,
-    },
-  };
-});
-
 interface Props {
   children?: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {
   const [open, setOpen] = useState(false);
-  const classes = useStyles(open);
   const navigate = useNavigate();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="sticky" className={classes.appBar}>
+    <div className={style.root}>
+      <AppBar position="sticky" className={style.appBar}>
         <Toolbar>
           <IconButton
             size="large"
@@ -85,13 +51,13 @@ export default function Layout({ children }: Props) {
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
+        className={style.drawer}
         variant="persistent"
         anchor="left"
         open={open}
-        classes={{ paper: classes.drawerPaper }}
+        classes={{ paper: style.drawerPaper }}
       >
-        <div className={classes.drawerHeader}>
+        <div className={style.drawerHeader}>
           <IconButton
             onClick={() => {
               setOpen(!open);
@@ -116,7 +82,7 @@ export default function Layout({ children }: Props) {
           ))}
         </List>
       </Drawer>
-      <div className={classes.page}>{children}</div>
+      <div className={style.page}>{children}</div>
     </div>
   );
 }
