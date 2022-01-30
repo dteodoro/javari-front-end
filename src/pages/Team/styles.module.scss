@@ -1,6 +1,25 @@
 .root {
   width: 100%;
 }
+.divisionContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.scheduleContainer {
+  display: flex;
+  margin: 8px auto;
+}
+.cardContainer {
+  padding: 2px;
+  margin: 8px 0 16px 0;
+}
 .cardItem {
+  width: 100%;
+}
+.scheduleTitle {
+  margin: 16px 8px 8px 8px !important;
+  border-bottom: 2px solid rgb(165, 163, 163);
   width: 100%;
 }

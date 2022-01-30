@@ -1,3 +1,4 @@
+import { MatchResult } from "./match-result-enum";
 import { ITeam } from "./team";
 
 export interface ISchedule {
@@ -8,4 +9,5 @@ export interface ISchedule {
     homeTeam: ITeam;
     awayTeam: ITeam;
   };
+  matchResult?: MatchResult;
 }

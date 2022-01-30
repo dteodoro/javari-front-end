@@ -18,7 +18,7 @@ const TeamHero = () => {
       <Box className={style.teamInfo}>
         <CardContent>
           <Typography margin={0} variant="h6">
-            Arizona Cardinalds
+            Los Angeles Rams
           </Typography>
           <Typography margin={0} variant="subtitle2">
             1st NFC South
