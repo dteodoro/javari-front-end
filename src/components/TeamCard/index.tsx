@@ -1,14 +1,8 @@
-import { ExpandMore } from "@mui/icons-material";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  checkboxClasses,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import React from "react";
+import { Box, Card, CardMedia, Typography } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useNavigate } from "react-router-dom";
+
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 interface Props {
@@ -16,10 +10,15 @@ interface Props {
 }
 
 const TeamCard = ({ team }: Props) => {
-  console.log(team);
+  let navigate = useNavigate();
   return (
-    <Card>
-      <div className={style.root}>
+    <Card
+      className={style.root}
+      onClick={() => {
+        navigate(`/team/${team.id}`);
+      }}
+    >
+      <Box className={style.container}>
         <Box className={style.cardContent}>
           <CardMedia
             component="img"
@@ -36,12 +35,18 @@ const TeamCard = ({ team }: Props) => {
             </Typography>
           </Box>
           <Box className={style.stats}>
-            <Typography margin={0} variant="caption">
-              {team.stats}
-            </Typography>
+            {team.stats && (
+              <Typography variant="caption">{team.stats}</Typography>
+            )}
+            {team.favorite != undefined &&
+              (team.favorite ? (
+                <StarIcon sx={{ marginLeft: "8px" }} />
+              ) : (
+                <StarBorderIcon sx={{ marginLeft: "8px" }} />
+              ))}
           </Box>
         </Box>
-      </div>
+      </Box>
     </Card>
   );
 };

@@ -1,6 +1,8 @@
 .root {
+  max-width: 500px;
+}
+.container {
   padding: 8px 16px 8px 4px;
-  min-width: 295px;
 }
 .cardContent {
   display: flex;
@@ -12,7 +14,8 @@
   max-height: 70px;
 }
 .stats {
-  align-self: center;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   flex-grow: 3;
 }
