@@ -1,0 +1,30 @@
+.playerCard_root {
+  display: grid;
+  padding: 8px 0;
+  grid-template-columns: 58% 42%;
+  max-width: 500px;
+}
+.playerCard_playerContainer {
+  display: flex;
+}
+.playerCard_avatar {
+  display: inherit;
+  margin: 0 8px;
+  align-items: center;
+}
+.playerCard_playerName {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.playerCard_position {
+  position: absolute;
+  top: 0;
+  right: -25px;
+}
+.playerCard__points {
+  display: ruby;
+}
+.playerCard_rankIcon {
+  margin: 0 8px;
+}
