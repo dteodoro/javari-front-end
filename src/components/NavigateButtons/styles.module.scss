@@ -1,4 +1,13 @@
+.fixed {
+  position: fixed;
+}
+.root {
+  width: 90%;
+  background-color: #f6f6f6;
+}
 .buttonGroup {
   margin-top: 8px;
   margin-bottom: 8px;
+  width: 100%;
+  justify-content: center;
 }

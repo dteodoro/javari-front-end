@@ -1,14 +1,14 @@
-import { PropsOf } from "@emotion/react";
 import { Box, ButtonGroup } from "@mui/material";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import style from "./styles.module.scss";
 interface Props {
   children?: ReactNode;
+  fixed?: boolean;
 }
-const NavigateButtons = ({ children }: Props) => {
+const NavigateButtons = ({ children, fixed }: Props) => {
   return (
-    <Box textAlign="center">
+    <Box className={`${style.root} ${fixed ? style.fixed : ""}`}>
       <ButtonGroup
         variant="contained"
         color="primary"
