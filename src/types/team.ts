@@ -9,4 +9,5 @@ export interface ITeam {
     stats?: string;
     color?:string;
     alternativeColor?:string,
+    favorite?:boolean,
 }
