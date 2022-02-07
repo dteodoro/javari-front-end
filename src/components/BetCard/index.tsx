@@ -8,10 +8,9 @@ import {
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { makeStyles } from "@mui/styles";
 import { format } from "date-fns";
-import { ISchedule } from "../../types/schedule";
 
+import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
 
 interface Props {

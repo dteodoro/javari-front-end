@@ -1,6 +1,4 @@
-import { Box, Container, Grid, MenuItem, Typography } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
+import { Box, Grid } from "@mui/material";
 
 import BetCard from "../../components/BetCard";
 import { ISchedule } from "../../types/schedule";

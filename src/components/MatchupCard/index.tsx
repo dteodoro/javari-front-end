@@ -1,8 +1,6 @@
 import { Box, CardMedia, Typography } from "@mui/material";
 import Card from "@mui/material/Card/Card";
-import { useState } from "react";
-import { MatchResult } from "../../types/match-result-enum";
-import { ISchedule } from "../../types/schedule";
+
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 

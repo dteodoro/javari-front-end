@@ -5,10 +5,7 @@ import {
   Container,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React from "react";
-import { createLanguageServiceSourceFile } from "typescript";
 
 import style from "./styles.module.scss";
 
@@ -34,7 +31,7 @@ const TeamHero = () => {
           className={style.teamLogo}
         />
       </Box>
-      <Box className={style.logoContainer}>
+      <Box>
         <img src="/SVG-rams-logo.svg" className={style.backgroundLogo}></img>
       </Box>
     </Card>

@@ -1,13 +1,7 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Divider } from "@mui/material";
+
 import NavigateButtons from "../../components/NavigateButtons";
-import TeamCard from "../../components/TeamCard";
+import DivisionContainer from "../../containers/DivisionContainer";
 import { IDivision } from "../../types/division";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
@@ -72,41 +66,15 @@ const divisions: IDivision[] = [
 
 const Standings = () => {
   return (
-    <div>
-      <div className={style.pageButtons}>
-        <NavigateButtons>
-          <Button>Division</Button>
-          <Button disabled>Conference</Button>
-          <Button disabled>League</Button>
-        </NavigateButtons>
-      </div>
-      <div className={style.divisionContainer}>
-        {divisions.map((d) => (
-          <Grid
-            container
-            className={style.classificationContent}
-            xs={12}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={4}
-          >
-            <div className={style.divisionTitle}>
-              <Typography margin={0} variant="h6">
-                {d.name}
-              </Typography>
-            </div>
-            <Grid container spacing={0.5} className={style.cardContainer}>
-              {d.teams.map((team) => (
-                <Grid key={team.id} item className={style.cardItem}>
-                  <TeamCard team={team} />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        ))}
-      </div>
-    </div>
+    <Container>
+      <NavigateButtons fixed>
+        <Button>Division</Button>
+        <Button disabled>Conference</Button>
+        <Button disabled>League</Button>
+      </NavigateButtons>
+      <Divider sx={{ marginTop: "56px" }} />
+      <DivisionContainer divisions={divisions} />
+    </Container>
   );
 };
 

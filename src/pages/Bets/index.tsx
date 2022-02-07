@@ -1,6 +1,7 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState } from "react";
+import { useState } from "react";
+
 import BetCardContainer from "../../containers/BetCardContainer";
 import style from "./styles.module.scss";
 

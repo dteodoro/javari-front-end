@@ -1,6 +1,7 @@
 import {
   AppBar,
   Button,
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -11,13 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { RefCallback, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import style from "./styles.module.scss";
-
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
+import style from "./styles.module.scss";
 import { navItem } from "../../routes";
 interface Props {
   children?: React.ReactNode;
@@ -66,9 +66,11 @@ export default function Layout({ children }: Props) {
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
+        <Divider />
         <List>
           {navItem.map((item) => (
             <ListItem
+              className={style.menuItems}
               key={item.name}
               button
               onClick={() => {
@@ -77,7 +79,7 @@ export default function Layout({ children }: Props) {
               }}
             >
               <ListItemIcon>{<item.icon />}</ListItemIcon>
-              <ListItemText primary={item.name} />
+              <ListItemText className={style.menuItems} primary={item.name} />
             </ListItem>
           ))}
         </List>
