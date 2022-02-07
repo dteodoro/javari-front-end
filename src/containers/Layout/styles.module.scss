@@ -18,10 +18,18 @@ $drawer-width: 240px;
   width: $drawer-width;
 }
 .drawerHeader {
-  background-color: lightblue;
+  background-color: #013369;
   padding: 8px 8px;
-  height: 64px;
+  height: auto;
+  opacity: 0.5;
 }
 .appBar {
   z-index: 999;
+  background: #013369 !important;
+}
+.menuItems {
+  &:hover {
+    background-color: #013369 !important;
+    color: #fff;
+  }
 }
