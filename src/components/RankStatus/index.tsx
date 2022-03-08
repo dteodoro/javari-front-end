@@ -7,7 +7,7 @@ import { RANK_STATUS } from "../../types/constants";
 import style from "./styles.module.scss";
 
 interface Props {
-  rankStatus: RANK_STATUS;
+  rankStatus?: RANK_STATUS;
 }
 
 const RankStatus = ({ rankStatus }: Props) => {

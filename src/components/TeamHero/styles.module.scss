@@ -14,8 +14,17 @@
   grid-template-columns: 50% 50%;
   align-items: center;
 }
+.logoContainer {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 .teamLogo {
-  padding-left: 0;
+  width: fit-content;
   min-width: 100px;
   max-width: 350px;
   max-height: 350px;

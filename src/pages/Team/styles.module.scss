@@ -1,21 +1,19 @@
 .root {
-  width: 100%;
+  padding: 0 !important;
 }
 .divisionContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
 }
 .scheduleContainer {
   display: flex;
-  margin: 8px auto;
+  margin: 0 0 0 0;
 }
 .cardContainer {
-  padding: 2px;
-  margin: 8px 0 16px 0;
+  margin: 8px 8px 8px 8px;
 }
 .cardItem {
+  margin: 0 8px;
   width: 100%;
 }
 .scheduleTitle {

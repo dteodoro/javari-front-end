@@ -6,33 +6,43 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import React, { ReactNode } from "react";
 
 import style from "./styles.module.scss";
 
-const TeamHero = () => {
+const heroContent2 = {
+  mainTitle: "Los Angeles Rams",
+  secondaryTitle: "1st NFC South",
+  description: "13-4-0",
+  mainImage: "/SVG-rams-logo.svg",
+  backgroundImage: "/SVG-rams-logo.svg",
+};
+
+interface Props {
+  children?: ReactNode;
+  mainImage?: string;
+  backgroundImage?: string;
+}
+
+const TeamHero = (heroContent: Props) => {
   return (
     <Card elevation={2} className={style.root}>
       <Box className={style.teamInfo}>
-        <CardContent>
-          <Typography margin={0} variant="h6">
-            Los Angeles Rams
-          </Typography>
-          <Typography margin={0} variant="subtitle2">
-            1st NFC South
-          </Typography>
-          <Typography margin={0} variant="caption">
-            13-4-0
-          </Typography>
-        </CardContent>
-        <CardMedia
-          component="img"
-          image="/SVG-rams-logo.svg"
-          alt="Live from space album cover"
-          className={style.teamLogo}
-        />
+        <CardContent>{heroContent.children}</CardContent>
+        <Box className={style.logoContainer}>
+          <CardMedia
+            component="img"
+            image={heroContent.mainImage}
+            alt="Live from space album cover"
+            className={style.teamLogo}
+          />
+        </Box>
       </Box>
       <Box>
-        <img src="/SVG-rams-logo.svg" className={style.backgroundLogo}></img>
+        <img
+          src={heroContent.backgroundImage}
+          className={style.backgroundLogo}
+        ></img>
       </Box>
     </Card>
   );

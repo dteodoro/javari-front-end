@@ -12,6 +12,7 @@ import NavigateButtons from "../../components/NavigateButtons";
 import TeamHero from "../../components/TeamHero";
 import { MatchResult } from "../../types/match-result-enum";
 import { ISession } from "../../types/session";
+import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
 const sessions: ISession[] = [
@@ -234,14 +235,27 @@ const sessions: ISession[] = [
 
 const Team = () => {
   return (
-    <Box>
-      <TeamHero />
-      <Container>
+    <Container className={style.root}>
+      <TeamHero
+        backgroundImage="/SVG-rams-logo.svg"
+        mainImage="/SVG-rams-logo.svg"
+      >
+        <Typography margin={0} variant="h6">
+          Title
+        </Typography>
+        <Typography margin={0} variant="subtitle2">
+          Subtitle
+        </Typography>
+        <Typography margin={0} variant="caption">
+          Description
+        </Typography>
+      </TeamHero>
+      <Box>
         <NavigateButtons>
           <Button>Last Games</Button>
           <Button disabled>Stats</Button>
         </NavigateButtons>
-        <div className={style.divisionContainer}>
+        <Grid container className={style.divisionContainer}>
           {sessions.map((session) => (
             <Grid
               container
@@ -256,7 +270,12 @@ const Team = () => {
                 {session.name}
               </Typography>
 
-              <Grid container spacing={0.5} className={style.cardContainer}>
+              <Grid
+                container
+                item
+                spacing={0.5}
+                className={style.cardContainer}
+              >
                 {session.schedules.map((schedule) => (
                   <Grid key={schedule.id} item className={style.cardItem}>
                     <MatchupCard
@@ -268,9 +287,9 @@ const Team = () => {
               </Grid>
             </Grid>
           ))}
-        </div>
-      </Container>
-    </Box>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 

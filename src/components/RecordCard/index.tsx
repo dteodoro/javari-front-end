@@ -5,7 +5,7 @@ import { RANK_STATUS } from "../../types/constants";
 import RankStatus from "../RankStatus";
 
 interface Props {
-  rank: RANK_STATUS;
+  rank?: RANK_STATUS;
 }
 
 const RecordCard = ({ rank }: Props) => {

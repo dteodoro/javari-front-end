@@ -1,5 +1,5 @@
 import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 
 import style from "./styles.module.scss";
 import RecordCard from "../../components/RecordCard";
@@ -9,6 +9,8 @@ import { RANK_STATUS } from "../../types/constants";
 import RankContainer from "../../containers/RankContainer";
 import { IPlayer } from "../../types/player";
 import UserHero from "../../components/UserHero";
+import TeamHero from "../../components/TeamHero";
+import UserProvider, { UserContext } from "../../store/contexts/user";
 
 const teamData: ITeam = {
   id: 1,
@@ -57,16 +59,28 @@ const players: IPlayer[] = [
 ];
 
 const Home: React.FC = () => {
+  const player = useContext(UserContext);
   return (
     <Container className={style.root}>
-      <UserHero player={players[0]} />
+      <TeamHero mainImage="/avatar2.svg" backgroundImage="/SVG-rams-logo.svg">
+        <Typography margin={0} variant="h6">
+          {player?.fullName}
+        </Typography>
+        <Typography margin={0} variant="subtitle2">
+          {player?.position}
+        </Typography>
+        <Typography margin={0} variant="caption">
+          {player?.rankStatus}
+        </Typography>
+      </TeamHero>
+
       <Grid container wrap={"wrap"}>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>
             {/* <Typography mt={2} mb={1} variant="h6">
               Records
             </Typography> */}
-            <RecordCard rank={players[0].rankStatus} />
+            <RecordCard rank={player?.rankStatus} />
             <Box component={"section"}>
               <Typography mt={2} mb={1} variant="h6">
                 Favorite Team
@@ -75,7 +89,7 @@ const Home: React.FC = () => {
             </Box>
           </Box>
         </Grid>
-        <Grid xs={12} sm={6} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component={"section"} mr={1.5} ml={1.5}>
             <Typography mt={2} mb={1} variant="h6">
               Rank
