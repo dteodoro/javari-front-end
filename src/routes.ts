@@ -9,6 +9,7 @@ import Bets from "./pages/Bets";
 import Teams from './pages/Teams';
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
+import Login from "./pages/Login";
 
 export enum RoutePath {
   LOG_IN = "/login",
@@ -44,6 +45,11 @@ export const navItem: SideBarNavItem[] = [
 ];
 
 export const routes: Route[] = [
+  {
+    name: "login",
+    path: RoutePath.LOG_IN,
+    component: Login,
+  },
   {
     name: "home",
     path: RoutePath.HOME,
