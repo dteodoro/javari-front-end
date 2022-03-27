@@ -1,7 +1,6 @@
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import React, { ReactChild, ReactNode } from "react";
-import { ISmallCard } from "../../types/mini-card";
 import style from "./styles.module.scss";
 
 interface Props {
