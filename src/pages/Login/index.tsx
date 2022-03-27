@@ -14,8 +14,15 @@ import {
   Typography,
 } from "@mui/material";
 import { start } from "repl";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
+
+  const cardClickHandle = () => {
+    navigate(`/home`);
+  };
+
   return (
     <Container>
       <FormGroup className={style.root}>
@@ -54,6 +61,7 @@ const Login = () => {
           variant="contained"
           size="large"
           className={style.buttonLogin}
+          onClick={cardClickHandle}
         >
           SING IN
         </Button>

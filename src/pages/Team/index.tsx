@@ -10,6 +10,7 @@ import {
 import MatchupCard from "../../components/MatchupCard";
 import NavigateButtons from "../../components/NavigateButtons";
 import TeamHero from "../../components/TeamHero";
+import ListCardContainer from "../../containers/ListCardContainer";
 import { MatchResult } from "../../types/match-result-enum";
 import { ISession } from "../../types/session";
 import { ITeam } from "../../types/team";
@@ -266,25 +267,14 @@ const Team = () => {
               lg={4}
               xl={4}
             >
-              <Typography className={style.scheduleTitle} variant="h6">
-                {session.name}
-              </Typography>
-
-              <Grid
-                container
-                item
-                spacing={0.5}
-                className={style.cardContainer}
-              >
+              <ListCardContainer title={session.name}>
                 {session.schedules.map((schedule) => (
-                  <Grid key={schedule.id} item className={style.cardItem}>
-                    <MatchupCard
-                      team={schedule.competitors.awayTeam}
-                      winner={schedule.matchResult == MatchResult.HOME}
-                    />
-                  </Grid>
+                  <MatchupCard
+                    team={schedule.competitors.awayTeam}
+                    winner={schedule.matchResult == MatchResult.HOME}
+                  />
                 ))}
-              </Grid>
+              </ListCardContainer>
             </Grid>
           ))}
         </Grid>
