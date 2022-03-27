@@ -13,6 +13,7 @@ export default function UserProvider({ children }: { children: ReactNode }) {
   const player: IPlayer = {
     id: 1,
     name: "Dario",
+    slug: "dario",
     fullName: "Dario Teodoro",
     points: 48,
     position: 1,

@@ -6,6 +6,7 @@ export interface IPlayer{
     id:number;
     name: string;
     fullName:string;
+    slug:string;
     points?: number;
     position?: number;
     rankStatus?: RANK_STATUS;

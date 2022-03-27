@@ -11,6 +11,8 @@ import { IPlayer } from "../../types/player";
 import UserHero from "../../components/UserHero";
 import TeamHero from "../../components/TeamHero";
 import UserProvider, { UserContext } from "../../store/contexts/user";
+import ListCardContainer from "../../containers/ListCardContainer";
+import PlayerCard from "../../components/PlayerCard";
 
 const teamData: ITeam = {
   id: 1,
@@ -27,6 +29,7 @@ const players: IPlayer[] = [
   {
     id: 1,
     name: "Dário",
+    slug: "dario",
     fullName: "Dário Teodoro",
     points: 48,
     position: 1,
@@ -35,6 +38,7 @@ const players: IPlayer[] = [
   {
     id: 2,
     name: "Diego",
+    slug: "diego",
     fullName: "Diego Medeiros",
     points: 40,
     position: 2,
@@ -43,6 +47,7 @@ const players: IPlayer[] = [
   {
     id: 3,
     name: "Leandro",
+    slug: "leandro",
     fullName: "Leandro Davi",
     points: 38,
     position: 3,
@@ -51,6 +56,7 @@ const players: IPlayer[] = [
   {
     id: 4,
     name: "Johnny",
+    slug: "johnny",
     fullName: "Johnny Vitor",
     points: 37,
     position: 4,
@@ -62,7 +68,11 @@ const Home: React.FC = () => {
   const player = useContext(UserContext);
   return (
     <Container className={style.root}>
-      <TeamHero mainImage="/avatar2.svg" backgroundImage="/SVG-rams-logo.svg">
+      <TeamHero
+        mainImage="/avatar2.svg"
+        backgroundImage="/SVG-rams-logo.svg"
+        editable
+      >
         <Typography margin={0} variant="h6">
           {player?.fullName}
         </Typography>
@@ -77,9 +87,6 @@ const Home: React.FC = () => {
       <Grid container wrap={"wrap"}>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>
-            {/* <Typography mt={2} mb={1} variant="h6">
-              Records
-            </Typography> */}
             <RecordCard rank={player?.rankStatus} />
             <Box component={"section"}>
               <Typography mt={2} mb={1} variant="h6">
@@ -89,13 +96,13 @@ const Home: React.FC = () => {
             </Box>
           </Box>
         </Grid>
+
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-          <Box component={"section"} mr={1.5} ml={1.5}>
-            <Typography mt={2} mb={1} variant="h6">
-              Rank
-            </Typography>
-            <RankContainer players={players} />
-          </Box>
+          <ListCardContainer title="Rank">
+            {players.map((player) => (
+              <PlayerCard player={player} />
+            ))}
+          </ListCardContainer>
         </Grid>
       </Grid>
     </Container>

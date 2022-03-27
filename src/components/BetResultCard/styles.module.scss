@@ -1,0 +1,50 @@
+.matchPoints {
+  flex-grow: 2;
+}
+.cardContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 4px 0 4px;
+}
+.cardMedia {
+  max-width: 70px;
+  max-height: 70px;
+}
+.cardItem {
+  flex-wrap: nowrap;
+  &.itemName {
+    flex-grow: 1;
+  }
+  &.itemStats {
+    align-items: baseline;
+    margin-right: 8%;
+  }
+  &.teamStats {
+    font-size: 12px !important;
+  }
+}
+.matchStats {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+.matchResult {
+  margin-right: 4px;
+  text-align: end;
+}
+.matchResultBannerWinner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background-color: green;
+}
+.matchResultBannerLoser {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background-color: red;
+}
