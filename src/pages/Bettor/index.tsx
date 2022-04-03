@@ -1,5 +1,5 @@
 import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import style from "./styles.module.scss";
@@ -286,6 +286,9 @@ const players: IPlayer[] = [
 ];
 
 const Bettor: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const player = useContext(UserContext);
   const navigate = useNavigate();
   return (
@@ -312,30 +315,37 @@ const Bettor: React.FC = () => {
       </TeamHero>
 
       <Grid container wrap={"wrap"}>
-        <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>
+            <Typography mt={2} mb={1} variant="h6">
+              Score
+            </Typography>
             <RecordCard rank={player?.rankStatus} />
-            <Box component={"section"}>
-              <Typography mt={2} mb={1} variant="h6">
-                Favorite Team
-              </Typography>
-              <TeamCard team={teamData} />
-            </Box>
+          </Box>
+          <Box component="section" mr={1.5} ml={1.5} mt={2}>
+            <Typography mt={2} mb={1} variant="h6">
+              Favorite Team
+            </Typography>
+            <TeamCard team={teamData} />
           </Box>
         </Grid>
-        <Typography mt={3} ml={2} variant="h5">
-          Last Games
-        </Typography>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+          <Box component="section" mr={1.5} ml={1.5} mt={2}>
+            <Typography mt={2} mb={0} variant="h6">
+              Last Games
+            </Typography>
+          </Box>
           {sessions.map((session) => (
-            <ListCardContainer title={session.name}>
-              {session.schedules.map((schedule: ISchedule) => (
-                <BetResultCard
-                  team={schedule.competitors.awayTeam}
-                  winner={schedule.matchResult == MatchResult.HOME}
-                />
-              ))}
-            </ListCardContainer>
+            <Box component="section" mt={2}>
+              <ListCardContainer title={session.name}>
+                {session.schedules.map((schedule: ISchedule) => (
+                  <BetResultCard
+                    team={schedule.competitors.awayTeam}
+                    winner={schedule.matchResult == MatchResult.HOME}
+                  />
+                ))}
+              </ListCardContainer>
+            </Box>
           ))}
         </Grid>
       </Grid>

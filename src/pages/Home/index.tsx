@@ -87,13 +87,16 @@ const Home: React.FC = () => {
       <Grid container wrap={"wrap"}>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>
+            <Typography mt={2} mb={1} variant="h6">
+              Score
+            </Typography>
             <RecordCard rank={player?.rankStatus} />
-            <Box component={"section"}>
-              <Typography mt={2} mb={1} variant="h6">
-                Favorite Team
-              </Typography>
-              <TeamCard team={teamData} />
-            </Box>
+          </Box>
+          <Box component="section" mr={1.5} ml={1.5} mt={2}>
+            <Typography mt={2} mb={1} variant="h6">
+              Favorite Team
+            </Typography>
+            <TeamCard team={teamData} />
           </Box>
         </Grid>
 

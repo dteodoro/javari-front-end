@@ -73,8 +73,8 @@ const divisions: IDivision[] = [
 
 const Teams = () => {
   return (
-    <Container>
-      <Box className={style.filterBar}>
+    <Container className={style.root}>
+      <Container className={style.filterBar}>
         <Typography
           fontWeight="bold"
           variant="h6"
@@ -106,7 +106,7 @@ const Teams = () => {
             ))}
           </Select>
         </Box>
-      </Box>
+      </Container>
       <Divider />
       <DivisionContainer divisions={divisions} />
     </Container>

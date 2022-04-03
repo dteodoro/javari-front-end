@@ -4,8 +4,10 @@ import {
   ButtonGroup,
   Container,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import MatchupCard from "../../components/MatchupCard";
 import NavigateButtons from "../../components/NavigateButtons";
@@ -15,6 +17,7 @@ import { MatchResult } from "../../types/match-result-enum";
 import { ISession } from "../../types/session";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const sessions: ISession[] = [
   {
@@ -235,8 +238,17 @@ const sessions: ISession[] = [
 ];
 
 const Team = () => {
+  const navigate = useNavigate();
   return (
     <Container className={style.root}>
+      <IconButton
+        className={style.backButton}
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        <ChevronLeftIcon />
+      </IconButton>
       <TeamHero
         backgroundImage="/SVG-rams-logo.svg"
         mainImage="/SVG-rams-logo.svg"
