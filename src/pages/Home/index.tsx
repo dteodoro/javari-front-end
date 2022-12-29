@@ -1,33 +1,30 @@
-import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import React, { useEffect } from "react";
 
 import style from "./styles.module.scss";
 import RecordCard from "../../components/RecordCard";
 import TeamCard from "../../components/TeamCard";
 import { ITeam } from "../../types/team";
 import { RANK_STATUS } from "../../types/constants";
-import RankContainer from "../../containers/RankContainer";
 import { IPlayer } from "../../types/player";
-import UserHero from "../../components/UserHero";
 import TeamHero from "../../components/TeamHero";
-import UserProvider, { UserContext } from "../../store/contexts/user";
 import ListCardContainer from "../../containers/ListCardContainer";
 import PlayerCard from "../../components/PlayerCard";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 
 const teamData: ITeam = {
   id: 1,
   logo: "/nfl.svg",
   name: "Raiders",
-  nickName: "Las Vegas",
+  shortDisplayName: "Las Vegas",
   displayName: "Las Vegas Raiders",
   abbreviation: "LV",
-  stats: "(2-3-1)",
-  favorite: true,
+  scoreSummary: "(2-3-1)",
 };
 
 const players: IPlayer[] = [
   {
-    id: 1,
+    id: "1",
     name: "Dário",
     slug: "dario",
     fullName: "Dário Teodoro",
@@ -36,7 +33,7 @@ const players: IPlayer[] = [
     rankStatus: RANK_STATUS.UP,
   },
   {
-    id: 2,
+    id: "2",
     name: "Diego",
     slug: "diego",
     fullName: "Diego Medeiros",
@@ -45,7 +42,7 @@ const players: IPlayer[] = [
     rankStatus: RANK_STATUS.NO_CHANGE,
   },
   {
-    id: 3,
+    id: "3",
     name: "Leandro",
     slug: "leandro",
     fullName: "Leandro Davi",
@@ -54,7 +51,7 @@ const players: IPlayer[] = [
     rankStatus: RANK_STATUS.UP,
   },
   {
-    id: 4,
+    id: "4",
     name: "Johnny",
     slug: "johnny",
     fullName: "Johnny Vitor",
@@ -65,7 +62,10 @@ const players: IPlayer[] = [
 ];
 
 const Home: React.FC = () => {
-  const player = useContext(UserContext);
+  const { user: player } = useAuth();
+  useEffect(() => {
+    console.log(player);
+  }, [player]);
   return (
     <Container className={style.root}>
       <TeamHero
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <ListCardContainer title="Rank">
             {players.map((player) => (
-              <PlayerCard player={player} />
+              <PlayerCard key={player.id} player={player} />
             ))}
           </ListCardContainer>
         </Grid>

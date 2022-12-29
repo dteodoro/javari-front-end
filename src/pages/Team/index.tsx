@@ -20,221 +20,221 @@ import style from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const sessions: ISession[] = [
-  {
-    name: "WILD CARD",
-    schedules: [
-      {
-        id: 1,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 1,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 2,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-        matchResult: MatchResult.HOME,
-      },
-      {
-        id: 2,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 3,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 4,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-        matchResult: MatchResult.HOME,
-      },
-      {
-        id: 3,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 5,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 6,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-      },
-      {
-        id: 4,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 7,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 8,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-        matchResult: MatchResult.AWAY,
-      },
-    ],
-  },
-  {
-    name: "WILD CARD",
-    schedules: [
-      {
-        id: 5,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 9,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 10,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-        matchResult: MatchResult.AWAY,
-      },
-      {
-        id: 6,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 11,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 12,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-      },
-      {
-        id: 7,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 13,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 14,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-      },
-      {
-        id: 8,
-        matchDate: new Date(),
-        matchStatus: "NOT STARTED",
-        competitors: {
-          homeTeam: {
-            id: 15,
-            logo: "/nfl.svg",
-            name: "Raiders",
-            nickName: "Las Vegas",
-            displayName: "Las Vegas Raiders",
-            abbreviation: "LV",
-            stats: "(2-3-1)",
-          },
-          awayTeam: {
-            id: 16,
-            logo: "/nfl.svg",
-            name: "Rams",
-            nickName: "Los Angeles",
-            displayName: "Los Angeles Rams",
-            abbreviation: "LAR",
-            stats: "(5-1)",
-          },
-        },
-        matchResult: MatchResult.AWAY,
-      },
-    ],
-  },
+  //   {
+  //     name: "WILD CARD",
+  //     schedules: [
+  //       {
+  //         id: 1,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 1,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 2,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //         matchResult: MatchResult.HOME,
+  //       },
+  //       {
+  //         id: 2,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 3,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 4,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //         matchResult: MatchResult.HOME,
+  //       },
+  //       {
+  //         id: 3,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 5,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 6,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //       },
+  //       {
+  //         id: 4,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 7,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 8,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //         matchResult: MatchResult.AWAY,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "WILD CARD",
+  //     schedules: [
+  //       {
+  //         id: 5,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 9,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 10,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //         matchResult: MatchResult.AWAY,
+  //       },
+  //       {
+  //         id: 6,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 11,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 12,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //       },
+  //       {
+  //         id: 7,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 13,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 14,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //       },
+  //       {
+  //         id: 8,
+  //         matchDate: new Date(),
+  //         matchStatus: "NOT STARTED",
+  //         competitors: {
+  //           homeTeam: {
+  //             id: 15,
+  //             logo: "/nfl.svg",
+  //             name: "Raiders",
+  //             nickName: "Las Vegas",
+  //             displayName: "Las Vegas Raiders",
+  //             abbreviation: "LV",
+  //             stats: "(2-3-1)",
+  //           },
+  //           awayTeam: {
+  //             id: 16,
+  //             logo: "/nfl.svg",
+  //             name: "Rams",
+  //             nickName: "Los Angeles",
+  //             displayName: "Los Angeles Rams",
+  //             abbreviation: "LAR",
+  //             stats: "(5-1)",
+  //           },
+  //         },
+  //         matchResult: MatchResult.AWAY,
+  //       },
+  //     ],
+  //   },
 ];
 
 const Team = () => {
@@ -282,8 +282,11 @@ const Team = () => {
               <ListCardContainer title={session.name}>
                 {session.schedules.map((schedule) => (
                   <MatchupCard
-                    team={schedule.competitors.awayTeam}
-                    winner={schedule.matchResult == MatchResult.HOME}
+                    team={
+                      schedule?.competitors.find((c) => c.homeAway == "away")
+                        ?.team
+                    }
+                    winner={true}
                   />
                 ))}
               </ListCardContainer>

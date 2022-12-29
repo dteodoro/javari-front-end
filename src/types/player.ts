@@ -3,7 +3,7 @@ import { RANK_STATUS } from "./constants";
 import { ITeam } from "./team";
 
 export interface IPlayer{
-    id:number;
+    id:string;
     name: string;
     fullName:string;
     slug:string;

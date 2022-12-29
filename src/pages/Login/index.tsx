@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import style from "./styles.module.scss";
 import {
   Avatar,
-  Box,
   Button,
   Checkbox,
   Container,
@@ -13,14 +12,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { start } from "repl";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import Home from "../Home";
 
 const Login = () => {
-  let navigate = useNavigate();
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const cardClickHandle = () => {
-    navigate(`/home`);
+  const navigate = useNavigate();
+
+  const { signIn, userLogged } = useAuth();
+
+  const handleSubmit = async () => {
+    await signIn({ username, password });
+    if (userLogged()) {
+      navigate("/home", { replace: true });
+    }
   };
 
   return (
@@ -41,6 +49,7 @@ const Login = () => {
           label="User Name"
           type="search"
           className={style.fieldText}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
           fullWidth
@@ -49,6 +58,7 @@ const Login = () => {
           type="password"
           label="Password"
           className={style.fieldText}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <FormControlLabel
@@ -61,7 +71,7 @@ const Login = () => {
           variant="contained"
           size="large"
           className={style.buttonLogin}
-          onClick={cardClickHandle}
+          onClick={handleSubmit}
         >
           SING IN
         </Button>

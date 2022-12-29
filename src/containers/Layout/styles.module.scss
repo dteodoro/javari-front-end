@@ -13,6 +13,7 @@ $drawer-width: 240px;
 .drawer {
   width: $drawer-width;
   display: flex;
+  position: relative;
 }
 .drawerPaper {
   width: $drawer-width;
@@ -31,5 +32,14 @@ $drawer-width: 240px;
   &:hover {
     background-color: #013369 !important;
     color: #fff;
+  }
+}
+.logoutButton{
+  position: absolute !important;
+  bottom: 8px;
+  left:8px;
+  padding: 8px;
+  .ico{
+    margin-right: 8px;
   }
 }

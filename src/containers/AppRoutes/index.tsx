@@ -1,25 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { RoutePath, routes } from "../../routes";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { routes } from "../../routes";
 import NotFound from "../../pages/NotFound";
-import UserProvider from "../../store/contexts/user";
-
-// import { Container } from './styles';
+import PrivateRoute from "../../components/PrivateRoute";
+import Login from "../../pages/Login";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 
 const AppRoutes: React.FC = () => {
+  const { userLogged } = useAuth();
   return (
-    <UserProvider>
-      <Routes>
-        {routes.map((route) => (
+    <Routes>
+      <Route
+        key="main"
+        path="/"
+        element={userLogged() ? <Navigate to={"/home"} /> : <Login />}
+      />
+      <Route key="not-found" path="/*" element={<NotFound />} />
+      {routes.map((route) => {
+        return (
           <Route
-            index={RoutePath.HOME === route.path}
-            path={route.path}
-            element={<route.component />}
             key={route.name}
-          ></Route>
-        ))}
-        <Route key="not-found" path="*" element={<NotFound />} />
-      </Routes>
-    </UserProvider>
+            path={route.path}
+            element={
+              <PrivateRoute role={route.permission}>
+                <route.component />
+              </PrivateRoute>
+            }
+          />
+        );
+      })}
+    </Routes>
   );
 };
 

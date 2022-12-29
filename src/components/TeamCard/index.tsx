@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 interface Props {
-  team: ITeam;
+  team: ITeam | undefined;
 }
 
 const TeamCard = ({ team }: Props) => {
@@ -15,31 +15,31 @@ const TeamCard = ({ team }: Props) => {
     <Card
       className={style.root}
       onClick={() => {
-        navigate(`/team/${team.id}`);
+        navigate(`/team/${team?.id}`);
       }}
     >
       <Box className={style.container}>
         <Box className={style.cardContent}>
           <CardMedia
             component="img"
-            image={team.logo}
-            alt={team.displayName}
+            image={team?.logo}
+            alt={team?.displayName}
             className={style.cardMedia}
           />
           <Box>
             <Typography margin={0} variant="caption">
-              {team.nickName}
+              {team?.shortDisplayName}
             </Typography>
             <Typography margin={0} variant="h6">
-              {team.name}
+              {team?.name}
             </Typography>
           </Box>
           <Box className={style.stats}>
-            {team.stats && (
-              <Typography variant="caption">{team.stats}</Typography>
+            {team?.scoreSummary && (
+              <Typography variant="caption">{team?.scoreSummary}</Typography>
             )}
-            {team.favorite != undefined &&
-              (team.favorite ? (
+            {true &&
+              (true ? (
                 <StarIcon sx={{ marginLeft: "8px" }} />
               ) : (
                 <StarBorderIcon sx={{ marginLeft: "8px" }} />

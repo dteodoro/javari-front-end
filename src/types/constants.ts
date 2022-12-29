@@ -24,4 +24,14 @@ export enum BET_RESULT{
     "HIT",
     "MISS"
 }
+
+export enum BET{
+    "home",
+    "away",
+    "tie"
+}
+
+export enum USER_ROLE{
+    "ROLE_ADMIN"
+}
   

@@ -1,23 +1,18 @@
 import { Avatar, Box, Card, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
-import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import style from "./styles.module.scss";
-import { RANK_STATUS } from "../../types/constants";
 import { IPlayer } from "../../types/player";
 import RankStatus from "../RankStatus";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../store/contexts/user";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 
 interface Props {
   player: IPlayer;
 }
 
 const PlayerCard = ({ player }: Props) => {
-  const currentPlayer = useContext(UserContext);
+  const { user: currentPlayer } = useAuth();
   let navigate = useNavigate();
 
   const cardClickHandle = () => {
@@ -27,7 +22,7 @@ const PlayerCard = ({ player }: Props) => {
   return (
     <Card
       className={style.playerCard_root}
-      onClick={currentPlayer?.id != player.id ? cardClickHandle : () => {}}
+      onClick={currentPlayer?.id !== player.id ? cardClickHandle : () => {}}
     >
       <Box className={style.playerCard_playerContainer}>
         <Box className={style.playerCard_avatar}>

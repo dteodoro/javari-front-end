@@ -3,24 +3,26 @@ import HomeIcon from "@mui/icons-material/Home";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupsIcon from "@mui/icons-material/Groups";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import Home from "./pages/Home";
 import Bets from "./pages/Bets";
 import Teams from './pages/Teams';
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
-import Login from "./pages/Login";
 import Bettor from "./pages/Bettor";
+import Settings from "./pages/Settings";
+import { USER_ROLE } from "./types/constants";
 
 export enum RoutePath {
-  LOG_IN = "/login",
   FORGOT_PASSWORD = "/forgot_password",
   HOME = "/home",
   BETS = "/bets",
   TEAMS = "/teams",
   TEAM = "/team/:id",
   STANDINGS = "/standings",
-  BETTOR = "bettor/:id"
+  BETTOR = "bettor/:id",
+  SETTINGS = "/config",
 }
 
 export const navItem: SideBarNavItem[] = [
@@ -44,14 +46,15 @@ export const navItem: SideBarNavItem[] = [
     path: RoutePath.STANDINGS,
     icon: EmojiEventsIcon,
   },
+  {
+    name: "Settings",
+    path : RoutePath.SETTINGS,
+    icon: SettingsIcon,
+    permission: USER_ROLE.ROLE_ADMIN
+  }
 ];
 
 export const routes: Route[] = [
-  {
-    name: "login",
-    path: RoutePath.LOG_IN,
-    component: Login,
-  },
   {
     name: "home",
     path: RoutePath.HOME,
@@ -86,12 +89,19 @@ export const routes: Route[] = [
     path: RoutePath.BETTOR,
     component: Bettor,
   },
+  {
+    name: "Settings",
+    path: RoutePath.SETTINGS,
+    component: Settings,
+    permission: USER_ROLE.ROLE_ADMIN
+  },
 ];
 
 export interface SideBarNavItem {
   name: string;
   path: string;
   icon: React.ComponentType;
+  permission?:USER_ROLE;
 }
 
 export interface Route {
@@ -99,4 +109,5 @@ export interface Route {
   path: RoutePath;
   sideBarNavItem?: SideBarNavItem[];
   component: React.ComponentType;
+  permission?: USER_ROLE;
 }

@@ -29,6 +29,7 @@ const Bets = () => {
 
   const handleChangeYear = (event: SelectChangeEvent) =>
     setYear(event.target.value as string);
+
   return (
     <Container>
       <Box className={style.filterBar}>

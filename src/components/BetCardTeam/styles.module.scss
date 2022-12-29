@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-rows: 10% 60% 30%;
+  grid-template-rows: 5% 85% 10%;
   position:relative;
 }
 .cardMedia {
@@ -40,18 +40,17 @@
   opacity: 0.2;
   transition-property: opacity;
   transition-duration: 2s;
-  transition-timing-function: ease-in-out;
-  display:none;
 }
 .spanLeft{
   left:0;
   margin-left: 4%;
-  display:block !important;
 }
 .spanRight{
   right:0;
   margin-right: 4%;
-  display:block !important;
 }
-
+.spanCenter{
+  left:0;
+  right: 100%;
+}
 

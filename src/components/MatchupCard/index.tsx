@@ -5,7 +5,7 @@ import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
 interface Props {
-  team: ITeam;
+  team?: ITeam;
   winner?: boolean;
 }
 
@@ -15,16 +15,16 @@ const MatchupCard = ({ team, winner }: Props) => {
       <Box className={style.cardContainer}>
         <CardMedia
           component="img"
-          image={team.logo}
-          alt={team.name}
+          image={team?.logo}
+          alt={team?.name}
           className={style.cardMedia}
         />
         <Box className={`${style.cardItem} ${style.itemName}`}>
           <Typography className={style.teamName} variant="subtitle2">
-            {team.name.toUpperCase()}
+            {team?.name.toUpperCase()}
           </Typography>
           <Typography className={style.teamStats} variant="body2">
-            {team.stats}
+            {team?.scoreSummary}
           </Typography>
         </Box>
         <Box className={`${style.cardItem} ${style.itemStats}`}>

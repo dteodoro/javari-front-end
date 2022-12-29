@@ -15,7 +15,7 @@ import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
 interface Props {
-  team: ITeam;
+  team?: ITeam;
   winner?: boolean;
 }
 
@@ -25,12 +25,12 @@ const BetResultCard = ({ team, winner }: Props) => {
       <Box className={style.cardContainer}>
         <CardMedia
           component="img"
-          image={team.logo}
-          alt={team.name}
+          image={team?.logo}
+          alt={team?.name}
           className={style.cardMedia}
         />
         <Typography className={style.teamName} variant="subtitle2">
-          {team.abbreviation}
+          {team?.abbreviation}
         </Typography>
         <Typography
           ml={1}
@@ -41,12 +41,12 @@ const BetResultCard = ({ team, winner }: Props) => {
           @
         </Typography>
         <Typography className={style.teamName} variant="subtitle2">
-          {team.abbreviation}
+          {team?.abbreviation}
         </Typography>
         <CardMedia
           component="img"
-          image={team.logo}
-          alt={team.name}
+          image={team?.logo}
+          alt={team?.name}
           className={style.cardMedia}
         />
         <Box

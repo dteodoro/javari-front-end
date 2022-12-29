@@ -3,16 +3,24 @@ import { ThemeProvider } from "@mui/styles";
 
 import Layout from "../Layout";
 import AppRoutes from "../AppRoutes";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "../../commons/queryClient";
+import { AuthProvider } from "../../store/contexts/Auth/AuthContext";
+import RequireAuth from "../../store/contexts/Auth/RequireAuth";
 
 const theme = createTheme({});
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Layout>
-        <AppRoutes />
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <CssBaseline />
+        <AuthProvider>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </AuthProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
