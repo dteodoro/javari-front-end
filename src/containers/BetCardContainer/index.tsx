@@ -7,15 +7,11 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import api from "../../services/api";
 
-const BetCardContainer = () => {
-  const { data, isFetching, error } = useQuery<ISchedule[]>(
-    "schedule",
-    async () => {
-      const response = await api.get("/schedules");
-      return response.data.content;
-    }
-  );
+interface BetCardProps {
+  data?: ISchedule[];
+}
 
+const BetCardContainer: React.FC<BetCardProps> = ({ data }) => {
   return (
     <Box p={0} m={0}>
       <Grid container spacing={2}>

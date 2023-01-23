@@ -1,11 +1,11 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import BetCardContainer from "../../containers/BetCardContainer";
+import api from "../../services/api";
+import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
-
-const bets = [1, 2, 3, 4, 5, 6, 7];
 
 const years = ["2020", "2021", "2022"];
 const weeks = [
@@ -18,11 +18,21 @@ const weeks = [
   "Week 7",
   "Week 8",
   "CONFERENCE CHAMPIONSHIP",
+  "REGULAR_SESSION",
 ];
 
 const Bets = () => {
-  const [year, setYear] = useState("");
-  const [week, setWeek] = useState("");
+  const [year, setYear] = useState("2022");
+  const [week, setWeek] = useState("REGULAR_SESSION");
+  const [data, setData] = useState<ISchedule[] | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.get(`/schedules/session/${year}/${week}`);
+      setData(response.data.content);
+    };
+    fetchData();
+  }, [year, week]);
 
   const handleChangeWeek = (event: SelectChangeEvent) =>
     setWeek(event.target.value as string);
@@ -72,7 +82,7 @@ const Bets = () => {
           </Select>
         </Box>
       </Box>
-      <BetCardContainer />
+      <BetCardContainer data={data} />
     </Container>
   );
 };

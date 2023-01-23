@@ -25,21 +25,9 @@ const DivisionContainer = ({ divisions }: Props) => {
         >
           <ListCardContainer title={d.name}>
             {d.teams.map((team) => (
-              <TeamCard team={team} />
+              <TeamCard team={team} key={team.id} />
             ))}
           </ListCardContainer>
-          {/* <div className={style.divisionTitle}>
-            <Typography margin={0} variant="h6">
-              {d.name}
-            </Typography>
-          </div>
-          <Grid container spacing={0.5} className={style.cardContainer}>
-            {d.teams.map((team) => (
-              <Grid key={team.id} item className={style.cardItem}>
-                <TeamCard team={team} />
-              </Grid>
-            ))} */}
-          {/* </Grid> */}
         </Grid>
       ))}
     </Grid>
