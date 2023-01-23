@@ -1,16 +1,17 @@
 import React, { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import { USER_ROLE } from "../../types/constants";
 
 interface RoutePropsData {
-  role?: USER_ROLE;
   children: ReactElement;
 }
 
-const PrivateRoute: React.FC<RoutePropsData> = ({ role, children }) => {
+const PrivateRoute: React.FC<RoutePropsData> = ({ children }) => {
   const { userLogged } = useAuth();
-  return userLogged() ? children : <Navigate to={"/"} />;
+  if (!userLogged()) {
+    return <Navigate to={"/"} />;
+  }
+  return children;
 };
 
 export default PrivateRoute;

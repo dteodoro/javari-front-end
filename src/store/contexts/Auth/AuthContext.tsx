@@ -8,6 +8,7 @@ const mockUser: IPlayer = {
   name: "Dario",
   slug: "dario",
   fullName: "Dario Teodoro",
+  roles: "ROLE_ADMIN",
   points: 48,
   position: 1,
   rankStatus: RANK_STATUS.UP,
@@ -57,7 +58,7 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ username, password }: UserData) => {
-    const response = await api.post("/sessions", {
+    const response = await api.post("/login", {
       username,
       password,
     });

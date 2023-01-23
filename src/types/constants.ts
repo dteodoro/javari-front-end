@@ -32,6 +32,7 @@ export enum BET{
 }
 
 export enum USER_ROLE{
+    "ROLE_USER",
     "ROLE_ADMIN"
 }
   

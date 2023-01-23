@@ -50,7 +50,7 @@ export const navItem: SideBarNavItem[] = [
     name: "Settings",
     path : RoutePath.SETTINGS,
     icon: SettingsIcon,
-    permission: USER_ROLE.ROLE_ADMIN
+    permission: 'ROLE_ADMIN'
   }
 ];
 
@@ -92,8 +92,8 @@ export const routes: Route[] = [
   {
     name: "Settings",
     path: RoutePath.SETTINGS,
+    sideBarNavItem: navItem,
     component: Settings,
-    permission: USER_ROLE.ROLE_ADMIN
   },
 ];
 
@@ -101,7 +101,7 @@ export interface SideBarNavItem {
   name: string;
   path: string;
   icon: React.ComponentType;
-  permission?:USER_ROLE;
+  permission?:string;
 }
 
 export interface Route {
@@ -109,5 +109,5 @@ export interface Route {
   path: RoutePath;
   sideBarNavItem?: SideBarNavItem[];
   component: React.ComponentType;
-  permission?: USER_ROLE;
+  permission?: string;
 }

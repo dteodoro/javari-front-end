@@ -1,5 +1,5 @@
 import { IBet } from "./bet";
-import { RANK_STATUS } from "./constants";
+import { RANK_STATUS, USER_ROLE } from "./constants";
 import { ITeam } from "./team";
 
 export interface IPlayer{
@@ -7,6 +7,7 @@ export interface IPlayer{
     name: string;
     fullName:string;
     slug:string;
+    roles?:string;
     points?: number;
     position?: number;
     rankStatus?: RANK_STATUS;

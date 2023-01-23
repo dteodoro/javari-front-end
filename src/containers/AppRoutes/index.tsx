@@ -21,7 +21,7 @@ const AppRoutes: React.FC = () => {
             key={route.name}
             path={route.path}
             element={
-              <PrivateRoute role={route.permission}>
+              <PrivateRoute>
                 <route.component />
               </PrivateRoute>
             }

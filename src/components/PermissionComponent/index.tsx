@@ -1,12 +1,15 @@
 import React from "react";
-import { USER_ROLE } from "../../types/constants";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 
 interface PermissionRole {
-  role?: USER_ROLE;
+  role?: string;
 }
 
 const PermissionComponent: React.FC<PermissionRole> = ({ role, children }) => {
-  return <>{role !== USER_ROLE.ROLE_ADMIN && children}</>;
+  const { user } = useAuth();
+  const userRoles = user?.roles?.split(";");
+  const hasPermission = role == undefined || userRoles?.includes(role);
+  return <>{hasPermission && children}</>;
 };
 
 export default PermissionComponent;
