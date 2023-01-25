@@ -23,7 +23,9 @@
   right: -25px;
 }
 .playerCard__points {
-  display: ruby;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 8px;
 }
 .playerCard_rankIcon {
   margin: 0 8px;

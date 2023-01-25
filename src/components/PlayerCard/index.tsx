@@ -40,7 +40,7 @@ const PlayerCard = ({ player }: Props) => {
       <Box className={style.playerCard__points}>
         <RankStatus rankStatus={player.rankStatus} />
         <Typography variant="h4">{player.points}</Typography>
-        <Typography ml={1} variant="body2">
+        <Typography variant="body2" ml={0.5}>
           Pts
         </Typography>
       </Box>
