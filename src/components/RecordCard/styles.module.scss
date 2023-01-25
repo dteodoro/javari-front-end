@@ -9,9 +9,9 @@
   align-content: center;
 }
 .cardRecord__points {
-  display: ruby;
+  display: flex;
   align-self: center;
-  text-align: center;
+  align-items: flex-end;
   margin: 0 auto 0 0;
 }
 .cardRecord__divider {
@@ -25,4 +25,8 @@
   justify-content: space-between;
   margin-left: 5%;
   margin-right: 10%;
+}
+.cardRecord__efficiency_percents{
+  display: flex;
+  align-items: flex-end;
 }

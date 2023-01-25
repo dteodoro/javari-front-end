@@ -15,7 +15,7 @@ const RecordCard = ({ rank }: Props) => {
         <RankStatus rankStatus={rank} />
         <Box className={style.cardRecord__points}>
           <Typography variant="h3">48</Typography>
-          <Typography ml={1} variant="subtitle2">
+          <Typography ml={1} mb={1} variant="subtitle2">
             Pts
           </Typography>
         </Box>
@@ -35,9 +35,9 @@ const RecordCard = ({ rank }: Props) => {
           <Typography mr={1} variant="subtitle2">
             EFF
           </Typography>
-          <Box sx={{ display: "ruby" }}>
+          <Box className={style.cardRecord__efficiency_percents}>
             <Typography variant="h4">98</Typography>
-            <Typography ml={0} variant="body2">
+            <Typography ml={0} mb={0.5} variant="body2">
               %
             </Typography>
           </Box>
