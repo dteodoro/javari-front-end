@@ -2,10 +2,6 @@ import { Box, Grid } from "@mui/material";
 
 import BetCard from "../../components/BetCard";
 import { ISchedule } from "../../types/schedule";
-import style from ".styles.module.scss";
-import { useQuery } from "react-query";
-import axios from "axios";
-import api from "../../services/api";
 
 interface BetCardProps {
   data?: ISchedule[];

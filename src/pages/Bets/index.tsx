@@ -1,8 +1,10 @@
-import { Box, Container, MenuItem, Typography } from "@mui/material";
+import { Box, Container, MenuItem, Skeleton, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
+import { sleep } from "react-query/types/core/utils";
 
 import BetCardContainer from "../../containers/BetCardContainer";
+import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
 import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
@@ -25,11 +27,13 @@ const Bets = () => {
   const [year, setYear] = useState("2022");
   const [week, setWeek] = useState("REGULAR_SESSION");
   const [data, setData] = useState<ISchedule[] | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get(`/schedules/session/${year}/${week}`);
       setData(response.data.content);
+      setLoading(false);
     };
     fetchData();
   }, [year, week]);
@@ -43,11 +47,7 @@ const Bets = () => {
   return (
     <Container>
       <Box className={style.filterBar}>
-        <Typography
-          fontWeight="bold"
-          variant="subtitle1"
-          // className={classes.filterBarTitle}
-        >
+        <Typography fontWeight="bold" variant="subtitle1">
           NFL SCHEDULE
         </Typography>
         <Typography
@@ -82,7 +82,11 @@ const Bets = () => {
           </Select>
         </Box>
       </Box>
-      <BetCardContainer data={data} />
+      {loading ? (
+        <BetCardSkeletonContainer />
+      ) : (
+        <BetCardContainer data={data} />
+      )}
     </Container>
   );
 };
