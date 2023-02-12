@@ -24,15 +24,19 @@ interface Props {
 }
 
 const BetCard = ({ schedule }: Props) => {
-  const [selected, setSelected] = useState<IBetting | undefined>(undefined);
-  const { user: bettor } = useAuth();
+  const getTeam = (teamType: string | undefined) => {
+    return schedule?.competitors.find(
+      (c) => c.homeAway.toUpperCase() === teamType
+    )?.team;
+  };
+  if (schedule?.bet) {
+    schedule.bet.team = getTeam(schedule.bet.bet);
+  }
 
-  const homeTeam = schedule?.competitors.find(
-    (c) => c.homeAway === "home"
-  )?.team;
-  const awayTeam = schedule?.competitors.find(
-    (c) => c.homeAway === "away"
-  )?.team;
+  const [selected, setSelected] = useState<IBetting | undefined | null>(
+    schedule?.bet
+  );
+  const { user: bettor } = useAuth();
 
   const makeBet = async (bet: IBetting) => {
     const response = await api.post("/bets", bet);
@@ -76,21 +80,17 @@ const BetCard = ({ schedule }: Props) => {
           {schedule &&
             format(new Date(schedule?.startDate), "EEE dd/MM").toUpperCase()}
         </Typography>
-        <Typography
-          variant="caption"
-          fontWeight="bold"
-          className={style.matchStatus}
-        >
+        <Typography variant="caption" fontWeight="bold">
           {schedule?.status}
         </Typography>
       </Box>
 
       <CardContent className={style.cardContent}>
-        <BetCardTeam team={awayTeam} />
+        <BetCardTeam team={getTeam("AWAY")} />
         <Typography margin={0} variant="h6" textAlign={"center"}>
           @
         </Typography>
-        <BetCardTeam team={homeTeam} />
+        <BetCardTeam team={getTeam("HOME")} />
         <div className={getClass()} style={getStyle()} />
       </CardContent>
 
@@ -101,15 +101,15 @@ const BetCard = ({ schedule }: Props) => {
               handleBetClick({
                 scheduleId: schedule?.id,
                 bettorId: bettor?.id,
-                teamId: awayTeam?.id,
-                team: awayTeam,
+                teamId: getTeam("AWAY")?.id,
+                team: getTeam("AWAY"),
                 bet: "AWAY",
               })
             }
             color={selected?.bet === "AWAY" ? "secondary" : "primary"}
             startIcon={selected?.bet === "AWAY" ? <EmojiEventsIcon /> : ""}
           >
-            {awayTeam?.abbreviation}
+            {getTeam("AWAY")?.abbreviation}
           </Button>
           <Button
             onClick={() =>
@@ -129,15 +129,15 @@ const BetCard = ({ schedule }: Props) => {
               handleBetClick({
                 scheduleId: schedule?.id,
                 bettorId: bettor?.id,
-                teamId: homeTeam?.id,
-                team: homeTeam,
+                teamId: getTeam("HOME")?.id,
+                team: getTeam("HOME"),
                 bet: "HOME",
               })
             }
             color={selected?.bet === "HOME" ? "secondary" : "primary"}
             endIcon={selected?.bet === "HOME" ? <EmojiEventsIcon /> : ""}
           >
-            {homeTeam?.abbreviation}
+            {getTeam("HOME")?.abbreviation}
           </Button>
         </ButtonGroup>
       </CardActions>

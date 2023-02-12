@@ -1,3 +1,4 @@
+import { IBetting } from "./betting";
 import { ICompetitor } from "./competitors";
 import { MatchResult } from "./match-result-enum";
 import { ITeam } from "./team";
@@ -7,5 +8,5 @@ export interface ISchedule {
   startDate: Date;
   status: string;
   competitors: ICompetitor[]; 
-  bet:string;
+  bet?:IBetting;
 }

@@ -1,11 +1,11 @@
 import { Box, Container, MenuItem, Skeleton, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
-import { sleep } from "react-query/types/core/utils";
 
 import BetCardContainer from "../../containers/BetCardContainer";
 import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
 import api from "../../services/api";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
 
@@ -28,10 +28,12 @@ const Bets = () => {
   const [week, setWeek] = useState("REGULAR_SESSION");
   const [data, setData] = useState<ISchedule[] | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-
+  const { user: bettor } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
-      const response = await api.get(`/schedules/session/${year}/${week}`);
+      const response = await api.get(
+        `/schedules/session/${year}/${week}/bettor/${bettor?.id}`
+      );
       setData(response.data.content);
       setLoading(false);
     };
