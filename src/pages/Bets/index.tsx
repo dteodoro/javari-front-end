@@ -9,26 +9,15 @@ import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
 
-const years = ["2020", "2021", "2022"];
-const weeks = [
-  "Week 1",
-  "Week 2",
-  "Week 3",
-  "Week 4",
-  "Week 5",
-  "Week 6",
-  "Week 7",
-  "Week 8",
-  "CONFERENCE CHAMPIONSHIP",
-  "REGULAR_SESSION",
-];
-
 const Bets = () => {
   const [year, setYear] = useState("2022");
   const [week, setWeek] = useState("REGULAR_SESSION");
   const [data, setData] = useState<ISchedule[] | undefined>(undefined);
+  const [menuYear, setMenuYear] = useState<string[]>([]);
+  const [menuSeason, setMenuSeason] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const { user: bettor } = useAuth();
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get(
@@ -36,6 +25,9 @@ const Bets = () => {
       );
       setData(response.data.content);
       setLoading(false);
+      const responseMenu = await api.get(`/schedules/filters`);
+      setMenuYear(responseMenu.data.years);
+      setMenuSeason(responseMenu.data.seasons);
     };
     fetchData();
   }, [year, week]);
@@ -65,7 +57,7 @@ const Bets = () => {
             onChange={handleChangeYear}
             value={year}
           >
-            {years.map((year) => (
+            {menuYear.map((year) => (
               <MenuItem key={year} value={year}>
                 {year}
               </MenuItem>
@@ -76,9 +68,9 @@ const Bets = () => {
             onChange={handleChangeWeek}
             value={week}
           >
-            {weeks.map((week) => (
-              <MenuItem key={week} value={week}>
-                {week}
+            {menuSeason.map((season) => (
+              <MenuItem key={season} value={season}>
+                {season}
               </MenuItem>
             ))}
           </Select>
