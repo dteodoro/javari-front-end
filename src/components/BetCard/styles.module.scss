@@ -53,5 +53,20 @@
   margin-right: 4%;
   display:block !important;
 }
-
+.matchResultBannerWinner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background-color: green;
+}
+.matchResultBannerLoser {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background-color: red;
+}
 

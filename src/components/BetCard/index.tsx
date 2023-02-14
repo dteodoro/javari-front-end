@@ -60,6 +60,12 @@ const BetCard = ({ schedule }: Props) => {
     };
   };
 
+  const getCompetitorScore = (teamType: string) => {
+    return schedule?.competitors.find(
+      (c) => c.homeAway.toUpperCase() === teamType
+    );
+  };
+
   const handleBetClick = (bet: IBetting) => {
     if (selected?.bet === bet.bet) {
       setSelected(undefined);
@@ -69,18 +75,19 @@ const BetCard = ({ schedule }: Props) => {
     }
   };
 
-  useEffect(() => {
-    console.log(`selected:${selected}`);
-  }, [selected]);
-
   return (
     <Card className={style.root} elevation={2}>
       <Box className={style.cardHeader}>
-        <Typography fontWeight="bold" variant="caption" className={style.date}>
+        <Typography
+          fontWeight="bold"
+          variant="caption"
+          className={style.date}
+          ml={0.4}
+        >
           {schedule &&
             format(new Date(schedule?.startDate), "EEE dd/MM").toUpperCase()}
         </Typography>
-        <Typography variant="caption" fontWeight="bold">
+        <Typography variant="caption" fontWeight="bold" mr={0.4}>
           {schedule?.status}
         </Typography>
       </Box>
@@ -95,52 +102,81 @@ const BetCard = ({ schedule }: Props) => {
       </CardContent>
 
       <CardActions className={style.buttonGroup}>
-        <ButtonGroup variant="contained">
-          <Button
-            onClick={() =>
-              handleBetClick({
-                scheduleId: schedule?.id,
-                bettorId: bettor?.id,
-                teamId: getTeam("AWAY")?.id,
-                team: getTeam("AWAY"),
-                bet: "AWAY",
-              })
-            }
-            color={selected?.bet === "AWAY" ? "secondary" : "primary"}
-            startIcon={selected?.bet === "AWAY" ? <EmojiEventsIcon /> : ""}
-          >
-            {getTeam("AWAY")?.abbreviation}
-          </Button>
-          <Button
-            onClick={() =>
-              handleBetClick({
-                scheduleId: schedule?.id,
-                bettorId: bettor?.id,
-                teamId: undefined,
-                bet: "TIE",
-              })
-            }
-            color={selected?.bet === "TIE" ? "secondary" : "primary"}
-          >
-            <GppBadIcon fontSize="small" />
-          </Button>
-          <Button
-            onClick={() =>
-              handleBetClick({
-                scheduleId: schedule?.id,
-                bettorId: bettor?.id,
-                teamId: getTeam("HOME")?.id,
-                team: getTeam("HOME"),
-                bet: "HOME",
-              })
-            }
-            color={selected?.bet === "HOME" ? "secondary" : "primary"}
-            endIcon={selected?.bet === "HOME" ? <EmojiEventsIcon /> : ""}
-          >
-            {getTeam("HOME")?.abbreviation}
-          </Button>
-        </ButtonGroup>
+        {schedule?.status === "STATUS_FINAL" && (
+          <ButtonGroup variant="contained">
+            <Button
+              color={
+                getCompetitorScore("AWAY")?.winner ? "secondary" : "primary"
+              }
+            >
+              {getCompetitorScore("AWAY")?.score}
+            </Button>
+            <Button> - </Button>
+            <Button
+              color={
+                getCompetitorScore("HOME")?.winner ? "secondary" : "primary"
+              }
+            >
+              {getCompetitorScore("HOME")?.score}
+            </Button>
+          </ButtonGroup>
+        )}
+
+        {schedule?.status !== "STATUS_FINAL" && (
+          <ButtonGroup variant="contained">
+            <Button
+              onClick={() =>
+                handleBetClick({
+                  scheduleId: schedule?.id,
+                  bettorId: bettor?.id,
+                  teamId: getTeam("AWAY")?.id,
+                  team: getTeam("AWAY"),
+                  bet: "AWAY",
+                })
+              }
+              color={selected?.bet === "AWAY" ? "secondary" : "primary"}
+            >
+              {getTeam("AWAY")?.abbreviation}
+            </Button>
+            <Button
+              onClick={() =>
+                handleBetClick({
+                  scheduleId: schedule?.id,
+                  bettorId: bettor?.id,
+                  teamId: undefined,
+                  bet: "TIE",
+                })
+              }
+              color={selected?.bet === "TIE" ? "secondary" : "primary"}
+            >
+              <GppBadIcon fontSize="small" />
+            </Button>
+            <Button
+              onClick={() =>
+                handleBetClick({
+                  scheduleId: schedule?.id,
+                  bettorId: bettor?.id,
+                  teamId: getTeam("HOME")?.id,
+                  team: getTeam("HOME"),
+                  bet: "HOME",
+                })
+              }
+              color={selected?.bet === "HOME" ? "secondary" : "primary"}
+            >
+              {getTeam("HOME")?.abbreviation}
+            </Button>
+          </ButtonGroup>
+        )}
       </CardActions>
+      {schedule?.status === "STATUS_FINAL" && (
+        <div
+          className={
+            schedule?.bet?.win
+              ? style.matchResultBannerWinner
+              : style.matchResultBannerLoser
+          }
+        ></div>
+      )}
     </Card>
   );
 };

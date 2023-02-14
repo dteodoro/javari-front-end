@@ -8,4 +8,5 @@ export interface IBetting{
     teamId?:number,
     bet?:string,
     team?:ITeam,
+    win?:boolean,
 }
