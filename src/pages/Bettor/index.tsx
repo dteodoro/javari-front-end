@@ -1,6 +1,6 @@
 import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import style from "./styles.module.scss";
 import RecordCard from "../../components/RecordCard";
@@ -11,16 +11,26 @@ import BetResultCard from "../../components/BetResultCard";
 import { ISchedule } from "../../types/schedule";
 import { ISession } from "../../types/session";
 import ListCardContainer from "../../containers/ListCardContainer";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import api from "../../services/api";
+import { IPlayer } from "../../types/player";
 
 const sessions: ISession[] = [];
 
 const Bettor: React.FC = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [rival, setRival] = useState<IPlayer>({} as IPlayer);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    async function fetchData() {
+      const response = await api.get(`/bettor/${id}`);
+      setRival(response.data);
+    }
+    fetchData();
   }, []);
-  const { user: player } = useAuth();
-  const navigate = useNavigate();
+
   return (
     <Container className={style.root}>
       <IconButton
@@ -34,13 +44,13 @@ const Bettor: React.FC = () => {
 
       <TeamHero mainImage="/avatar2.svg" backgroundImage="/SVG-rams-logo.svg">
         <Typography mt={2} variant="h6">
-          {player?.fullName}
+          {rival?.nickName}
         </Typography>
         <Typography mt={1} variant="subtitle2">
-          {player?.position}
+          {rival?.currentPosition}
         </Typography>
         <Typography mt={1} variant="caption">
-          {player?.rankStatus}
+          {rival?.currentPosition}
         </Typography>
       </TeamHero>
 
@@ -50,14 +60,19 @@ const Bettor: React.FC = () => {
             <Typography mt={2} mb={1} variant="h6">
               Score
             </Typography>
-            <RecordCard rank={player?.rankStatus} />
+            <RecordCard
+              rank={rival.previousPosition - rival.currentPosition}
+              score={rival.score}
+            />
           </Box>
-          <Box component="section" mr={1.5} ml={1.5} mt={2}>
-            <Typography mt={2} mb={1} variant="h6">
-              Favorite Team
-            </Typography>
-            <TeamCard team={player?.favoriteTeam} />
-          </Box>
+          {rival?.favoriteTeam && (
+            <Box component="section" mr={1.5} ml={1.5} mt={2}>
+              <Typography mt={2} mb={1} variant="h6">
+                Favorite Team
+              </Typography>
+              <TeamCard team={rival?.favoriteTeam} />
+            </Box>
+          )}
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>

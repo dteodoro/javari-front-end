@@ -4,6 +4,7 @@ import style from "./styles.module.scss";
 import {
   Avatar,
   Button,
+  ButtonGroup,
   Checkbox,
   Container,
   FormControlLabel,
@@ -22,12 +23,19 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { signIn, userLogged } = useAuth();
+  const { logIn, signIn, userLogged } = useAuth();
 
-  const handleSubmit = async () => {
+  const handleSignin = async () => {
     await signIn({ username, password });
     if (userLogged()) {
-      navigate("/home", { replace: true });
+      navigate("/home");
+    }
+  };
+
+  const handleLogin = async () => {
+    await logIn({ username, password });
+    if (userLogged()) {
+      navigate("/home");
     }
   };
 
@@ -66,15 +74,24 @@ const Login = () => {
           label="Remember-me"
           className={style.checkBox}
         />
-        <Button
-          fullWidth
-          variant="contained"
-          size="large"
-          className={style.buttonLogin}
-          onClick={handleSubmit}
-        >
-          SING IN
-        </Button>
+        <ButtonGroup orientation="horizontal">
+          <Button
+            variant="contained"
+            size="large"
+            className={style.buttonLogin}
+            onClick={handleSignin}
+          >
+            SIGN UP
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            className={style.buttonLogin}
+            onClick={handleLogin}
+          >
+            LOGIN
+          </Button>
+        </ButtonGroup>
         <Link variant="body2" mt={2} href="#">
           Forgot password ?
         </Link>

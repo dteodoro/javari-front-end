@@ -12,8 +12,7 @@ import { format } from "date-fns";
 import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
 import GppBadIcon from "@mui/icons-material/GppBad";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IBetting } from "../../types/betting";
 import BetCardTeam from "../BetCardTeam";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
@@ -36,7 +35,7 @@ const BetCard = ({ schedule }: Props) => {
   const [selected, setSelected] = useState<IBetting | undefined | null>(
     schedule?.bet
   );
-  const { user: bettor } = useAuth();
+  const { bettor } = useAuth();
 
   const makeBet = async (bet: IBetting) => {
     const response = await api.post("/bets", bet);
@@ -128,7 +127,7 @@ const BetCard = ({ schedule }: Props) => {
               onClick={() =>
                 handleBetClick({
                   scheduleId: schedule?.id,
-                  bettorId: bettor?.id,
+                  bettorId: bettor?.userId,
                   teamId: getTeam("AWAY")?.id,
                   team: getTeam("AWAY"),
                   bet: "AWAY",
@@ -142,7 +141,7 @@ const BetCard = ({ schedule }: Props) => {
               onClick={() =>
                 handleBetClick({
                   scheduleId: schedule?.id,
-                  bettorId: bettor?.id,
+                  bettorId: bettor?.userId,
                   teamId: undefined,
                   bet: "TIE",
                 })
@@ -155,7 +154,7 @@ const BetCard = ({ schedule }: Props) => {
               onClick={() =>
                 handleBetClick({
                   scheduleId: schedule?.id,
-                  bettorId: bettor?.id,
+                  bettorId: bettor?.userId,
                   teamId: getTeam("HOME")?.id,
                   team: getTeam("HOME"),
                   bet: "HOME",

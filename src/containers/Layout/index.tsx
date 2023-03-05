@@ -97,6 +97,7 @@ export default function Layout({ children }: Props) {
             setOpen(!open);
             auth.signOut();
             navigate("/");
+            window.location.reload();
           }}
         >
           <ExitToAppIcon className={style.ico} /> Sair

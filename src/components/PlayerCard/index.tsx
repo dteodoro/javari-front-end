@@ -12,17 +12,21 @@ interface Props {
 }
 
 const PlayerCard = ({ player }: Props) => {
-  const { user: currentPlayer } = useAuth();
+  const { bettor: currentPlayer } = useAuth();
   let navigate = useNavigate();
 
+  const isCurrentPlayer = currentPlayer?.userId === player.bettorId;
+
   const cardClickHandle = () => {
-    navigate(`/bettor/${player.slug}`);
+    navigate(`/bettor/${player.bettorId}`);
   };
 
   return (
     <Card
-      className={style.playerCard_root}
-      onClick={currentPlayer?.id !== player.id ? cardClickHandle : () => {}}
+      className={`${style.playerCard_root} ${
+        isCurrentPlayer ? style.playerCard_currentPlayer : ""
+      }`}
+      onClick={isCurrentPlayer ? () => {} : cardClickHandle}
     >
       <Box className={style.playerCard_playerContainer}>
         <Box className={style.playerCard_avatar}>
@@ -31,15 +35,17 @@ const PlayerCard = ({ player }: Props) => {
           </Avatar>
         </Box>
         <Box className={style.playerCard_playerName}>
-          <Typography variant="h6">{player.name}</Typography>
+          <Typography variant="h6">{player.nickName}</Typography>
           <Box className={style.playerCard_position}>
-            <Typography variant="caption">{player.position}th</Typography>
+            <Typography variant="caption">
+              {player.currentPosition}th
+            </Typography>
           </Box>
         </Box>
       </Box>
       <Box className={style.playerCard__points}>
-        <RankStatus rankStatus={player.rankStatus} />
-        <Typography variant="h4">{player.points}</Typography>
+        <RankStatus rank={player.previousPosition - player.currentPosition} />
+        <Typography variant="h4">{player.score?.points}</Typography>
         <Typography variant="body2" ml={0.5}>
           Pts
         </Typography>

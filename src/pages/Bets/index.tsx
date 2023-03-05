@@ -16,12 +16,12 @@ const Bets = () => {
   const [menuYear, setMenuYear] = useState<string[]>([]);
   const [menuSeason, setMenuSeason] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user: bettor } = useAuth();
+  const { bettor } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get(
-        `/schedules/session/${year}/${week}/bettor/${bettor?.id}`
+        `/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
       );
       setData(response.data.content);
       setLoading(false);

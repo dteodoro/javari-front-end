@@ -5,21 +5,22 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import { RANK_STATUS } from "../../types/constants";
 import style from "./styles.module.scss";
+import { IScore } from "../../types/score";
 
 interface Props {
-  rankStatus?: RANK_STATUS;
+  rank: number;
 }
 
-const RankStatus = ({ rankStatus }: Props) => {
+const RankStatus = ({ rank }: Props) => {
   return (
     <Box className={style.cardRecord__rankIcon}>
-      {rankStatus === RANK_STATUS.UP && (
+      {rank > 0 && (
         <ArrowCircleUpIcon color="success" sx={{ marginTop: "12px" }} />
       )}
-      {rankStatus === RANK_STATUS.DOWN && (
+      {rank < 0 && (
         <ArrowCircleDownIcon color="error" sx={{ marginTop: "12px" }} />
       )}
-      {rankStatus === RANK_STATUS.NO_CHANGE && (
+      {rank === 0 && (
         <RemoveCircleOutlineIcon color="secondary" sx={{ marginTop: "12px" }} />
       )}
     </Box>

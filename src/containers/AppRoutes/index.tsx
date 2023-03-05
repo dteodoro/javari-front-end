@@ -4,9 +4,11 @@ import NotFound from "../../pages/NotFound";
 import PrivateRoute from "../../components/PrivateRoute";
 import Login from "../../pages/Login";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { useEffect, useState } from "react";
 
 const AppRoutes: React.FC = () => {
   const { userLogged } = useAuth();
+
   return (
     <Routes>
       <Route

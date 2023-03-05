@@ -19,7 +19,7 @@ const RankContainer = ({ players }: Props) => {
         flexDirection={"column"}
       >
         {players.map((player) => (
-          <Grid key={player.id} item>
+          <Grid key={player.bettorId} item>
             <PlayerCard player={player} />
           </Grid>
         ))}

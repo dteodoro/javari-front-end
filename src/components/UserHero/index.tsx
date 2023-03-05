@@ -12,8 +12,8 @@ const UserHero = ({ player }: Props) => {
       <Avatar variant="circular" className={style.avatar}>
         <AccountCircleIcon />
       </Avatar>
-      <Typography variant="h6">{player.fullName}</Typography>
-      <Typography variant="subtitle2">{player.position}Th</Typography>
+      <Typography variant="h6">{player.nickName}</Typography>
+      <Typography variant="subtitle2">{player.currentPosition}Th</Typography>
     </Box>
   );
 };

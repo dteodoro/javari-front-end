@@ -1,5 +1,12 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 import style from "./styles.module.scss";
 import RecordCard from "../../components/RecordCard";
@@ -11,6 +18,8 @@ import TeamHero from "../../components/TeamHero";
 import ListCardContainer from "../../containers/ListCardContainer";
 import PlayerCard from "../../components/PlayerCard";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import api from "../../services/api";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 const teamData: ITeam = {
   id: 1,
@@ -24,48 +33,50 @@ const teamData: ITeam = {
 
 const players: IPlayer[] = [
   {
-    id: "1",
-    name: "Dário",
-    slug: "dario",
-    fullName: "Dário Teodoro",
+    bettorId: "1",
+    nickName: "Dário Teodoro",
     points: 48,
-    position: 1,
-    rankStatus: RANK_STATUS.UP,
+    currentPosition: 1,
+    previousPosition: 2,
   },
   {
-    id: "2",
-    name: "Diego",
-    slug: "diego",
-    fullName: "Diego Medeiros",
+    bettorId: "2",
+    nickName: "Diego Medeiros",
     points: 40,
-    position: 2,
-    rankStatus: RANK_STATUS.NO_CHANGE,
+    currentPosition: 2,
+    previousPosition: 1,
   },
   {
-    id: "3",
-    name: "Leandro",
-    slug: "leandro",
-    fullName: "Leandro Davi",
+    bettorId: "3",
+    nickName: "Leandro Davi",
     points: 38,
-    position: 3,
-    rankStatus: RANK_STATUS.UP,
+    currentPosition: 3,
+    previousPosition: 3,
   },
   {
-    id: "4",
-    name: "Johnny",
-    slug: "johnny",
-    fullName: "Johnny Vitor",
+    bettorId: "4",
+    nickName: "Johnny Vitor",
     points: 37,
-    position: 4,
-    rankStatus: RANK_STATUS.DOWN,
+    currentPosition: 4,
+    previousPosition: 4,
   },
 ];
 
 const Home: React.FC = () => {
-  const { user: player } = useAuth();
+  const { bettor } = useAuth();
+  const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
+  const [rivals, setRivals] = useState<IPlayer[]>([]);
+
   useEffect(() => {
-    console.log(player);
-  }, [player]);
+    async function fetchData() {
+      const bettorResp = await api.get(`/bettor/${bettor?.userId}`);
+      setPlayer(bettorResp.data);
+      const rivalsResp = await api.get(`/bettor/${bettor?.userId}/rivals`);
+      setRivals(rivalsResp.data);
+    }
+    fetchData();
+  }, [bettor]);
+
   return (
     <Container className={style.root}>
       <TeamHero
@@ -74,13 +85,13 @@ const Home: React.FC = () => {
         editable
       >
         <Typography margin={0} variant="h6">
-          {player?.fullName}
+          {player?.nickName}
         </Typography>
         <Typography margin={0} variant="subtitle2">
-          {player?.position}
+          {player?.currentPosition}
         </Typography>
         <Typography margin={0} variant="caption">
-          {player?.rankStatus}
+          {player?.previousPosition}
         </Typography>
       </TeamHero>
 
@@ -90,23 +101,37 @@ const Home: React.FC = () => {
             <Typography mt={2} mb={1} variant="h6">
               Score
             </Typography>
-            <RecordCard rank={player?.rankStatus} />
+            <RecordCard
+              score={player?.score}
+              rank={player?.currentPosition - player?.previousPosition}
+            />
           </Box>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>
             <Typography mt={2} mb={1} variant="h6">
               Favorite Team
             </Typography>
-            <TeamCard team={teamData} />
+            {player?.favoriteTeam ? (
+              <TeamCard team={player?.favoriteTeam} />
+            ) : (
+              <IconButton
+                color="primary"
+                aria-label="add team"
+                component="label"
+              >
+                <AddBoxIcon />
+              </IconButton>
+            )}
           </Box>
         </Grid>
-
-        <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-          <ListCardContainer title="Rank">
-            {players.map((player) => (
-              <PlayerCard key={player.id} player={player} />
-            ))}
-          </ListCardContainer>
-        </Grid>
+        {rivals.length > 0 && (
+          <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+            <ListCardContainer title="Rank">
+              {rivals.map((player) => (
+                <PlayerCard key={player.bettorId} player={player} />
+              ))}
+            </ListCardContainer>
+          </Grid>
+        )}
       </Grid>
     </Container>
   );

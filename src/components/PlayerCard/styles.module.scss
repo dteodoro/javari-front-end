@@ -4,6 +4,9 @@
   grid-template-columns: 58% 42%;
   max-width: 500px;
 }
+.playerCard_currentPlayer {
+  background-color: rgba(0, 128, 0, 0.048) !important;
+}
 .playerCard_playerContainer {
   display: flex;
 }
