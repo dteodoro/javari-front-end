@@ -3,33 +3,18 @@ import api from "../../../services/api";
 import { RANK_STATUS } from "../../../types/constants";
 import { IPlayer } from "../../../types/player";
 
-const mockUser: IPlayer = {
-  id: "0c32db66-86d7-11ed-a1eb-0242ac120002",
-  name: "Dario",
-  slug: "dario",
-  fullName: "Dario Teodoro",
-  roles: "ROLE_ADMIN",
-  points: 48,
-  position: 1,
-  rankStatus: RANK_STATUS.UP,
-  favoriteTeam: {
-    id: 1,
-    logo: "/nfl.svg",
-    name: "Raiders",
-    shortDisplayName: "Las Vegas",
-    displayName: "Las Vegas Raiders",
-    abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
-  },
-  bets: [],
-};
+interface IBettor {
+  userName: string;
+  userId: string;
+}
 
 interface AuthContextState {
   token?: TokenState;
+  logIn({ username, password }: UserData): Promise<void>;
   signIn({ username, password }: UserData): Promise<void>;
   signOut(): void;
   userLogged(): boolean;
-  user?: IPlayer;
+  bettor?: IBettor;
 }
 
 interface UserData {
@@ -44,7 +29,7 @@ interface TokenState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<IPlayer>({} as IPlayer);
+  const [bettor, setBettor] = useState<IBettor>({} as IBettor);
   const [token, setToken] = useState<TokenState | undefined>(() => {
     const token = localStorage.getItem("@PermissionYT:token");
 
@@ -57,17 +42,34 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as TokenState;
   });
 
-  const signIn = useCallback(async ({ username, password }: UserData) => {
-    const response = await api.post("/login", {
+  const logIn = useCallback(async ({ username, password }: UserData) => {
+    const response = await api.post("/auth/login", {
       username,
       password,
     });
 
-    const { token, userLogged } = response.data;
+    const { token, userLogged, userName, userId } = response.data;
 
     if (userLogged) {
       setToken(token);
-      setUser(mockUser);
+      setBettor({ userName, userId });
+
+      localStorage.setItem("@PermissionYT:token", token);
+      api.defaults.headers.authorization = `Bearer ${token}`;
+    }
+  }, []);
+
+  const signIn = useCallback(async ({ username, password }: UserData) => {
+    const response = await api.post("/auth/signIn", {
+      username,
+      password,
+    });
+
+    const { token, userLogged, userName, userId } = response.data;
+
+    if (userLogged) {
+      setToken(token);
+      setBettor({ userName, userId });
 
       localStorage.setItem("@PermissionYT:token", token);
       api.defaults.headers.authorization = `Bearer ${token}`;
@@ -75,12 +77,12 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(async () => {
-    if (user) {
-      setUser({} as IPlayer);
+    if (setBettor) {
+      setBettor({} as IBettor);
       setToken(undefined);
       localStorage.removeItem("@PermissionYT:token");
     }
-  }, [user]);
+  }, [setBettor]);
 
   const userLogged = useCallback(() => {
     const token = localStorage.getItem("@PermissionYT:token");
@@ -91,7 +93,9 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, signIn, signOut, userLogged, user }}>
+    <AuthContext.Provider
+      value={{ token, logIn, signIn, signOut, userLogged, bettor }}
+    >
       {children}
     </AuthContext.Provider>
   );
