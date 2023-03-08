@@ -4,74 +4,40 @@ import {
   Divider,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import DivisionContainer from "../../containers/DivisionContainer";
+import api from "../../services/api";
+import { IConference } from "../../types/conference";
 import { CONFERENCES, DIVISIONS } from "../../types/constants";
-import { IDivision } from "../../types/division";
-import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
-const teamData: ITeam[] = [
-  {
-    id: 1,
-    logo: "/nfl.svg",
-    name: "Raiders",
-    shortDisplayName: "Las Vegas",
-    displayName: "Las Vegas Raiders",
-    abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
-  },
-  {
-    id: 2,
-    logo: "/nfl.svg",
-    name: "Raiders",
-    shortDisplayName: "Las Vegas",
-    displayName: "Las Vegas Raiders",
-    abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
-  },
-  {
-    id: 3,
-    logo: "/nfl.svg",
-    name: "Raiders",
-    shortDisplayName: "Las Vegas",
-    displayName: "Las Vegas Raiders",
-    abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
-  },
-  {
-    id: 4,
-    logo: "/nfl.svg",
-    name: "Raiders",
-    shortDisplayName: "Las Vegas",
-    displayName: "Las Vegas Raiders",
-    abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
-  },
-];
-
-const divisions: IDivision[] = [
-  {
-    name: "AFC North",
-    teams: teamData,
-  },
-  {
-    name: "AFC Lest",
-    teams: teamData,
-  },
-  {
-    name: "AFC Sul",
-    teams: teamData,
-  },
-  {
-    name: "AFC Oest",
-    teams: teamData,
-  },
-];
-
 const Teams = () => {
+  const [conferences, setConferences] = useState<IConference[]>([]);
+  const [conference, setConference] = useState<string>(() => {
+    let lsConference = localStorage.getItem("conferenceFilter");
+    return lsConference ? (lsConference as string) : "";
+  });
+  const [division, setDivision] = useState<string>(() => {
+    let lsDivision = localStorage.getItem("divisionFilter");
+    return lsDivision ? (lsDivision as string) : "";
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      const teamsResp = await api.get(
+        `/teams?conference=${conference}&division=${division}`
+      );
+      setConferences(teamsResp.data);
+      localStorage.setItem("conferenceFilter", conference);
+      localStorage.setItem("divisionFilter", division);
+    }
+    fetchData();
+  }, [conference, division]);
+
   return (
     <Container className={style.root}>
       <Container className={style.filterBar}>
@@ -85,9 +51,10 @@ const Teams = () => {
         <Box className={style.selectsGroup}>
           <Select
             className={style.selectItem}
-            // onChange={handleChangeYear}
-            // value={year}
+            onChange={(e) => setConference(e.target.value)}
+            value={conference}
           >
+            <MenuItem key={"conf-empty"} value={""}></MenuItem>
             {CONFERENCES.map((c) => (
               <MenuItem key={c} value={c}>
                 {c}
@@ -96,9 +63,10 @@ const Teams = () => {
           </Select>
           <Select
             className={`${style.selectItem} ${style.lastSelect}`}
-            // onChange={handleChangeWeek}
-            // value={week}
+            onChange={(e) => setDivision(e.target.value)}
+            value={division}
           >
+            <MenuItem key={"div-empty"} value={""}></MenuItem>
             {DIVISIONS.map((d) => (
               <MenuItem key={d} value={d}>
                 {d}
@@ -108,7 +76,13 @@ const Teams = () => {
         </Box>
       </Container>
       <Divider />
-      <DivisionContainer divisions={divisions} />
+      {conferences.map((conf) => (
+        <DivisionContainer
+          key={conf.name}
+          divisions={conf.divisions}
+          conference={conf.name}
+        />
+      ))}
     </Container>
   );
 };

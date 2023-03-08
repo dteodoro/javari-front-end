@@ -1,14 +1,11 @@
 .root {
+  $team-color: "#{background}";
   background-color: transparent !important  ;
   position: relative;
   padding: 16px 16px 16px 0;
-  background: linear-gradient(
-    110deg,
-    transparent 61%,
-    #181818 62%,
-    #00295b 63%
-  );
+  background: $team-color;
 }
+
 .teamInfo {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -24,7 +21,6 @@
   overflow: hidden;
 }
 .teamLogo {
-  border-radius: 50%;
   width: fit-content;
   min-width: 100px;
   max-width: 150px;

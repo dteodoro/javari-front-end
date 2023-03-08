@@ -7,9 +7,10 @@ import ListCardContainer from "../ListCardContainer";
 
 interface Props {
   divisions: IDivision[];
+  conference?: string;
 }
 
-const DivisionContainer = ({ divisions }: Props) => {
+const DivisionContainer = ({ divisions, conference }: Props) => {
   return (
     <Grid container spacing={2} className={style.divisionContainer}>
       {divisions.map((d) => (
@@ -23,7 +24,11 @@ const DivisionContainer = ({ divisions }: Props) => {
           lg={4}
           xl={4}
         >
-          <ListCardContainer title={d.name}>
+          <ListCardContainer
+            key={`${d.name}-${conference}`}
+            title={d.name}
+            subtitle={conference}
+          >
             {d.teams.map((team) => (
               <TeamCard team={team} key={team.id} />
             ))}

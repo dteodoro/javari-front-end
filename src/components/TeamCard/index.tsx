@@ -15,7 +15,7 @@ const TeamCard = ({ team }: Props) => {
     <Card
       className={style.root}
       onClick={() => {
-        navigate(`/team/${team?.id}`);
+        navigate(`/teams/${team?.id}`);
       }}
     >
       <Box className={style.container}>
@@ -35,14 +35,14 @@ const TeamCard = ({ team }: Props) => {
             </Typography>
           </Box>
           <Box className={style.stats}>
-            {team?.scoreSummary && (
-              <Typography variant="caption">{team?.scoreSummary}</Typography>
-            )}
+            {true && <Typography variant="caption">{"0-0-0"}</Typography>}
             {true &&
-              (true ? (
+              (false ? (
                 <StarIcon sx={{ marginLeft: "8px" }} />
               ) : (
-                <StarBorderIcon sx={{ marginLeft: "8px" }} />
+                <StarBorderIcon
+                  sx={{ marginLeft: "16px", marginRight: "8px" }}
+                />
               ))}
           </Box>
         </Box>

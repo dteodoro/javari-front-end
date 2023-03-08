@@ -3,11 +3,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupsIcon from "@mui/icons-material/Groups";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import Home from "./pages/Home";
 import Bets from "./pages/Bets";
-import Teams from './pages/Teams';
+import Teams from "./pages/Teams";
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
 import Bettor from "./pages/Bettor";
@@ -19,7 +19,7 @@ export enum RoutePath {
   HOME = "/home",
   BETS = "/bets",
   TEAMS = "/teams",
-  TEAM = "/team/:id",
+  TEAM = "/teams/:id",
   STANDINGS = "/standings",
   BETTOR = "bettor/:id",
   SETTINGS = "/config",
@@ -48,10 +48,10 @@ export const navItem: SideBarNavItem[] = [
   },
   {
     name: "Settings",
-    path : RoutePath.SETTINGS,
+    path: RoutePath.SETTINGS,
     icon: SettingsIcon,
-    permission: 'ROLE_ADMIN'
-  }
+    permission: "ROLE_ADMIN",
+  },
 ];
 
 export const routes: Route[] = [
@@ -101,7 +101,7 @@ export interface SideBarNavItem {
   name: string;
   path: string;
   icon: React.ComponentType;
-  permission?:string;
+  permission?: string;
 }
 
 export interface Route {
