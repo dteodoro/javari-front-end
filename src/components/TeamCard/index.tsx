@@ -41,7 +41,7 @@ const TeamCard = ({ team }: Props) => {
                 <StarIcon sx={{ marginLeft: "8px" }} />
               ) : (
                 <StarBorderIcon
-                  sx={{ marginLeft: "16px", marginRight: "8px" }}
+                  sx={{ marginLeft: "16px", marginRight: "4px" }}
                 />
               ))}
           </Box>

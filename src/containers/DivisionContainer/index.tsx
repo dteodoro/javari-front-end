@@ -12,7 +12,12 @@ interface Props {
 
 const DivisionContainer = ({ divisions, conference }: Props) => {
   return (
-    <Grid container spacing={2} className={style.divisionContainer}>
+    <Grid
+      container
+      spacing={2}
+      className={style.divisionContainer}
+      key={`${conference}-grid`}
+    >
       {divisions.map((d) => (
         <Grid
           container
@@ -23,6 +28,7 @@ const DivisionContainer = ({ divisions, conference }: Props) => {
           md={6}
           lg={4}
           xl={4}
+          key={`${d.name}-grid`}
         >
           <ListCardContainer
             key={`${d.name}-${conference}`}

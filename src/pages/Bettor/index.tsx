@@ -21,11 +21,16 @@ const Bettor: React.FC = () => {
   const navigate = useNavigate();
 
   const [rival, setRival] = useState<IPlayer>({} as IPlayer);
+  const [lastGames, setLastGames] = useState<ISchedule[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
       const response = await api.get(`/bettor/${id}`);
+      const schedulesResp = await api.get(
+        `schedules/session/2023/presesion/bettor/${id}`
+      );
+      setLastGames(schedulesResp.data);
       setRival(response.data);
     }
     fetchData();
@@ -80,21 +85,14 @@ const Bettor: React.FC = () => {
               Last Games
             </Typography>
           </Box>
-          {sessions.map((session) => (
-            <Box component="section" mt={2}>
-              <ListCardContainer title={session.name}>
-                {session.schedules.map((schedule: ISchedule) => (
-                  <BetResultCard
-                    team={
-                      schedule.competitors.find((c) => c?.homeAway == "away")
-                        ?.team
-                    }
-                    winner={true}
-                  />
-                ))}
-              </ListCardContainer>
-            </Box>
-          ))}
+
+          <Box component="section" mt={2}>
+            <ListCardContainer title={"Super-Bowl"}>
+              {lastGames.map((schedule: ISchedule) => (
+                <BetResultCard key={schedule.id} schedule={schedule} />
+              ))}
+            </ListCardContainer>
+          </Box>
         </Grid>
       </Grid>
     </Container>

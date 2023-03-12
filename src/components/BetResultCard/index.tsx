@@ -9,60 +9,87 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { ICompetitor } from "../../types/competitors";
+import { MatchResult } from "../../types/match-result-enum";
 
 import { ISchedule } from "../../types/schedule";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
 interface Props {
-  team?: ITeam;
-  winner?: boolean;
+  schedule?: ISchedule;
 }
 
-const BetResultCard = ({ team, winner }: Props) => {
+const BetResultCard = ({ schedule }: Props) => {
+  const homeTeam = schedule?.competitors.find(
+    (c) => c.homeAway == "home"
+  )?.team;
+  const awayTeam = schedule?.competitors.find(
+    (c) => c.homeAway == "away"
+  )?.team;
+  const winner = schedule?.bet?.win;
+
+  function getTeam(teamType: MatchResult) {
+    console.log("entrou aqui");
+    if (teamType == MatchResult.HOME) {
+      return homeTeam;
+    } else {
+      return awayTeam;
+    }
+  }
+
   return (
     <Card>
       <Box className={style.cardContainer}>
+        {winner && (
+          <Typography
+            className={style.matchResult}
+            variant="caption"
+            component="span"
+          >
+            +{schedule?.bet?.score}
+          </Typography>
+        )}
+        <Typography className={style.teamName} variant="subtitle2" ml={1}>
+          {getTeam(MatchResult.AWAY)?.abbreviation}
+        </Typography>
         <CardMedia
           component="img"
-          image={team?.logo}
-          alt={team?.name}
-          className={style.cardMedia}
+          image={getTeam(MatchResult.AWAY)?.logo}
+          alt={getTeam(MatchResult.AWAY)?.name}
+          className={`${style.cardMedia} `}
         />
-        <Typography className={style.teamName} variant="subtitle2">
-          {team?.abbreviation}
+        <Typography variant="h6" ml={1}>
+          30
         </Typography>
-        <Typography
-          ml={1}
-          mr={1}
-          className={style.teamName}
-          variant="subtitle2"
-        >
+        <Typography ml={1} mr={1} variant="subtitle2">
           @
         </Typography>
-        <Typography className={style.teamName} variant="subtitle2">
-          {team?.abbreviation}
+        <Typography variant="h6" mr={1}>
+          27
         </Typography>
         <CardMedia
           component="img"
-          image={team?.logo}
-          alt={team?.name}
+          image={getTeam(MatchResult.HOME)?.logo}
+          alt={getTeam(MatchResult.HOME)?.name}
           className={style.cardMedia}
         />
+        <Typography className={style.teamName} variant="subtitle2" mr={1}>
+          {getTeam(MatchResult.HOME)?.abbreviation}
+        </Typography>
         <Box
           className={`${style.cardItem} ${style.itemStats} ${style.matchPoints}`}
-        >
-          <Typography className={style.matchResult} variant="h6" component="p">
-            {winner ? "+5" : "-"}
-          </Typography>
-        </Box>
-        <div
-          className={
-            winner
-              ? style.matchResultBannerWinner
-              : style.matchResultBannerLoser
-          }
-        ></div>
+        ></Box>
+        {winner != undefined && (
+          <div
+            className={
+              winner
+                ? style.matchResultBannerWinner
+                : style.matchResultBannerLoser
+            }
+          ></div>
+        )}
       </Box>
     </Card>
   );

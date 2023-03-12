@@ -23,7 +23,7 @@ const Bets = () => {
       const response = await api.get(
         `/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
       );
-      setData(response.data.content);
+      setData(response.data);
       setLoading(false);
       const responseMenu = await api.get(`/schedules/filters`);
       setMenuYear(responseMenu.data.years);

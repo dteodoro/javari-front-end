@@ -18,17 +18,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ITeam } from "../../types/team";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { ISchedule } from "../../types/schedule";
 
 const sessions: ISession[] = [];
 
 const Team = () => {
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
+  const [lastGames, setLastGames] = useState<ISchedule[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await api.get(`teams/${id}`);
-      setTeam(response.data);
+      const teamResp = await api.get(`/teams/${id}`);
+      const schedulesResp = await api.get(
+        `schedules/session/2023/presesion/team/${id}`
+      );
+      setTeam(teamResp.data);
+      setLastGames(schedulesResp.data);
     }
     fetchData();
   }, []);
@@ -65,8 +71,8 @@ const Team = () => {
           <Button>Last Games</Button>
           <Button disabled>Stats</Button>
         </NavigateButtons>
-        <Grid container className={style.divisionContainer}>
-          {sessions.map((session) => (
+        {lastGames.length > 0 && (
+          <Grid container className={style.divisionContainer}>
             <Grid
               container
               className={style.scheduleContainer}
@@ -76,20 +82,23 @@ const Team = () => {
               lg={4}
               xl={4}
             >
-              <ListCardContainer title={session.name}>
-                {session.schedules.map((schedule) => (
+              <ListCardContainer title={"Super Bowl"} subtitle={"2022"}>
+                {lastGames.map((schedule) => (
                   <MatchupCard
                     team={
-                      schedule?.competitors.find((c) => c.homeAway == "away")
+                      schedule?.competitors.find((c) => c.team.id != team.id)
                         ?.team
                     }
-                    winner={true}
+                    winner={
+                      schedule?.competitors.find((c) => c.team.id == team.id)
+                        ?.winner
+                    }
                   />
                 ))}
               </ListCardContainer>
             </Grid>
-          ))}
-        </Grid>
+          </Grid>
+        )}
       </Box>
     </Container>
   );
