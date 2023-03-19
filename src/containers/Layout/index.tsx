@@ -1,8 +1,11 @@
 import {
   AppBar,
+  Box,
   Button,
+  ButtonGroup,
   Divider,
   Drawer,
+  Hidden,
   IconButton,
   List,
   ListItem,
@@ -11,6 +14,10 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import SportsFootballIcon from "@mui/icons-material/SportsFootball";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +40,7 @@ export default function Layout({ children }: Props) {
   const auth = useAuth();
 
   return (
-    <div className={style.root}>
+    <Box className={style.root} minHeight="100vh">
       <AppBar position="sticky" className={style.appBar}>
         <Toolbar>
           {auth.userLogged() && (
@@ -104,6 +111,32 @@ export default function Layout({ children }: Props) {
         </Button>
       </Drawer>
       <div className={style.page}>{children}</div>
-    </div>
+      {auth.userLogged() && (
+        <Hidden smUp>
+          <AppBar position="sticky" className={style.actionButtons}>
+            <ButtonGroup className={style.actionsGroup}>
+              <IconButton
+                className={style.action}
+                onClick={() => navigate("/standings")}
+              >
+                <EmojiEventsIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                className={style.action}
+                onClick={() => navigate("/home")}
+              >
+                <HomeIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                className={style.action}
+                onClick={() => navigate("/bets")}
+              >
+                <SportsFootballIcon fontSize="large" />
+              </IconButton>
+            </ButtonGroup>
+          </AppBar>
+        </Hidden>
+      )}
+    </Box>
   );
 }

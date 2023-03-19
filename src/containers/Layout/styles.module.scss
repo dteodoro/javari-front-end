@@ -9,6 +9,7 @@ $drawer-width: 240px;
   display: flex;
   margin: 0 auto;
   width: 100%;
+  min-height: 100vh;
 }
 .drawer {
   width: $drawer-width;
@@ -27,6 +28,7 @@ $drawer-width: 240px;
 .appBar {
   z-index: 999;
   background: #013369 !important;
+  top: 0;
 }
 .menuItems {
   &:hover {
@@ -34,12 +36,26 @@ $drawer-width: 240px;
     color: #fff;
   }
 }
-.logoutButton{
+.logoutButton {
   position: absolute !important;
   bottom: 8px;
-  left:8px;
+  left: 8px;
   padding: 8px;
-  .ico{
+  .ico {
     margin-right: 8px;
+  }
+}
+.actionButtons {
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  background: #fff !important;
+  .actionsGroup {
+    display: flex;
+    justify-content: space-between;
+  }
+  .action {
+    width: auto;
+    margin: 4px 24px 4px 24px;
   }
 }
