@@ -9,12 +9,9 @@ import TeamHero from "../../components/TeamHero";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import BetResultCard from "../../components/BetResultCard";
 import { ISchedule } from "../../types/schedule";
-import { ISession } from "../../types/session";
 import ListCardContainer from "../../containers/ListCardContainer";
 import api from "../../services/api";
 import { IPlayer } from "../../types/player";
-
-const sessions: ISession[] = [];
 
 const Bettor: React.FC = () => {
   const { id } = useParams();
@@ -34,7 +31,7 @@ const Bettor: React.FC = () => {
       setRival(response.data);
     }
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <Container className={style.root}>
@@ -75,7 +72,7 @@ const Bettor: React.FC = () => {
               <Typography mt={2} mb={1} variant="h6">
                 Favorite Team
               </Typography>
-              <TeamCard team={rival?.favoriteTeam} />
+              <TeamCard team={rival?.favoriteTeam} editable={false} />
             </Box>
           )}
         </Grid>

@@ -1,7 +1,12 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import api from "../../../services/api";
-import { RANK_STATUS } from "../../../types/constants";
-import { IPlayer } from "../../../types/player";
+import { ITeam } from "../../../types/team";
 
 interface IBettor {
   userName: string;
@@ -15,6 +20,8 @@ interface AuthContextState {
   signOut(): void;
   userLogged(): boolean;
   bettor?: IBettor;
+  favoriteTeam?: ITeam;
+  setFavoriteTeam: React.Dispatch<React.SetStateAction<ITeam>>;
 }
 
 interface UserData {
@@ -30,6 +37,7 @@ const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [bettor, setBettor] = useState<IBettor>({} as IBettor);
+  const [favoriteTeam, setFavoriteTeam] = useState<ITeam>({} as ITeam);
   const [token, setToken] = useState<TokenState | undefined>(() => {
     const token = localStorage.getItem("@PermissionYT:token");
 
@@ -92,9 +100,28 @@ const AuthProvider: React.FC = ({ children }) => {
     return false;
   }, []);
 
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      const team = await api.get(`/bettor/${bettor.userId}/favoriteTeam`);
+      setFavoriteTeam(team.data);
+    };
+    if (bettor.userId) {
+      fetchFavorite();
+    }
+  }, [bettor]);
+
   return (
     <AuthContext.Provider
-      value={{ token, logIn, signIn, signOut, userLogged, bettor }}
+      value={{
+        token,
+        logIn,
+        signIn,
+        signOut,
+        userLogged,
+        bettor,
+        favoriteTeam,
+        setFavoriteTeam,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import { IDivision } from "../../types/division";
 import TeamCard from "../../components/TeamCard";
@@ -36,7 +36,7 @@ const DivisionContainer = ({ divisions, conference }: Props) => {
             subtitle={conference}
           >
             {d.teams.map((team) => (
-              <TeamCard team={team} key={team.id} />
+              <TeamCard team={team} key={team.id} editable={true} />
             ))}
           </ListCardContainer>
         </Grid>

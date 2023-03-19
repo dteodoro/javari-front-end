@@ -1,4 +1,4 @@
-import { Box, Container, MenuItem, Skeleton, Typography } from "@mui/material";
+import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,7 @@ const Bets = () => {
   const { bettor } = useAuth();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       const response = await api.get(
         `/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
@@ -30,7 +31,7 @@ const Bets = () => {
       setMenuSeason(responseMenu.data.seasons);
     };
     fetchData();
-  }, [year, week]);
+  }, [year, week, bettor]);
 
   const handleChangeWeek = (event: SelectChangeEvent) =>
     setWeek(event.target.value as string);

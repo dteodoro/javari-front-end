@@ -12,7 +12,6 @@ import MatchupCard from "../../components/MatchupCard";
 import NavigateButtons from "../../components/NavigateButtons";
 import TeamHero from "../../components/TeamHero";
 import ListCardContainer from "../../containers/ListCardContainer";
-import { ISession } from "../../types/session";
 import style from "./styles.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { ITeam } from "../../types/team";
@@ -20,14 +19,13 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
 
-const sessions: ISession[] = [];
-
 const Team = () => {
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
   const [lastGames, setLastGames] = useState<ISchedule[]>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function fetchData() {
       const teamResp = await api.get(`/teams/${id}`);
       const schedulesResp = await api.get(
@@ -37,7 +35,7 @@ const Team = () => {
       setLastGames(schedulesResp.data);
     }
     fetchData();
-  }, []);
+  }, [id]);
 
   const navigate = useNavigate();
   return (
@@ -63,7 +61,7 @@ const Team = () => {
           {team.displayName}
         </Typography>
         <Typography margin={0} variant="caption">
-          Description
+          6-6-10
         </Typography>
       </TeamHero>
       <Box>
@@ -86,11 +84,11 @@ const Team = () => {
                 {lastGames.map((schedule) => (
                   <MatchupCard
                     team={
-                      schedule?.competitors.find((c) => c.team.id != team.id)
+                      schedule?.competitors.find((c) => c.team.id !== team.id)
                         ?.team
                     }
                     winner={
-                      schedule?.competitors.find((c) => c.team.id == team.id)
+                      schedule?.competitors.find((c) => c.team.id === team.id)
                         ?.winner
                     }
                   />

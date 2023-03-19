@@ -8,7 +8,7 @@ import style from "./styles.module.scss";
 
 const teamData: ITeam[] = [
   {
-    id: 1,
+    id: "1",
     logo: "/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
@@ -17,7 +17,7 @@ const teamData: ITeam[] = [
     scoreSummary: "(2-3-1)",
   },
   {
-    id: 2,
+    id: "2",
     logo: "/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
@@ -26,7 +26,7 @@ const teamData: ITeam[] = [
     scoreSummary: "(2-3-1)",
   },
   {
-    id: 3,
+    id: "3",
     logo: "/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
@@ -35,7 +35,7 @@ const teamData: ITeam[] = [
     scoreSummary: "(2-3-1)",
   },
   {
-    id: 4,
+    id: "4",
     logo: "/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",

@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import style from "./styles.module.scss";
 import RecordCard from "../../components/RecordCard";
 import TeamCard from "../../components/TeamCard";
-import { ITeam } from "../../types/team";
-import { RANK_STATUS } from "../../types/constants";
 import { IPlayer } from "../../types/player";
 import TeamHero from "../../components/TeamHero";
 import ListCardContainer from "../../containers/ListCardContainer";
@@ -20,52 +11,13 @@ import PlayerCard from "../../components/PlayerCard";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import api from "../../services/api";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-
-const teamData: ITeam = {
-  id: 1,
-  logo: "/nfl.svg",
-  name: "Raiders",
-  shortDisplayName: "Las Vegas",
-  displayName: "Las Vegas Raiders",
-  abbreviation: "LV",
-  scoreSummary: "(2-3-1)",
-};
-
-const players: IPlayer[] = [
-  {
-    bettorId: "1",
-    nickName: "Dário Teodoro",
-    points: 48,
-    currentPosition: 1,
-    previousPosition: 2,
-  },
-  {
-    bettorId: "2",
-    nickName: "Diego Medeiros",
-    points: 40,
-    currentPosition: 2,
-    previousPosition: 1,
-  },
-  {
-    bettorId: "3",
-    nickName: "Leandro Davi",
-    points: 38,
-    currentPosition: 3,
-    previousPosition: 3,
-  },
-  {
-    bettorId: "4",
-    nickName: "Johnny Vitor",
-    points: 37,
-    currentPosition: 4,
-    previousPosition: 4,
-  },
-];
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
-  const { bettor } = useAuth();
+  const { bettor, favoriteTeam } = useAuth();
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
   const [rivals, setRivals] = useState<IPlayer[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -81,7 +33,9 @@ const Home: React.FC = () => {
     <Container className={style.root}>
       <TeamHero
         mainImage="/avatar2.svg"
-        backgroundImage="/SVG-rams-logo.svg"
+        backgroundImage={
+          favoriteTeam?.id ? player.favoriteTeam?.logo : "/SVG-rams-logo.svg"
+        }
         editable
       >
         <Typography margin={0} variant="h6">
@@ -110,15 +64,15 @@ const Home: React.FC = () => {
             <Typography mt={2} mb={1} variant="h6">
               Favorite Team
             </Typography>
-            {player?.favoriteTeam ? (
-              <TeamCard team={player?.favoriteTeam} />
+            {favoriteTeam?.id ? (
+              <TeamCard team={player?.favoriteTeam} editable={false} />
             ) : (
               <IconButton
                 color="primary"
                 aria-label="add team"
                 component="label"
               >
-                <AddBoxIcon />
+                <AddBoxIcon onClick={() => navigate("/teams")} />
               </IconButton>
             )}
           </Box>

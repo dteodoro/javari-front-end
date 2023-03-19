@@ -4,18 +4,20 @@ import {
   Divider,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import DivisionContainer from "../../containers/DivisionContainer";
 import api from "../../services/api";
+import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { IConference } from "../../types/conference";
 import { CONFERENCES, DIVISIONS } from "../../types/constants";
 import style from "./styles.module.scss";
 
 const Teams = () => {
+  const { favoriteTeam } = useAuth();
+
   const [conferences, setConferences] = useState<IConference[]>([]);
   const [conference, setConference] = useState<string>(() => {
     let lsConference = localStorage.getItem("conferenceFilter");
@@ -37,6 +39,10 @@ const Teams = () => {
     }
     fetchData();
   }, [conference, division]);
+
+  useEffect(() => {
+    console.log("render");
+  }, [favoriteTeam]);
 
   return (
     <Container className={style.root}>

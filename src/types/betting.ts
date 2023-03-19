@@ -5,7 +5,7 @@ import { ITeam } from "./team";
 export interface IBetting {
   scheduleId?: string;
   bettorId?: string;
-  teamId?: number;
+  teamId?: string;
   bet?: string;
   team?: ITeam;
   win?: boolean;
