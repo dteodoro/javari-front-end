@@ -1,56 +1,11 @@
-.root {
-  display: grid;
-  grid-template-rows: 5% 85% 10%;
-  position:relative;
-}
 .cardMedia {
   max-width: 70px;
   max-height: 70px;
   margin: auto;
 }
-.cardContent {
-  display: grid;
-  grid-template-columns: 40% 20% 40%;
-  align-items: center;
-}
-.cardHeader {
-  display: flex;
-  margin: 0 4px;
-}
-.date {
-  flex-grow: 1;
-}
 .teams {
   display: grid;
   margin: auto;
   text-align: center;
+  z-index: 999;
 }
-.buttonGroup {
-  justify-content: center;
-}
-.spanSelected{
-  position:absolute;
-  width: 35%;
-  height: 100%;
-  top:0;
-  bottom:0;
-  background-repeat: repeat;
-  background-size: cover;
-  object-fit: cover;
-  opacity: 0.2;
-  transition-property: opacity;
-  transition-duration: 2s;
-}
-.spanLeft{
-  left:0;
-  margin-left: 4%;
-}
-.spanRight{
-  right:0;
-  margin-right: 4%;
-}
-.spanCenter{
-  left:0;
-  right: 100%;
-}
-
