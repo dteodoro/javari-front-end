@@ -1,0 +1,8 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  .btnItem {
+    margin: 16px;
+  }
+}
