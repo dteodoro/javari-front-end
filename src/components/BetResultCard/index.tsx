@@ -51,33 +51,35 @@ const BetResultCard = ({ schedule }: Props) => {
             +{schedule?.bet?.score}
           </Typography>
         )}
-        <Typography className={style.teamName} variant="subtitle2" ml={1}>
-          {getTeam(MatchResult.AWAY)?.abbreviation}
-        </Typography>
-        <CardMedia
-          component="img"
-          image={getTeam(MatchResult.AWAY)?.logo}
-          alt={getTeam(MatchResult.AWAY)?.name}
-          className={`${style.cardMedia} `}
-        />
-        <Typography variant="h6" ml={1}>
-          30
-        </Typography>
-        <Typography ml={1} mr={1} variant="subtitle2">
-          @
-        </Typography>
-        <Typography variant="h6" mr={1}>
-          27
-        </Typography>
-        <CardMedia
-          component="img"
-          image={getTeam(MatchResult.HOME)?.logo}
-          alt={getTeam(MatchResult.HOME)?.name}
-          className={style.cardMedia}
-        />
-        <Typography className={style.teamName} variant="subtitle2" mr={1}>
-          {getTeam(MatchResult.HOME)?.abbreviation}
-        </Typography>
+        <Box className={style.matchContainer}>
+          <Typography className={style.teamName} variant="subtitle2" ml={1}>
+            {getTeam(MatchResult.AWAY)?.abbreviation}
+          </Typography>
+          <CardMedia
+            component="img"
+            image={getTeam(MatchResult.AWAY)?.logo}
+            alt={getTeam(MatchResult.AWAY)?.name}
+            className={`${style.cardMedia} `}
+          />
+          <Typography variant="h6" ml={2}>
+            30
+          </Typography>
+          <Typography ml={2} mr={2} variant="subtitle2">
+            @
+          </Typography>
+          <Typography variant="h6" mr={2}>
+            27
+          </Typography>
+          <CardMedia
+            component="img"
+            image={getTeam(MatchResult.HOME)?.logo}
+            alt={getTeam(MatchResult.HOME)?.name}
+            className={style.cardMedia}
+          />
+          <Typography className={style.teamName} variant="subtitle2" mr={1}>
+            {getTeam(MatchResult.HOME)?.abbreviation}
+          </Typography>
+        </Box>
         <Box
           className={`${style.cardItem} ${style.itemStats} ${style.matchPoints}`}
         ></Box>
