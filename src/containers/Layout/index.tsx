@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useState } from "react";
@@ -117,9 +117,9 @@ export default function Layout({ children }: Props) {
             <ButtonGroup className={style.actionsGroup}>
               <IconButton
                 className={style.action}
-                onClick={() => navigate("/standings")}
+                onClick={() => navigate("/teams")}
               >
-                <EmojiEventsIcon fontSize="large" />
+                <GroupsIcon fontSize="large" />
               </IconButton>
               <IconButton
                 className={style.action}
