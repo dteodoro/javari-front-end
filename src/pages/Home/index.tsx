@@ -14,12 +14,15 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
-  const { bettor, favoriteTeam } = useAuth();
+  const { bettor, favoriteTeam, userLogged } = useAuth();
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
   const [rivals, setRivals] = useState<IPlayer[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!userLogged) {
+      navigate("/login");
+    }
     async function fetchData() {
       const bettorResp = await api.get(`/bettor/${bettor?.userId}`);
       setPlayer(bettorResp.data);
