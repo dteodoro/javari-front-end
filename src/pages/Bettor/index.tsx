@@ -12,6 +12,7 @@ import { ISchedule } from "../../types/schedule";
 import ListCardContainer from "../../containers/ListCardContainer";
 import api from "../../services/api";
 import { IPlayer } from "../../types/player";
+import { API_CORE } from "../../types/constants";
 
 const Bettor: React.FC = () => {
   const { id } = useParams();
@@ -23,9 +24,9 @@ const Bettor: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
-      const response = await api.get(`/bettor/${id}`);
+      const response = await api.get(`${API_CORE}/bettor/${id}`);
       const schedulesResp = await api.get(
-        `schedules/session/2023/presesion/bettor/${id}`
+        `${API_CORE}/schedules/session/2023/presesion/bettor/${id}`
       );
       setLastGames(schedulesResp.data);
       setRival(response.data);

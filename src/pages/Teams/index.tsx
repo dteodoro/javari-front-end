@@ -12,7 +12,7 @@ import DivisionContainer from "../../containers/DivisionContainer";
 import api from "../../services/api";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { IConference } from "../../types/conference";
-import { CONFERENCES, DIVISIONS } from "../../types/constants";
+import { API_CORE, CONFERENCES, DIVISIONS } from "../../types/constants";
 import style from "./styles.module.scss";
 
 const Teams = () => {
@@ -31,7 +31,7 @@ const Teams = () => {
   useEffect(() => {
     async function fetchData() {
       const teamsResp = await api.get(
-        `/teams?conference=${conference}&division=${division}`
+        `${API_CORE}/teams?conference=${conference}&division=${division}`
       );
       setConferences(teamsResp.data);
       localStorage.setItem("conferenceFilter", conference);

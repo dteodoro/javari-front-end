@@ -12,6 +12,7 @@ import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import api from "../../services/api";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useNavigate } from "react-router-dom";
+import { API_CORE } from "../../types/constants";
 
 const Home: React.FC = () => {
   const { bettor, favoriteTeam, userLogged } = useAuth();
@@ -24,9 +25,11 @@ const Home: React.FC = () => {
       navigate("/login");
     }
     async function fetchData() {
-      const bettorResp = await api.get(`/bettor/${bettor?.userId}`);
+      const bettorResp = await api.get(`${API_CORE}/bettor/${bettor?.userId}`);
       setPlayer(bettorResp.data);
-      const rivalsResp = await api.get(`/bettor/${bettor?.userId}/rivals`);
+      const rivalsResp = await api.get(
+        `${API_CORE}/bettor/${bettor?.userId}/rivals`
+      );
       setRivals(rivalsResp.data);
     }
     fetchData();

@@ -1,3 +1,4 @@
+import { API_CORE } from "../types/constants";
 import { IPlayer } from "../types/player";
 import { ITeam } from "../types/team";
 import api from "./api";
@@ -5,7 +6,7 @@ import api from "./api";
 class BettorService {
   async findBettorById(id: string | undefined): Promise<IPlayer> {
     if (id) {
-      const response = await api.get(`/bettor/${id}`);
+      const response = await api.get(`${API_CORE}/bettor/${id}`);
       return response.data;
     }
     return Promise.resolve({} as IPlayer);
@@ -19,7 +20,7 @@ class BettorService {
       return Promise.resolve({} as ITeam);
     }
     const response = await api.post(
-      `/bettor/${bettorId}/favoriteTeam/${teamId}`
+      `${API_CORE}/bettor/${bettorId}/favoriteTeam/${teamId}`
     );
     return response.data;
   }
@@ -28,7 +29,7 @@ class BettorService {
     teamId: string | undefined,
     bettorId: string | undefined
   ) {
-    await api.delete(`/bettor/${bettorId}/favoriteTeam/${teamId}`);
+    await api.delete(`${API_CORE}/bettor/${bettorId}/favoriteTeam/${teamId}`);
   }
 }
 

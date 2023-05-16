@@ -8,6 +8,7 @@ import api from "../../services/api";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { ISchedule } from "../../types/schedule";
 import style from "./styles.module.scss";
+import { API_CORE } from "../../types/constants";
 
 const Bets = () => {
   const [year, setYear] = useState("2022");
@@ -22,11 +23,11 @@ const Bets = () => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       const response = await api.get(
-        `/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
+        `${API_CORE}/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
       );
       setData(response.data);
       setLoading(false);
-      const responseMenu = await api.get(`/schedules/filters`);
+      const responseMenu = await api.get(`${API_CORE}/schedules/filters`);
       setMenuYear(responseMenu.data.years);
       setMenuSeason(responseMenu.data.seasons);
     };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { API_CORE } from "../../types/constants";
 
 interface PermissionRole {
   role?: string;
@@ -16,7 +17,9 @@ const PermissionComponent: React.FC<PermissionRole> = ({ role, children }) => {
       if (!bettor?.userId) {
         setHasPermission(false);
       } else if (role) {
-        const response = await api.get(`/bettor/${bettor?.userId}/${role}`);
+        const response = await api.get(
+          `${API_CORE}/bettor/${bettor?.userId}/${role}`
+        );
         setHasPermission(response.data);
       } else {
         setHasPermission(true);

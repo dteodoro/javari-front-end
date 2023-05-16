@@ -17,6 +17,7 @@ import { IBetting } from "../../types/betting";
 import BetCardTeam from "../BetCardTeam";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import api from "../../services/api";
+import { API_CORE } from "../../types/constants";
 
 interface Props {
   schedule: ISchedule | undefined;
@@ -38,7 +39,7 @@ const BetCard = ({ schedule }: Props) => {
   const { bettor } = useAuth();
 
   const makeBet = async (bet: IBetting) => {
-    const response = await api.post("/bets", bet);
+    const response = await api.post(`${API_CORE}/bets`, bet);
     return response.data;
   };
 

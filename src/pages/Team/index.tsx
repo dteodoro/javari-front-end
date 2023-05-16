@@ -18,6 +18,7 @@ import { ITeam } from "../../types/team";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
+import { API_CORE } from "../../types/constants";
 
 const Team = () => {
   const { id } = useParams();
@@ -27,9 +28,9 @@ const Team = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
-      const teamResp = await api.get(`/teams/${id}`);
+      const teamResp = await api.get(`${API_CORE}/teams/${id}`);
       const schedulesResp = await api.get(
-        `schedules/session/2023/presesion/team/${id}`
+        `${API_CORE}/schedules/session/2023/presesion/team/${id}`
       );
       setTeam(teamResp.data);
       setLastGames(schedulesResp.data);

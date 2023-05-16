@@ -4,6 +4,7 @@ import React from "react";
 
 import style from "./styles.module.scss";
 import api from "../../services/api";
+import { API_CONNECTOR } from "../../types/constants";
 
 const Settings: React.FC = () => {
   const [loadingSchedule, setLoadingSchedule] = React.useState(false);
@@ -11,12 +12,12 @@ const Settings: React.FC = () => {
 
   async function handleScheduleClick() {
     setLoadingSchedule(true);
-    await api.get("/loader/schedules");
+    await api.get(`${API_CONNECTOR}/loader/schedules`);
     setLoadingSchedule(false);
   }
   async function handleTeamClick() {
     setLoadingTeam(true);
-    await api.get("/loader/teams");
+    await api.get(`${API_CONNECTOR}/loader/teams`);
     setLoadingTeam(false);
   }
   return (
