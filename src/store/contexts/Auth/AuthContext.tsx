@@ -7,6 +7,7 @@ import {
 } from "react";
 import api from "../../../services/api";
 import { ITeam } from "../../../types/team";
+import { API_AUTH, API_CORE } from "../../../types/constants";
 
 interface IBettor {
   userName: string;
@@ -15,8 +16,8 @@ interface IBettor {
 
 interface AuthContextState {
   token?: TokenState;
-  logIn({ username, password }: UserData): Promise<void>;
-  signIn({ username, password }: UserData): Promise<void>;
+  logIn({ email, password }: UserData): Promise<void>;
+  signIn({ email, password }: UserData): Promise<void>;
   signOut(): void;
   userLogged(): boolean;
   bettor?: IBettor;
@@ -25,12 +26,13 @@ interface AuthContextState {
 }
 
 interface UserData {
-  username: string;
+  email: string;
   password: string;
 }
 
 interface TokenState {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
@@ -39,37 +41,43 @@ const AuthProvider: React.FC = ({ children }) => {
   const [bettor, setBettor] = useState<IBettor>({} as IBettor);
   const [favoriteTeam, setFavoriteTeam] = useState<ITeam>({} as ITeam);
   const [token, setToken] = useState<TokenState | undefined>(() => {
-    const token = localStorage.getItem("@PermissionYT:token");
+    const accessToken = localStorage.getItem("@PermissionYT:accessToken");
+    const refreshToken = localStorage.getItem("@PermissionYT:refreshToken");
 
-    if (token) {
+    if (accessToken) {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      return { token };
+      return { accessToken, refreshToken } as TokenState;
     }
 
     return {} as TokenState;
   });
 
-  const logIn = useCallback(async ({ username, password }: UserData) => {
-    const response = await api.post("/auth/login", {
-      username,
+  const logIn = useCallback(async ({ email, password }: UserData) => {
+    const responseAuth = await api.post(`${API_AUTH}/authenticate`, {
+      email,
       password,
     });
+    const { access_token, refresh_token } = responseAuth.data;
 
-    const { token, userLogged, userName, userId } = response.data;
+    let responseUser;
+    if (access_token && refresh_token) {
+      setToken(access_token);
+      localStorage.setItem("@PermissionYT:token", access_token);
+      api.defaults.headers.authorization = `Bearer ${access_token}`;
+      responseUser = await api.post(`${API_AUTH}/validate-token`);
+    }
 
-    if (userLogged) {
-      setToken(token);
-      setBettor({ userName, userId });
+    const { username: userName, id: userId } = responseUser?.data;
 
-      localStorage.setItem("@PermissionYT:token", token);
-      api.defaults.headers.authorization = `Bearer ${token}`;
+    if (userName) {
+      setBettor({ userName, userId } as IBettor);
     }
   }, []);
 
-  const signIn = useCallback(async ({ username, password }: UserData) => {
-    const response = await api.post("/auth/signIn", {
-      username,
+  const signIn = useCallback(async ({ email, password }: UserData) => {
+    const response = await api.post(`${API_AUTH}/signIn`, {
+      email,
       password,
     });
 
@@ -102,7 +110,9 @@ const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const fetchFavorite = async () => {
-      const team = await api.get(`/bettor/${bettor.userId}/favoriteTeam`);
+      const team = await api.get(
+        `${API_CORE}/bettor/${bettor.userId}/favoriteTeam`
+      );
       setFavoriteTeam(team.data);
     };
     if (bettor.userId) {

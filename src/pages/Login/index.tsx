@@ -18,7 +18,7 @@ import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import Home from "../Home";
 
 const Login = () => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
@@ -26,14 +26,14 @@ const Login = () => {
   const { logIn, signIn, userLogged } = useAuth();
 
   const handleSignin = async () => {
-    await signIn({ username, password });
+    await signIn({ email, password });
     if (userLogged()) {
       navigate("/home");
     }
   };
 
   const handleLogin = async () => {
-    await logIn({ username, password });
+    await logIn({ email, password });
     if (userLogged()) {
       navigate("/home");
     }
@@ -57,7 +57,7 @@ const Login = () => {
           label="User Name"
           type="search"
           className={style.fieldText}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           fullWidth
