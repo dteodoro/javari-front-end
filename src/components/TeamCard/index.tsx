@@ -52,7 +52,7 @@ const TeamCard = ({ team, editable }: Props) => {
           />
           <Box onClick={cardClickHandle}>
             <Typography margin={0} variant="caption">
-              {team?.shortDisplayName}
+              {team?.displayName}
             </Typography>
             <Typography margin={0} variant="h6">
               {team?.name}
