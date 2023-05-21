@@ -29,3 +29,19 @@
   left: 8px;
   z-index: 2;
 }
+.notfound {
+  overflow: hidden;
+  width: 100%;
+  opacity: 0.05;
+  object-fit: cover;
+  margin-top: -64px;
+}
+.figcaption {
+  text-align: center;
+  font-size: 3rem;
+  opacity: 0.1;
+}
+.figure {
+  margin: 0;
+  margin-top: 16px;
+}

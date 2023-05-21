@@ -3,28 +3,32 @@ import Card from "@mui/material/Card/Card";
 
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
+import { ISchedule } from "../../types/schedule";
+import { ICompetitor } from "../../types/competitors";
 
 interface Props {
+  competitors: ICompetitor[];
   team?: ITeam;
-  winner?: boolean;
 }
 
-const MatchupCard = ({ team, winner }: Props) => {
+const MatchupCard = ({ competitors, team }: Props) => {
+  var homeCompetitor = competitors.find((c) => c.team.id === team?.id);
+  var awayCompetitor = competitors.find((c) => c.team.id !== team?.id);
   return (
     <Card>
       <Box className={style.cardContainer}>
         <CardMedia
           component="img"
-          image={team?.logo}
-          alt={team?.name}
+          image={awayCompetitor?.team?.logo}
+          alt={awayCompetitor?.team?.name}
           className={style.cardMedia}
         />
         <Box className={`${style.cardItem} ${style.itemName}`}>
           <Typography className={style.teamName} variant="subtitle2">
-            {team?.name.toUpperCase()}
+            {awayCompetitor?.team?.name.toUpperCase()}
           </Typography>
           <Typography className={style.teamStats} variant="body2">
-            {team?.scoreSummary}
+            {awayCompetitor?.team?.scoreSummary}
           </Typography>
         </Box>
         <Box className={`${style.cardItem} ${style.itemStats}`}>
@@ -33,7 +37,7 @@ const MatchupCard = ({ team, winner }: Props) => {
             variant="subtitle2"
             component="p"
           >
-            {winner ? "W" : "L"}
+            {homeCompetitor?.winner ? "W" : "L"}
           </Typography>
           <Typography
             className={style.matchStats}
@@ -41,12 +45,12 @@ const MatchupCard = ({ team, winner }: Props) => {
             component="h6"
             marginLeft={"8px"}
           >
-            30 - 27
+            {homeCompetitor?.score + " - " + awayCompetitor?.score}
           </Typography>
         </Box>
         <div
           className={
-            winner
+            homeCompetitor?.winner
               ? style.matchResultBannerWinner
               : style.matchResultBannerLoser
           }

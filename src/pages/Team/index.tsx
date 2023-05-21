@@ -1,9 +1,14 @@
 import {
+  Avatar,
   Box,
   Button,
+  Card,
+  CardContent,
+  CardMedia,
   Container,
   Grid,
   IconButton,
+  StyledEngineProvider,
   Typography,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -20,10 +25,15 @@ import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
 
+interface IScheduleBySeason {
+  seasonName: string;
+  schedules: ISchedule[];
+}
+
 const Team = () => {
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
-  const [lastGames, setLastGames] = useState<ISchedule[]>([]);
+  const [lastGames, setLastGames] = useState<IScheduleBySeason[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,34 +80,46 @@ const Team = () => {
           <Button>Last Games</Button>
           <Button disabled>Stats</Button>
         </NavigateButtons>
-        {lastGames.length > 0 && (
-          <Grid container className={style.divisionContainer}>
-            <Grid
-              container
-              className={style.scheduleContainer}
-              xs={12}
-              sm={6}
-              md={6}
-              lg={4}
-              xl={4}
-            >
-              <ListCardContainer title={"Super Bowl"} subtitle={"2022"}>
-                {lastGames.map((schedule) => (
+        {lastGames.length === 0 ? (
+          <Box>
+            <figure className={style.figure}>
+              <figcaption className={style.figcaption}>No Results</figcaption>
+              <img
+                src="/404.png"
+                className={style.notfound}
+                alt="not found"
+              ></img>
+            </figure>
+          </Box>
+        ) : (
+          ""
+        )}
+
+        <Grid container className={style.divisionContainer}>
+          <Grid
+            container
+            className={style.scheduleContainer}
+            xs={12}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={4}
+          >
+            {lastGames.map((season) => (
+              <ListCardContainer title={season.seasonName}>
+                {season.schedules.map((schedule) => (
                   <MatchupCard
+                    competitors={schedule.competitors}
                     team={
-                      schedule?.competitors.find((c) => c.team.id !== team.id)
-                        ?.team
-                    }
-                    winner={
                       schedule?.competitors.find((c) => c.team.id === team.id)
-                        ?.winner
+                        ?.team
                     }
                   />
                 ))}
               </ListCardContainer>
-            </Grid>
+            ))}
           </Grid>
-        )}
+        </Grid>
       </Box>
     </Container>
   );
