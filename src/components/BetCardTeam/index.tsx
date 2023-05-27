@@ -25,7 +25,7 @@ const BetCardTeam = ({ team }: Props) => {
           {team?.name}
         </Typography>
         <Typography margin={0} variant="caption">
-          {team?.scoreSummary}
+          {team?.scoreScoreSummary}
         </Typography>
       </Box>
     </>

@@ -8,5 +8,5 @@ export interface ITeam {
   alternativeColor?: string;
   slug?: string; //ex. las-vegas-raiders
   logo: string;
-  scoreSummary?: string;
+  scoreScoreSummary?: string;
 }

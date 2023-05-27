@@ -14,7 +14,7 @@ const teamData: ITeam[] = [
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
     abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
+    scoreScoreSummary: "(2-3-1)",
   },
   {
     id: "2",
@@ -23,7 +23,7 @@ const teamData: ITeam[] = [
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
     abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
+    scoreScoreSummary: "(2-3-1)",
   },
   {
     id: "3",
@@ -32,7 +32,7 @@ const teamData: ITeam[] = [
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
     abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
+    scoreScoreSummary: "(2-3-1)",
   },
   {
     id: "4",
@@ -41,7 +41,7 @@ const teamData: ITeam[] = [
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
     abbreviation: "LV",
-    scoreSummary: "(2-3-1)",
+    scoreScoreSummary: "(2-3-1)",
   },
 ];
 

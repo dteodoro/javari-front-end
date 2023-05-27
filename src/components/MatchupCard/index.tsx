@@ -28,7 +28,7 @@ const MatchupCard = ({ competitors, team }: Props) => {
             {awayCompetitor?.team?.name.toUpperCase()}
           </Typography>
           <Typography className={style.teamStats} variant="body2">
-            {awayCompetitor?.team?.scoreSummary}
+            {awayCompetitor?.team?.scoreScoreSummary}
           </Typography>
         </Box>
         <Box className={`${style.cardItem} ${style.itemStats}`}>

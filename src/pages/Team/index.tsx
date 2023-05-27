@@ -72,7 +72,7 @@ const Team = () => {
           {team.displayName}
         </Typography>
         <Typography margin={0} variant="caption">
-          6-6-10
+          {team.scoreScoreSummary}
         </Typography>
       </TeamHero>
       <Box>
@@ -94,32 +94,33 @@ const Team = () => {
         ) : (
           ""
         )}
-
-        <Grid container className={style.divisionContainer}>
-          <Grid
-            container
-            className={style.scheduleContainer}
-            xs={12}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={4}
-          >
-            {lastGames.map((season) => (
-              <ListCardContainer title={season.seasonName}>
-                {season.schedules.map((schedule) => (
-                  <MatchupCard
-                    competitors={schedule.competitors}
-                    team={
-                      schedule?.competitors.find((c) => c.team.id === team.id)
-                        ?.team
-                    }
-                  />
-                ))}
-              </ListCardContainer>
-            ))}
+        {lastGames && (
+          <Grid container className={style.divisionContainer}>
+            <Grid
+              container
+              className={style.scheduleContainer}
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={4}
+            >
+              {lastGames.map((season) => (
+                <ListCardContainer title={season.seasonName}>
+                  {season.schedules.map((schedule) => (
+                    <MatchupCard
+                      competitors={schedule.competitors}
+                      team={
+                        schedule?.competitors.find((c) => c.team.id === team.id)
+                          ?.team
+                      }
+                    />
+                  ))}
+                </ListCardContainer>
+              ))}
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Box>
     </Container>
   );
