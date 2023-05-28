@@ -24,6 +24,8 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
+import { NOTFOUND } from "dns";
+import NoContent from "../../components/NoContent";
 
 interface IScheduleBySeason {
   seasonName: string;
@@ -81,20 +83,8 @@ const Team = () => {
           <Button disabled>Stats</Button>
         </NavigateButtons>
         {lastGames.length === 0 ? (
-          <Box>
-            <figure className={style.figure}>
-              <figcaption className={style.figcaption}>No Results</figcaption>
-              <img
-                src="/404.png"
-                className={style.notfound}
-                alt="not found"
-              ></img>
-            </figure>
-          </Box>
+          <NoContent label="No Results" />
         ) : (
-          ""
-        )}
-        {lastGames && (
           <Grid container className={style.divisionContainer}>
             <Grid
               container

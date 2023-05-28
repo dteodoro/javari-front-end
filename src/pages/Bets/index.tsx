@@ -6,78 +6,85 @@ import BetCardContainer from "../../containers/BetCardContainer";
 import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
 import api from "../../services/api";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import { ISchedule } from "../../types/schedule";
+import { ISchedule, ISeasonFilter, IWeek } from "../../types/schedule";
 import style from "./styles.module.scss";
 import { API_CORE } from "../../types/constants";
+import NoContent from "../../components/NoContent";
 
 const Bets = () => {
-  const [year, setYear] = useState("2022");
-  const [week, setWeek] = useState("REGULAR_SESSION");
-  const [data, setData] = useState<ISchedule[] | undefined>(undefined);
-  const [menuYear, setMenuYear] = useState<string[]>([]);
-  const [menuSeason, setMenuSeason] = useState<string[]>([]);
+  const [year, setYear] = useState("2023");
+  const [seasons, setSeasons] = useState<ISeasonFilter[]>([]);
+  const [week, setWeek] = useState<IWeek[] | undefined>([]);
+  const [selectedSeason, setSelectedSeason] = useState<string>("");
+  const [selectedWeek, setSelectedWeek] = useState<string>("");
+  const [data, setData] = useState<ISchedule[]>([]);
   const [loading, setLoading] = useState(true);
+
   const { bettor } = useAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       const response = await api.get(
-        `${API_CORE}/schedules/session/${year}/${week}/bettor/${bettor?.userId}`
+        `${API_CORE}/schedules?bettor=${bettor?.userId}&season=${selectedSeason}&week=${selectedWeek}`
       );
       setData(response.data);
       setLoading(false);
-      const responseMenu = await api.get(`${API_CORE}/schedules/filters`);
-      setMenuYear(responseMenu.data.years);
-      setMenuSeason(responseMenu.data.seasons);
     };
     fetchData();
-  }, [year, week, bettor]);
+  }, [selectedSeason, selectedWeek, bettor]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseMenu = await api.get(`${API_CORE}/seasons/filters`);
+      setSeasons(responseMenu.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleChangeSeason = (event: SelectChangeEvent) => {
+    let selected = event.target.value as string;
+    let season = seasons.find((s) => s.seasonId === selected);
+    setSelectedSeason(selected);
+    setSelectedWeek("");
+    setWeek(season?.weeks);
+  };
 
   const handleChangeWeek = (event: SelectChangeEvent) =>
-    setWeek(event.target.value as string);
-
-  const handleChangeYear = (event: SelectChangeEvent) =>
-    setYear(event.target.value as string);
+    setSelectedWeek(event.target.value as string);
 
   return (
     <Container>
       <Box className={style.filterBar}>
-        <Typography fontWeight="bold" variant="subtitle1">
-          NFL SCHEDULE
-        </Typography>
-        <Typography
-          fontWeight="bold"
-          variant="subtitle2"
-          className={style.filterBarTitle}
-        >
-          {year && week && `${year} - ${week}`}
+        <Typography fontWeight="bold" variant="subtitle1" mb={2}>
+          NFL SCHEDULES - {year}
         </Typography>
         <Box className={style.selectsGroup}>
           <Select
-            className={style.selectItem}
-            onChange={handleChangeYear}
-            value={year}
+            className={`${style.selectItem} ${style.firstSelect}`}
+            onChange={handleChangeSeason}
+            value={selectedSeason}
           >
-            {menuYear.map((year) => (
-              <MenuItem key={year} value={year}>
-                {year}
+            {seasons.map((s) => (
+              <MenuItem key={s.seasonId} value={s.seasonId}>
+                {s.seasonLabel}
               </MenuItem>
             ))}
           </Select>
           <Select
             className={`${style.selectItem} ${style.lastSelect}`}
             onChange={handleChangeWeek}
-            value={week}
+            value={selectedWeek}
           >
-            {menuSeason.map((season) => (
-              <MenuItem key={season} value={season}>
-                {season}
+            {week?.map((w) => (
+              <MenuItem key={w.weekId} value={w.weekId}>
+                {w.weekLabel}
               </MenuItem>
             ))}
           </Select>
         </Box>
       </Box>
+      {data.length < 1 ? <NoContent label="No Results" /> : ""}
       {loading ? (
         <BetCardSkeletonContainer />
       ) : (

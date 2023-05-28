@@ -15,3 +15,14 @@ export interface ISchedule {
   seasonCalendar: ISessionCalendar;
   bet?: IBetting;
 }
+
+export interface ISeasonFilter {
+  seasonId: string;
+  seasonLabel: string;
+  weeks: IWeek[];
+}
+
+export interface IWeek {
+  weekId: string;
+  weekLabel: string;
+}
