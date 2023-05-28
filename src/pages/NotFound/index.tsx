@@ -2,11 +2,12 @@ import React from "react";
 import { Container } from "@mui/material";
 
 import style from ".styles.module.scss";
+import NoContent from "../../components/NoContent";
 
 const NotFound: React.FC = () => {
   return (
     <Container>
-      <h1>Not Found</h1>
+      <NoContent label="Page Not Found" />
     </Container>
   );
 };
