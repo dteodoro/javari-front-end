@@ -29,6 +29,7 @@ import style from "./styles.module.scss";
 import { navItem } from "../../routes";
 import PermissionComponent from "../../components/PermissionComponent";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import Login from "../../pages/Login";
 
 interface Props {
   children?: React.ReactNode;
@@ -41,75 +42,82 @@ export default function Layout({ children }: Props) {
 
   return (
     <Box className={style.root} minHeight="100vh">
-      <AppBar position="sticky" className={style.appBar}>
-        <Toolbar>
-          {auth.userLogged() && (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon
+      {auth.userLogged() && (
+        <>
+          <AppBar position="sticky" className={style.appBar}>
+            <Toolbar>
+              {auth.userLogged() && (
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 }}
+                >
+                  <MenuIcon
+                    onClick={() => {
+                      setOpen(!open);
+                    }}
+                  />
+                </IconButton>
+              )}
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                NFL
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={style.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{ paper: style.drawerPaper }}
+          >
+            <div className={style.drawerHeader}>
+              <IconButton
                 onClick={() => {
                   setOpen(!open);
                 }}
-              />
-            </IconButton>
-          )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            NFL
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={style.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{ paper: style.drawerPaper }}
-      >
-        <div className={style.drawerHeader}>
-          <IconButton
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
-            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {navItem.map((item) => (
-            <PermissionComponent key={item.name} role={item.permission}>
-              <ListItem
-                className={style.menuItems}
-                key={item.name}
-                button
-                onClick={() => {
-                  setOpen(false);
-                  navigate(item.path);
-                }}
               >
-                <ListItemIcon>{<item.icon />}</ListItemIcon>
-                <ListItemText className={style.menuItems} primary={item.name} />
-              </ListItem>
-            </PermissionComponent>
-          ))}
-        </List>
-        <Button
-          className={style.logoutButton}
-          onClick={() => {
-            setOpen(!open);
-            auth.signOut();
-            navigate("/");
-            window.location.reload();
-          }}
-        >
-          <ExitToAppIcon className={style.ico} /> Sair
-        </Button>
-      </Drawer>
+                {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              {navItem.map((item) => (
+                <PermissionComponent key={item.name} role={item.permission}>
+                  <ListItem
+                    className={style.menuItems}
+                    key={item.name}
+                    button
+                    onClick={() => {
+                      setOpen(false);
+                      navigate(item.path);
+                    }}
+                  >
+                    <ListItemIcon>{<item.icon />}</ListItemIcon>
+                    <ListItemText
+                      className={style.menuItems}
+                      primary={item.name}
+                    />
+                  </ListItem>
+                </PermissionComponent>
+              ))}
+            </List>
+            <Button
+              className={style.logoutButton}
+              onClick={() => {
+                setOpen(!open);
+                auth.signOut();
+                navigate("/");
+                window.location.reload();
+              }}
+            >
+              <ExitToAppIcon className={style.ico} /> Sair
+            </Button>
+          </Drawer>
+        </>
+      )}
       <div className={style.page}>{children}</div>
       {auth.userLogged() && (
         <Hidden smUp>
