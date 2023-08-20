@@ -14,10 +14,12 @@ pipeline {
     stage('Build Javari') {
       steps {
         sh "npm install"
+        sh "npm run build"
       }
     }
      stage('Deploy') {
        steps {
+         sh "cd build"
          sh "ls -la"
        }
      }
