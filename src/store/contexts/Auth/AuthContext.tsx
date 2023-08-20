@@ -26,6 +26,8 @@ interface AuthContextState {
 }
 
 interface UserData {
+  firstname?: string;
+  lastname?: string;
   email: string;
   password: string;
 }
@@ -75,22 +77,27 @@ const AuthProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const signIn = useCallback(async ({ email, password }: UserData) => {
-    const response = await api.post(`${API_AUTH}/signIn`, {
-      email,
-      password,
-    });
+  const signIn = useCallback(
+    async ({ firstname, lastname, email, password }: UserData) => {
+      const response = await api.post(`${API_AUTH}/register`, {
+        firstname,
+        lastname,
+        email,
+        password,
+      });
 
-    const { token, userLogged, userName, userId } = response.data;
+      const { token, userLogged, userName, userId } = response.data;
 
-    if (userLogged) {
-      setToken(token);
-      setBettor({ userName, userId });
+      if (userLogged) {
+        setToken(token);
+        setBettor({ userName, userId });
 
-      localStorage.setItem("@PermissionYT:token", token);
-      api.defaults.headers.authorization = `Bearer ${token}`;
-    }
-  }, []);
+        localStorage.setItem("@PermissionYT:token", token);
+        api.defaults.headers.authorization = `Bearer ${token}`;
+      }
+    },
+    []
+  );
 
   const signOut = useCallback(async () => {
     if (setBettor) {

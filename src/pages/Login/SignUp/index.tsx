@@ -1,32 +1,31 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import style from "./styles.module.scss";
 import {
   Avatar,
   Button,
-  Checkbox,
   Container,
   Divider,
-  FormControlLabel,
   FormGroup,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import Home from "../Home";
 
-const Login = () => {
+import { useAuth } from "../../../store/contexts/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+const SignUp = () => {
+  const [firstname, setFirstName] = useState<string>("");
+  const [lastname, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [passwordCheck, setPasswordCheck] = useState<string>("");
 
+  const { signIn, userLogged } = useAuth();
   const navigate = useNavigate();
 
-  const { logIn, userLogged } = useAuth();
-
-  const handleLogin = async () => {
-    await logIn({ email, password });
+  const handleSignin = async () => {
+    await signIn({ firstname, lastname, email, password });
     if (userLogged()) {
       navigate("/home");
     }
@@ -41,17 +40,36 @@ const Login = () => {
           sx={{ width: 60, height: 60 }}
         />
         <Typography variant="h6" mb={2} mt={2}>
-          Sign in
+          Create Account
         </Typography>
 
         <TextField
           fullWidth
-          id="username"
-          label="User Name"
+          id="firstname"
+          label="First Name"
           type="search"
+          className={style.fieldText}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+
+        <TextField
+          fullWidth
+          id="lastname"
+          label="Last Name"
+          type="search"
+          className={style.fieldText}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+
+        <TextField
+          fullWidth
+          id="username"
+          label="E-mail"
+          type="email"
           className={style.fieldText}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <TextField
           fullWidth
           id="password"
@@ -62,29 +80,21 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <FormControlLabel
-          control={<Checkbox />}
-          label="Remember-me"
-          className={style.checkBox}
+        <TextField
+          fullWidth
+          id="passwordcheck"
+          required
+          type="password"
+          label="Password Check"
+          className={style.fieldText}
+          onChange={(e) => setPasswordCheck(e.target.value)}
         />
-        <Button
-          variant="contained"
-          size="large"
-          className={style.buttonLogin}
-          onClick={handleLogin}
-        >
-          LOG IN
-        </Button>
-
-        <Link variant="body2" mt={2} mb={2} href="#">
-          Forgot password ?
-        </Link>
         <Divider variant="middle" />
         <Button
           variant="contained"
           size="large"
           className={style.buttonSignUp}
-          onClick={() => navigate("/signup")}
+          onClick={handleSignin}
         >
           Create New Account
         </Button>
@@ -93,4 +103,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

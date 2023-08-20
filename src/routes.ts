@@ -12,7 +12,7 @@ import Standings from "./pages/Standings";
 import Team from "./pages/Team";
 import Bettor from "./pages/Bettor";
 import Settings from "./pages/Settings";
-import { USER_ROLE } from "./types/constants";
+import SignUp from "./pages/Login/SignUp";
 
 export enum RoutePath {
   FORGOT_PASSWORD = "/forgot_password",
@@ -23,6 +23,7 @@ export enum RoutePath {
   STANDINGS = "/standings",
   BETTOR = "bettor/:id",
   SETTINGS = "/config",
+  SIGNUP = "/signup",
 }
 
 export const navItem: SideBarNavItem[] = [
@@ -94,6 +95,11 @@ export const routes: Route[] = [
     path: RoutePath.SETTINGS,
     sideBarNavItem: navItem,
     component: Settings,
+  },
+  {
+    name: "SignUP",
+    path: RoutePath.SIGNUP,
+    component: SignUp,
   },
 ];
 
