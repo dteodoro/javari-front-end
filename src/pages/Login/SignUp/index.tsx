@@ -88,6 +88,11 @@ const SignUp = () => {
           label="Password Check"
           className={style.fieldText}
           onChange={(e) => setPasswordCheck(e.target.value)}
+          error={
+            password && passwordCheck && password !== passwordCheck
+              ? true
+              : false
+          }
         />
         <Divider variant="middle" />
         <Button

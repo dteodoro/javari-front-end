@@ -12,7 +12,7 @@ import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
 
 const Bets = () => {
-  const [year, setYear] = useState("2023");
+  const year = "2023";
   const [seasons, setSeasons] = useState<ISeasonFilter[]>([]);
   const [week, setWeek] = useState<IWeek[] | undefined>([]);
   const [selectedSeason, setSelectedSeason] = useState<string>("");
