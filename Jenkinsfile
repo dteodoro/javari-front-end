@@ -1,15 +1,25 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18.17.1-alpine3.18'
-            args '-p 3000:3000'
-        }
+  tools {
+    nodejs 'nodejs'
+  }
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main',
+            credentialsId: 'dteodoro-github',
+            url: 'https://github.com/dteodoro/javari-front-end.git'
+      }
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
+    stage('Build Javari') {
+      steps {
+        sh "npm install"
+      }
     }
+     stage('Deploy') {
+       steps {
+         sh "ls -la"
+       }
+     }
+  }
 }
