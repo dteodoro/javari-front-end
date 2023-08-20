@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       setRivals(rivalsResp.data);
     }
     fetchData();
-  }, [bettor]);
+  }, [bettor, userLogged, navigate]);
 
   return (
     <Container className={style.root}>

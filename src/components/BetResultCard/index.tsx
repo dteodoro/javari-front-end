@@ -1,20 +1,9 @@
-import {
-  Button,
-  ButtonGroup,
-  CardActions,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { ICompetitor } from "../../types/competitors";
 import { MatchResult } from "../../types/match-result-enum";
 
 import { ISchedule } from "../../types/schedule";
-import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 
 interface Props {
@@ -23,16 +12,16 @@ interface Props {
 
 const BetResultCard = ({ schedule }: Props) => {
   const homeTeam = schedule?.competitors.find(
-    (c) => c.homeAway == "home"
+    (c) => c.homeAway === "home"
   )?.team;
   const awayTeam = schedule?.competitors.find(
-    (c) => c.homeAway == "away"
+    (c) => c.homeAway === "away"
   )?.team;
   const winner = schedule?.bet?.win;
 
   function getTeam(teamType: MatchResult) {
     console.log("entrou aqui");
-    if (teamType == MatchResult.HOME) {
+    if (teamType === MatchResult.HOME) {
       return homeTeam;
     } else {
       return awayTeam;
@@ -83,7 +72,7 @@ const BetResultCard = ({ schedule }: Props) => {
         <Box
           className={`${style.cardItem} ${style.itemStats} ${style.matchPoints}`}
         ></Box>
-        {winner != undefined && (
+        {winner !== undefined && (
           <div
             className={
               winner

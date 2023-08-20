@@ -29,7 +29,6 @@ import style from "./styles.module.scss";
 import { navItem } from "../../routes";
 import PermissionComponent from "../../components/PermissionComponent";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import Login from "../../pages/Login";
 
 interface Props {
   children?: React.ReactNode;

@@ -8,12 +8,12 @@ import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const NotFound: React.FC = () => {
-  const { signOut, userLogged } = useAuth();
+  const { signOut } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     signOut();
-  }, []);
+  }, [signOut]);
 
   return (
     <Container>

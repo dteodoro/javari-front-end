@@ -1,6 +1,5 @@
 import { Box, Container, Divider, Grid, Typography } from "@mui/material";
-import Card from "@mui/material/Card";
-import React, { ReactChild, ReactNode } from "react";
+import { ReactNode } from "react";
 import style from "./styles.module.scss";
 
 interface Props {

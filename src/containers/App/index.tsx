@@ -6,7 +6,6 @@ import AppRoutes from "../AppRoutes";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "../../commons/queryClient";
 import { AuthProvider } from "../../store/contexts/Auth/AuthContext";
-import RequireAuth from "../../store/contexts/Auth/RequireAuth";
 
 const theme = createTheme({});
 

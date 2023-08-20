@@ -1,8 +1,7 @@
-import { Box, Card, Grid, Skeleton } from "@mui/material";
+import { Box, Grid, Skeleton } from "@mui/material";
 import React from "react";
-import BetCard from "../../../components/BetCard";
 import style from "./styles.module.scss";
-import uuid from 'react-uuid';
+import uuid from "react-uuid";
 
 const BetCardSkeletonContainer: React.FC = () => {
   const skeletonQtd = 3;

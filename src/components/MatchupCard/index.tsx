@@ -3,7 +3,6 @@ import Card from "@mui/material/Card/Card";
 
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
-import { ISchedule } from "../../types/schedule";
 import { ICompetitor } from "../../types/competitors";
 
 interface Props {

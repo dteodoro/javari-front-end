@@ -4,7 +4,6 @@ import NavigateButtons from "../../components/NavigateButtons";
 import DivisionContainer from "../../containers/DivisionContainer";
 import { IDivision } from "../../types/division";
 import { ITeam } from "../../types/team";
-import style from "./styles.module.scss";
 
 const teamData: ITeam[] = [
   {

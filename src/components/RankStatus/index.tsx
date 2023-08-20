@@ -3,9 +3,7 @@ import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
-import { RANK_STATUS } from "../../types/constants";
 import style from "./styles.module.scss";
-import { IScore } from "../../types/score";
 
 interface Props {
   rank: number;

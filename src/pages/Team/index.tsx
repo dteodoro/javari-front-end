@@ -1,14 +1,9 @@
 import {
-  Avatar,
   Box,
   Button,
-  Card,
-  CardContent,
-  CardMedia,
   Container,
   Grid,
   IconButton,
-  StyledEngineProvider,
   Typography,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -24,7 +19,6 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { ISchedule } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
-import { NOTFOUND } from "dns";
 import NoContent from "../../components/NoContent";
 
 interface IScheduleBySeason {

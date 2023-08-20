@@ -1,7 +1,6 @@
 import { Box, Card, Divider, Typography } from "@mui/material";
 
 import style from "./styles.module.scss";
-import { RANK_STATUS } from "../../types/constants";
 import RankStatus from "../RankStatus";
 import { IScore } from "../../types/score";
 

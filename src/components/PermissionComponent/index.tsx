@@ -26,7 +26,7 @@ const PermissionComponent: React.FC<PermissionRole> = ({ role, children }) => {
       }
     }
     fetchData();
-  }, [bettor]);
+  }, [bettor, role]);
   return <>{hasPermission && children}</>;
 };
 

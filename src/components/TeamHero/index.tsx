@@ -43,7 +43,11 @@ const TeamHero = (props: Props) => {
         )}
       </Box>
       <Box>
-        <img src={props.backgroundImage} className={style.backgroundLogo}></img>
+        <img
+          src={props.backgroundImage}
+          className={style.backgroundLogo}
+          alt="team logo as background"
+        ></img>
       </Box>
     </Card>
   );

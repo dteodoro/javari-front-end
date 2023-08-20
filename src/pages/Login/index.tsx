@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 
 import style from "./styles.module.scss";
 import {
@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import Home from "../Home";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");

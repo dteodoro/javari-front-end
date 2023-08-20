@@ -4,7 +4,6 @@ import NotFound from "../../pages/NotFound";
 import PrivateRoute from "../../components/PrivateRoute";
 import Login from "../../pages/Login";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
-import { useEffect, useState } from "react";
 import SignUp from "../../pages/Login/SignUp";
 
 const AppRoutes: React.FC = () => {
