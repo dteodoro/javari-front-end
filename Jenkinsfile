@@ -19,7 +19,7 @@ pipeline {
     }
      stage('Deploy') {
        steps {
-         sh "cd build & ls -la"
+         sh "ls -la build/"
        }
      }
   }
