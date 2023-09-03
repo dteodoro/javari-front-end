@@ -26,9 +26,8 @@ const SignUp = () => {
 
   const handleSignin = async () => {
     await signIn({ firstname, lastname, email, password });
-    if (userLogged()) {
-      navigate("/home");
-    }
+    navigate("/");
+    window.location.reload();
   };
 
   return (
