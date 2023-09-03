@@ -19,8 +19,7 @@ pipeline {
     }
      stage('Deploy') {
        steps {
-         sh "cd build"
-         sh "ls -la"
+         sh "ls -la build/"
        }
      }
   }
