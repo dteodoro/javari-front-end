@@ -9,6 +9,7 @@ import { API_CONNECTOR } from "../../types/constants";
 const Settings: React.FC = () => {
   const [loadingSchedule, setLoadingSchedule] = React.useState(false);
   const [loadingTeam, setLoadingTeam] = React.useState(false);
+  const [loadingSeason, setLoadingSeason] = React.useState(false);
 
   async function handleScheduleClick() {
     setLoadingSchedule(true);
@@ -19,6 +20,11 @@ const Settings: React.FC = () => {
     setLoadingTeam(true);
     await api.get(`${API_CONNECTOR}/loader/teams`);
     setLoadingTeam(false);
+  }
+  async function handleSeasonClick() {
+    setLoadingSeason(true);
+    await api.get(`${API_CONNECTOR}/loader/seasons`);
+    setLoadingSeason(false);
   }
   return (
     <Box>
@@ -41,6 +47,14 @@ const Settings: React.FC = () => {
           className={style.btnItem}
         >
           <span>Load Teams</span>
+        </LoadingButton>
+        <LoadingButton
+          onClick={handleSeasonClick}
+          loading={loadingSeason}
+          variant="outlined"
+          className={style.btnItem}
+        >
+          <span>Load Seasons</span>
         </LoadingButton>
       </Box>
     </Box>
