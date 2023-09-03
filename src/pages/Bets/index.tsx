@@ -25,8 +25,10 @@ const Bets = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
+      const seasonFilter = selectedSeason ? `&season=${selectedSeason}` : "";
+      const weekFilter = selectedWeek ? `&week=${selectedWeek}` : "";
       const response = await api.get(
-        `${API_CORE}/schedules?bettor=${bettor?.userId}&season=${selectedSeason}&week=${selectedWeek}`
+        `${API_CORE}/schedules?bettor=${bettor?.userId}${seasonFilter}${weekFilter}`
       );
       setData(response.data);
       setLoading(false);
@@ -65,6 +67,7 @@ const Bets = () => {
             onChange={handleChangeSeason}
             value={selectedSeason}
           >
+            <MenuItem key={"season-empty"} value={""}></MenuItem>
             {seasons.map((s) => (
               <MenuItem key={s.seasonId} value={s.seasonId}>
                 {s.seasonLabel}
@@ -76,6 +79,7 @@ const Bets = () => {
             onChange={handleChangeWeek}
             value={selectedWeek}
           >
+            <MenuItem key={"week-empty"} value={""}></MenuItem>
             {week?.map((w) => (
               <MenuItem key={w.weekId} value={w.weekId}>
                 {w.weekLabel}
