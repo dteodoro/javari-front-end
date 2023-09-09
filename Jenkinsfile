@@ -2,6 +2,10 @@ pipeline {
   tools {
     nodejs 'nodejs'
   }
+  environment {
+    sshServer = "${sshServer}"
+    sshUser = "${sshUser}"
+  }
   agent any
   stages {
     stage('Checkout') {
@@ -19,7 +23,9 @@ pipeline {
     }
      stage('Deploy') {
        steps {
-         sh "ls -la build/"
+         sshagent(credentials : ['javari-prd-credencial']){
+           echo "Send files to Server" 
+           sh "scp ./**/target/*App.jar ${sshUser}@${sshServer}:~/build/front/ "
        }
      }
   }
