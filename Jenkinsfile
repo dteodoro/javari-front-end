@@ -26,6 +26,7 @@ pipeline {
          sshagent(credentials : ['javari-prd-credencial']){
            echo "Send files to Server" 
            sh "scp ./**/target/*App.jar ${sshUser}@${sshServer}:~/build/front/ "
+         }
        }
      }
   }
