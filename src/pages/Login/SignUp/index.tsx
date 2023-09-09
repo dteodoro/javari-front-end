@@ -21,7 +21,7 @@ const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
 
-  const { signIn, userLogged } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSignin = async () => {
