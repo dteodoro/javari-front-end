@@ -88,7 +88,7 @@ const Bets = () => {
           </Select>
         </Box>
       </Box>
-      {data.length < 1 ? <NoContent label="No Results" /> : ""}
+      {data.length < 1 && !loading ? <NoContent label="No Results" /> : ""}
       {loading ? (
         <BetCardSkeletonContainer />
       ) : (
