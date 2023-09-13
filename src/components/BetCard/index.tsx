@@ -4,6 +4,9 @@ import {
   CardActions,
   Typography,
   Box,
+  Alert,
+  Collapse,
+  Snackbar,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -24,6 +27,7 @@ interface Props {
 }
 
 const BetCard = ({ schedule }: Props) => {
+  const [onError, setOnError] = useState(false);
   const getTeam = (teamType: string | undefined) => {
     return schedule?.competitors.find(
       (c) => c.homeAway.toUpperCase() === teamType
@@ -39,8 +43,10 @@ const BetCard = ({ schedule }: Props) => {
   const { bettor } = useAuth();
 
   const makeBet = async (bet: IBetting) => {
-    const response = await api.post(`${API_CORE}/bets`, bet);
-    return response.data;
+    return await api
+      .post(`${API_CORE}/bets`, bet)
+      .then((response) => response.data)
+      .catch(() => setOnError(true));
   };
 
   const getClass = () => {
@@ -77,6 +83,20 @@ const BetCard = ({ schedule }: Props) => {
 
   return (
     <Card className={style.root} elevation={2}>
+      <Snackbar
+        open={onError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={600}
+      >
+        <Alert
+          severity="error"
+          onClose={() => {
+            setOnError(!onError);
+          }}
+        >
+          Partida em andamento ou encerrada!
+        </Alert>
+      </Snackbar>
       <Box className={style.cardHeader}>
         <Typography
           fontWeight="bold"
