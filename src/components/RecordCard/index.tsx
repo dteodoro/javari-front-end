@@ -30,7 +30,13 @@ const RecordCard = ({ score, rank }: Props) => {
       <Box className={style.cardRecord__statistics}>
         <Box className={style.cardRecord__efficiency}>
           <Typography variant="subtitle2">Hits</Typography>
-          <Typography variant="h6">{score?.numberOfHits}</Typography>
+          <Box display={"flex"}>
+            <Typography variant="h6" color="secondary">
+              {score?.numberOfHits}
+            </Typography>
+            <Typography variant="h6">/</Typography>
+            <Typography variant="h6">{score?.amountBetMade}</Typography>
+          </Box>
         </Box>
         <Box className={style.cardRecord__efficiency}>
           <Typography mr={1} variant="subtitle2">
