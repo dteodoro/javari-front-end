@@ -65,7 +65,7 @@ const TeamCard = ({ team, editable }: Props) => {
               }}
               variant="caption"
             >
-              {"0-0-0"}
+              {team?.scoreScoreSummary}
             </Typography>
 
             {favoriteTeam?.id === team?.id ? (
