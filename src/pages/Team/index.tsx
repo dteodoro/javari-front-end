@@ -17,14 +17,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ITeam } from "../../types/team";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { ISchedule } from "../../types/schedule";
+import { IScheduleBySeason } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
-
-interface IScheduleBySeason {
-  seasonName: string;
-  schedules: ISchedule[];
-}
 
 const Team = () => {
   const { id } = useParams();
@@ -36,7 +31,7 @@ const Team = () => {
     async function fetchData() {
       const teamResp = await api.get(`${API_CORE}/teams/${id}`);
       const schedulesResp = await api.get(
-        `${API_CORE}/schedules/session/2023/presesion/team/${id}`
+        `${API_CORE}/schedules/season/2023/team/${id}`
       );
       setTeam(teamResp.data);
       setLastGames(schedulesResp.data);

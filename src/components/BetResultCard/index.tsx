@@ -11,12 +11,8 @@ interface Props {
 }
 
 const BetResultCard = ({ schedule }: Props) => {
-  const homeTeam = schedule?.competitors.find(
-    (c) => c.homeAway === "home"
-  )?.team;
-  const awayTeam = schedule?.competitors.find(
-    (c) => c.homeAway === "away"
-  )?.team;
+  const homeTeam = schedule?.competitors.find((c) => c.homeAway === "home");
+  const awayTeam = schedule?.competitors.find((c) => c.homeAway === "away");
   const winner = schedule?.bet?.win;
 
   function getTeam(teamType: MatchResult) {
@@ -37,41 +33,56 @@ const BetResultCard = ({ schedule }: Props) => {
             variant="caption"
             component="span"
           >
-            +{schedule?.bet?.score}
+            +3{schedule?.bet?.score}
           </Typography>
         )}
         <Box className={style.matchContainer}>
-          <Typography className={style.teamName} variant="subtitle2" ml={1}>
-            {getTeam(MatchResult.AWAY)?.abbreviation}
-          </Typography>
-          <CardMedia
-            component="img"
-            image={getTeam(MatchResult.AWAY)?.logo}
-            alt={getTeam(MatchResult.AWAY)?.name}
-            className={`${style.cardMedia} `}
-          />
-          <Typography variant="h6" ml={2}>
-            30
-          </Typography>
-          <Typography ml={2} mr={2} variant="subtitle2">
-            @
-          </Typography>
-          <Typography variant="h6" mr={2}>
-            27
-          </Typography>
-          <CardMedia
-            component="img"
-            image={getTeam(MatchResult.HOME)?.logo}
-            alt={getTeam(MatchResult.HOME)?.name}
-            className={style.cardMedia}
-          />
-          <Typography className={style.teamName} variant="subtitle2" mr={1}>
-            {getTeam(MatchResult.HOME)?.abbreviation}
-          </Typography>
+          <Box className={style.teamContainer}>
+            <Typography
+              className={style.teamName}
+              variant="subtitle2"
+              ml={1}
+              mb={1}
+              mr={1}
+            >
+              {getTeam(MatchResult.AWAY)?.team.abbreviation}
+            </Typography>
+            <CardMedia
+              component="img"
+              image={getTeam(MatchResult.AWAY)?.team.logo}
+              alt={getTeam(MatchResult.AWAY)?.team.name}
+              className={`${style.cardMedia} `}
+            />
+            <Typography variant="h6" ml={1}>
+              {getTeam(MatchResult.AWAY)?.score}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography ml={0.5} mr={0.5} variant="subtitle2">
+              @
+            </Typography>
+          </Box>
+          <Box className={style.teamContainer}>
+            <Typography variant="h6" mr={1}>
+              {getTeam(MatchResult.HOME)?.score}
+            </Typography>
+            <CardMedia
+              component="img"
+              image={getTeam(MatchResult.HOME)?.team.logo}
+              alt={getTeam(MatchResult.HOME)?.team.name}
+              className={style.cardMedia}
+            />
+            <Typography
+              className={style.teamName}
+              variant="subtitle2"
+              mr={1}
+              mb={1}
+              ml={1}
+            >
+              {getTeam(MatchResult.HOME)?.team.abbreviation}
+            </Typography>
+          </Box>
         </Box>
-        <Box
-          className={`${style.cardItem} ${style.itemStats} ${style.matchPoints}`}
-        ></Box>
         {winner !== undefined && (
           <div
             className={

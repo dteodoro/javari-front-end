@@ -7,15 +7,14 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
-  margin: 0 4px 0 4px;
+  margin: 8px 0 8px 0;
   .teamName {
     align-self: flex-end;
-    margin-bottom: 8px;
   }
 }
 .cardMedia {
-  max-width: 65px;
-  max-height: 65px;
+  max-width: 55px;
+  max-height: 55px;
 }
 .cardItem {
   flex-wrap: nowrap;
@@ -60,5 +59,18 @@
 .matchContainer {
   display: flex;
   align-items: center;
-  margin-right: 10%;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.teamContainer {
+  display: inline-flex;
+  align-items: center;
+}
+.divisionContainer {
+  display: flex;
+  width: 100%;
+}
+.scheduleContainer {
+  display: flex;
+  margin: 0 0 0 0;
 }

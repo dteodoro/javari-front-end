@@ -26,3 +26,8 @@ export interface IWeek {
   weekId: string;
   weekLabel: string;
 }
+
+export interface IScheduleBySeason {
+  seasonName: string;
+  schedules: ISchedule[];
+}

@@ -8,7 +8,7 @@ import TeamCard from "../../components/TeamCard";
 import TeamHero from "../../components/TeamHero";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import BetResultCard from "../../components/BetResultCard";
-import { ISchedule } from "../../types/schedule";
+import { IScheduleBySeason } from "../../types/schedule";
 import ListCardContainer from "../../containers/ListCardContainer";
 import api from "../../services/api";
 import { IPlayer } from "../../types/player";
@@ -19,14 +19,14 @@ const Bettor: React.FC = () => {
   const navigate = useNavigate();
 
   const [rival, setRival] = useState<IPlayer>({} as IPlayer);
-  const [lastGames, setLastGames] = useState<ISchedule[]>([]);
+  const [lastGames, setLastGames] = useState<IScheduleBySeason[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
       const response = await api.get(`${API_CORE}/bettor/${id}`);
       const schedulesResp = await api.get(
-        `${API_CORE}/schedules/session/2023/presesion/bettor/${id}`
+        `${API_CORE}/schedules/season/2023/bettor/${id}`
       );
       setLastGames(schedulesResp.data);
       setRival(response.data);
@@ -69,7 +69,7 @@ const Bettor: React.FC = () => {
               Score
             </Typography>
             <RecordCard
-              rank={rival.previousPosition - rival.currentPosition}
+              rank={-rival.currentPosition - rival.previousPosition}
               score={rival.score}
             />
           </Box>
@@ -82,21 +82,22 @@ const Bettor: React.FC = () => {
             </Box>
           )}
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-          <Box component="section" mr={1.5} ml={1.5} mt={2}>
-            <Typography mt={2} mb={0} variant="h6">
-              Last Games
-            </Typography>
-          </Box>
-
-          <Box component="section" mt={2}>
-            <ListCardContainer title={"Super-Bowl"}>
-              {lastGames.map((schedule: ISchedule) => (
+      </Grid>
+      <Box component="section" mr={1.5} ml={1.5} mt={2}>
+        <Typography mt={2} mb={0} variant="h6">
+          Last Games
+        </Typography>
+      </Box>
+      <Grid container wrap={"wrap"}>
+        {lastGames.map((season) => (
+          <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+            <ListCardContainer title={season.seasonName}>
+              {season.schedules.map((schedule) => (
                 <BetResultCard key={schedule.id} schedule={schedule} />
               ))}
             </ListCardContainer>
-          </Box>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
