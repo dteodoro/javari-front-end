@@ -103,7 +103,7 @@ const AuthProvider: React.FC = ({ children }) => {
         api.defaults.headers.authorization = `Bearer ${token}`;
       }
     },
-    []
+    [bettor]
   );
 
   const signOut = useCallback(async () => {
