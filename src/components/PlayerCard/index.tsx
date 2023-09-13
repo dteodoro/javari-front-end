@@ -44,7 +44,7 @@ const PlayerCard = ({ player }: Props) => {
         </Box>
       </Box>
       <Box className={style.playerCard__points}>
-        <RankStatus rank={player.previousPosition - player.currentPosition} />
+        <RankStatus rank={player.currentPosition - player.previousPosition} />
         <Typography variant="h4">{player.score?.points}</Typography>
         <Typography variant="body2" ml={0.5}>
           Pts

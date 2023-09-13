@@ -12,10 +12,10 @@ interface Props {
 const RankStatus = ({ rank }: Props) => {
   return (
     <Box className={style.cardRecord__rankIcon}>
-      {rank > 0 && (
+      {rank < 0 && (
         <ArrowCircleUpIcon color="success" sx={{ marginTop: "12px" }} />
       )}
-      {rank < 0 && (
+      {rank > 0 && (
         <ArrowCircleDownIcon color="error" sx={{ marginTop: "12px" }} />
       )}
       {rank === 0 && (
