@@ -40,15 +40,17 @@ interface TokenState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [bettor, setBettor] = useState<IBettor>({} as IBettor);
+  const bettorLocal = localStorage.getItem("javari-bettor");
+  const [bettor, setBettor] = useState<IBettor>(
+    bettorLocal ? JSON.parse(bettorLocal) : ({} as IBettor)
+  );
   const [favoriteTeam, setFavoriteTeam] = useState<ITeam>({} as ITeam);
   const [token, setToken] = useState<TokenState | undefined>(() => {
     const accessToken = localStorage.getItem("@PermissionYT:accessToken");
     const refreshToken = localStorage.getItem("@PermissionYT:refreshToken");
 
     if (accessToken) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
-
+      api.defaults.headers.authorization = `Bearer ${accessToken}`;
       return { accessToken, refreshToken } as TokenState;
     }
 
@@ -65,7 +67,7 @@ const AuthProvider: React.FC = ({ children }) => {
     let responseUser;
     if (access_token && refresh_token) {
       setToken(access_token);
-      localStorage.setItem("@PermissionYT:token", access_token);
+      localStorage.setItem("@PermissionYT:accessToken", access_token);
       api.defaults.headers.authorization = `Bearer ${access_token}`;
       responseUser = await api.post(`${API_AUTH}/validate-token`);
     }
@@ -74,6 +76,10 @@ const AuthProvider: React.FC = ({ children }) => {
 
     if (userName) {
       setBettor({ userName, userId } as IBettor);
+      localStorage.setItem(
+        "javari-bettor",
+        JSON.stringify({ userName, userId } as IBettor)
+      );
     }
   }, []);
 
@@ -92,7 +98,8 @@ const AuthProvider: React.FC = ({ children }) => {
         setToken(token);
         setBettor({ userName, userId });
 
-        localStorage.setItem("@PermissionYT:token", token);
+        localStorage.setItem("@PermissionYT:accessToken", token);
+        localStorage.setItem("javari-bettor", JSON.stringify(bettor));
         api.defaults.headers.authorization = `Bearer ${token}`;
       }
     },
@@ -103,12 +110,13 @@ const AuthProvider: React.FC = ({ children }) => {
     if (setBettor) {
       setBettor({} as IBettor);
       setToken(undefined);
-      localStorage.removeItem("@PermissionYT:token");
+      localStorage.removeItem("@PermissionYT:accessToken");
+      localStorage.removeItem("javari-bettor");
     }
   }, [setBettor]);
 
   const userLogged = useCallback(() => {
-    const token = localStorage.getItem("@PermissionYT:token");
+    const token = localStorage.getItem("@PermissionYT:accessToken");
     if (token) {
       return true;
     }
