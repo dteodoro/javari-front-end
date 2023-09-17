@@ -43,7 +43,7 @@ const Bettor: React.FC = () => {
       setLastGames(schedulesResp.data);
     }
     fetchData();
-  }, [id]);
+  }, [id, rival]);
 
   return (
     <Container className={style.root}>
