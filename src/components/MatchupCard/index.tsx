@@ -4,6 +4,7 @@ import Card from "@mui/material/Card/Card";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 import { ICompetitor } from "../../types/competitors";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   competitors: ICompetitor[];
@@ -11,8 +12,14 @@ interface Props {
 }
 
 const MatchupCard = ({ competitors, team }: Props) => {
+  const navigate = useNavigate();
   var homeCompetitor = competitors.find((c) => c.team.id === team?.id);
   var awayCompetitor = competitors.find((c) => c.team.id !== team?.id);
+
+  const cardClickHandle = (selectedTeam?: ICompetitor) => {
+    navigate(`/teams/${selectedTeam?.team.id}`);
+  };
+
   return (
     <Card>
       <Box className={style.cardContainer}>
@@ -21,8 +28,12 @@ const MatchupCard = ({ competitors, team }: Props) => {
           image={awayCompetitor?.team?.logo}
           alt={awayCompetitor?.team?.name}
           className={style.cardMedia}
+          onClick={() => cardClickHandle(awayCompetitor)}
         />
-        <Box className={`${style.cardItem} ${style.itemName}`}>
+        <Box
+          className={`${style.cardItem} ${style.itemName}`}
+          onClick={() => cardClickHandle(awayCompetitor)}
+        >
           <Typography className={style.teamName} variant="subtitle2">
             {awayCompetitor?.team?.name.toUpperCase()}
           </Typography>

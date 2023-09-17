@@ -22,6 +22,7 @@ import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
 
 const Team = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
   const [lastGames, setLastGames] = useState<IScheduleBySeason[]>([]);
@@ -39,7 +40,6 @@ const Team = () => {
     fetchData();
   }, [id]);
 
-  const navigate = useNavigate();
   return (
     <Container className={style.root}>
       <IconButton
