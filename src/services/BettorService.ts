@@ -31,6 +31,17 @@ class BettorService {
   ) {
     await api.delete(`${API_CORE}/bettor/${bettorId}/favoriteTeam/${teamId}`);
   }
+
+  async changeBettorImage(bettorId: string, file: Blob) {
+    let data = new FormData();
+    data.append("file", file);
+    await api.post(`${API_CORE}/bettor/${bettorId}/uploadImage`, data, {
+      headers: {
+        accept: "application/json",
+        "Content-Type": `multipart/form-data; boundary=${file.type}`,
+      },
+    });
+  }
 }
 
 export default BettorService;

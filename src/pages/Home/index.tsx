@@ -25,12 +25,37 @@ const Home: React.FC = () => {
       navigate("/login");
     }
     async function fetchData() {
-      const bettorResp = await api.get(`${API_CORE}/bettor/${bettor?.userId}`);
-      setPlayer(bettorResp.data);
-      const rivalsResp = await api.get(
-        `${API_CORE}/bettor/${bettor?.userId}/rivals`
-      );
-      setRivals(rivalsResp.data);
+      await api
+        .get(`${API_CORE}/bettor/${bettor?.userId}`)
+        .then(async (resp) => {
+          let currentPlayer = resp.data;
+          await api
+            .get(`${API_CORE}/bettor/image/${currentPlayer.image}`, {
+              responseType: "blob",
+            })
+            .then((resp) => {
+              currentPlayer.image = URL.createObjectURL(resp.data);
+              setPlayer(currentPlayer);
+            });
+        });
+
+      await api
+        .get(`${API_CORE}/bettor/${bettor?.userId}/rivals`)
+        .then(async (resp) => {
+          let rivals = resp.data;
+          for (let rival of rivals) {
+            if (rival.image) {
+              await api
+                .get(`${API_CORE}/bettor/image/${rival.image}`, {
+                  responseType: "blob",
+                })
+                .then((resp) => {
+                  rival.image = URL.createObjectURL(resp.data);
+                });
+            }
+          }
+          setRivals(rivals);
+        });
     }
     fetchData();
   }, [bettor, userLogged, navigate]);
@@ -38,7 +63,7 @@ const Home: React.FC = () => {
   return (
     <Container className={style.root}>
       <TeamHero
-        mainImage="/avatar2.svg"
+        mainImage={player.image}
         backgroundImage={
           favoriteTeam?.id ? player.favoriteTeam?.logo : "/SVG-rams-logo.svg"
         }
@@ -77,8 +102,9 @@ const Home: React.FC = () => {
                 color="primary"
                 aria-label="add team"
                 component="label"
+                onClick={() => navigate("/teams")}
               >
-                <AddBoxIcon onClick={() => navigate("/teams")} />
+                <AddBoxIcon />
               </IconButton>
             )}
           </Box>

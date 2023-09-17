@@ -1,0 +1,49 @@
+.slideAvatar {
+  background-color: rgba(228, 224, 224, 0.568) !important;
+  align-self: center;
+  margin: 0 2px 2px 2px;
+}
+.logoContainerEdit {
+  position: relative;
+  display: inline-block;
+  align-self: center;
+  color: gray;
+  margin: 0 16px 0 16px;
+}
+.actionButtons {
+  display: flex;
+  justify-content: center;
+}
+.avatarEditor {
+  margin-top: 8px;
+  width: 100% !important;
+  height: 100% !important;
+}
+.inputFile {
+  display: none;
+}
+.done {
+  background-color: rgba(0, 128, 0, 0.1) !important;
+}
+.cancel {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+.avatarCropped {
+  margin-top: 32px;
+  width: 100% !important;
+  height: 100% !important;
+}
+.closeButton {
+  position: absolute !important;
+  background-color: rgba(228, 224, 224, 0.568) !important;
+  top: 8px;
+  right: 8px;
+}
+.confirmButtons {
+  display: flex;
+  width: 100%;
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+  justify-content: space-evenly;
+}

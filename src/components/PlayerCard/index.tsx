@@ -30,7 +30,7 @@ const PlayerCard = ({ player }: Props) => {
     >
       <Box className={style.playerCard_playerContainer}>
         <Box className={style.playerCard_avatar}>
-          <Avatar>
+          <Avatar alt={player.nickName} src={player.image}>
             <AccountCircleIcon />
           </Avatar>
         </Box>

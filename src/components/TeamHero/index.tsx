@@ -1,9 +1,19 @@
-import { Card, CardContent, CardMedia, IconButton } from "@mui/material";
+import {
+  Avatar as AvatarMU,
+  Card,
+  CardContent,
+  IconButton,
+} from "@mui/material";
 import { Box } from "@mui/system";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
+import ImageIcon from "@mui/icons-material/Image";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import style from "./styles.module.scss";
+import AvatarEditorModal from "../AvatarEditorModal";
+import api from "../../services/api";
+import { API_CORE } from "../../types/constants";
 
 interface Props {
   children?: ReactNode;
@@ -15,6 +25,17 @@ interface Props {
 }
 
 const TeamHero = (props: Props) => {
+  const [logoEdit, setLogoEdit] = useState(false);
+
+  const handleClickEdit = () => {
+    setLogoEdit(!logoEdit);
+  };
+
+  const handleRefresh = () => {
+    setLogoEdit(!logoEdit);
+    window.location.reload();
+  };
+
   return (
     <Card
       elevation={2}
@@ -23,24 +44,44 @@ const TeamHero = (props: Props) => {
         background: `linear-gradient(120deg,transparent 61%, #${props.teamColor}3D 62%, #${props.alternativeColor} 63%`,
       }}
     >
+      {logoEdit && (
+        <AvatarEditorModal
+          mainImage={props.mainImage ? props.mainImage : "/avatar.svg"}
+        />
+      )}
       <Box className={style.teamInfo}>
         <CardContent>{props.children}</CardContent>
-        {props.mainImage && (
-          <Box className={style.logoContainer}>
-            <CardMedia
-              component="img"
-              image={props.mainImage}
-              alt="Live from space album cover"
-              className={style.teamLogo}
-              style={props.editable ? { borderRadius: "50%" } : {}}
-            />
-            {props.editable && (
-              <IconButton className={style.editButton}>
-                <EditIcon />
-              </IconButton>
-            )}
-          </Box>
-        )}
+
+        <Box className={style.logoContainer}>
+          <AvatarMU
+            src={props.mainImage}
+            sx={{
+              width: 130,
+              height: 130,
+            }}
+          >
+            <ImageIcon />
+          </AvatarMU>
+          {props.editable && (
+            <>
+              {logoEdit ? (
+                <IconButton
+                  className={style.editButton}
+                  onClick={handleRefresh}
+                >
+                  <RefreshIcon />
+                </IconButton>
+              ) : (
+                <IconButton
+                  className={style.editButton}
+                  onClick={handleClickEdit}
+                >
+                  <EditIcon />
+                </IconButton>
+              )}
+            </>
+          )}
+        </Box>
       </Box>
       <Box>
         <img

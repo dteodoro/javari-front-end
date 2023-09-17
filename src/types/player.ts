@@ -12,4 +12,5 @@ export interface IPlayer {
   favoriteTeam?: ITeam;
   score?: IScore;
   bets?: IBet[];
+  image?: string;
 }
