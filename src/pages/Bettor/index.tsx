@@ -24,12 +24,23 @@ const Bettor: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
-      const response = await api.get(`${API_CORE}/bettor/${id}`);
+      await api.get(`${API_CORE}/bettor/${id}`).then(async (resp) => {
+        let currentPlayer = resp.data;
+        if (currentPlayer.image) {
+          await api
+            .get(`${API_CORE}/bettor/image/${currentPlayer.image}`, {
+              responseType: "blob",
+            })
+            .then((resp) => {
+              currentPlayer.image = URL.createObjectURL(resp.data);
+              setRival(currentPlayer);
+            });
+        }
+      });
       const schedulesResp = await api.get(
         `${API_CORE}/schedules/season/2023/bettor/${id}`
       );
       setLastGames(schedulesResp.data);
-      setRival(response.data);
     }
     fetchData();
   }, [id]);

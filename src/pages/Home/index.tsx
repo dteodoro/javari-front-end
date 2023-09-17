@@ -29,14 +29,16 @@ const Home: React.FC = () => {
         .get(`${API_CORE}/bettor/${bettor?.userId}`)
         .then(async (resp) => {
           let currentPlayer = resp.data;
-          await api
-            .get(`${API_CORE}/bettor/image/${currentPlayer.image}`, {
-              responseType: "blob",
-            })
-            .then((resp) => {
-              currentPlayer.image = URL.createObjectURL(resp.data);
-              setPlayer(currentPlayer);
-            });
+          if (currentPlayer.image) {
+            await api
+              .get(`${API_CORE}/bettor/image/${currentPlayer.image}`, {
+                responseType: "blob",
+              })
+              .then((resp) => {
+                currentPlayer.image = URL.createObjectURL(resp.data);
+                setPlayer(currentPlayer);
+              });
+          }
         });
 
       await api
