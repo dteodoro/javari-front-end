@@ -5,15 +5,13 @@ import {
   IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import ImageIcon from "@mui/icons-material/Image";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 import style from "./styles.module.scss";
 import AvatarEditorModal from "../AvatarEditorModal";
-import api from "../../services/api";
-import { API_CORE } from "../../types/constants";
 
 interface Props {
   children?: ReactNode;

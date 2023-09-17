@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Dialog, IconButton, Slider } from "@mui/material";
 import { useRef, useState } from "react";
-import AvatarEditor, { CroppedRect } from "react-avatar-editor";
+import AvatarEditor from "react-avatar-editor";
 import ImageIcon from "@mui/icons-material/Image";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
@@ -33,7 +33,7 @@ const AvatarEditorModal = (props: Props) => {
     position: { x: 0.5, y: 0.5 },
     scale: 1,
   });
-  const { originalImage, croppedImage, position, scale } = imageProperties;
+  const { originalImage, position, scale } = imageProperties;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const editorRef = useRef<AvatarEditor | null>(null);
