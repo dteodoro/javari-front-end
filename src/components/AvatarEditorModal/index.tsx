@@ -7,7 +7,7 @@ import DoneIcon from "@mui/icons-material/Done";
 
 import style from "./styles.module.scss";
 import BettorService from "../../services/BettorService";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 interface Props {
   mainImage: string;
@@ -21,7 +21,7 @@ interface ImageProperties {
 }
 
 const AvatarEditorModal = (props: Props) => {
-  const { bettor } = useAuth();
+  const { bettor } = useBettorContext();
   const currentImage = props.mainImage;
   const [fileBlob, setFileBlob] = useState<Blob | null>(null);
   const [open, setOpen] = useState(true);

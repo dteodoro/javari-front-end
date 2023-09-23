@@ -6,15 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { ITeam } from "../../types/team";
 import style from "./styles.module.scss";
 import { useEffect } from "react";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import BettorService from "../../services/BettorService";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
+
 interface Props {
   team?: ITeam;
   editable: boolean;
 }
 
 const TeamCard = ({ team, editable }: Props) => {
-  const { bettor, favoriteTeam, setFavoriteTeam } = useAuth();
+  const { bettor, favoriteTeam, setFavoriteTeam } = useBettorContext();
   let navigate = useNavigate();
 
   const cardClickHandle = () => {
@@ -24,20 +25,16 @@ const TeamCard = ({ team, editable }: Props) => {
   const favoriteHandleClick = async () => {
     const service = new BettorService();
     if (team?.id !== favoriteTeam?.id) {
-      const selecteTeam = await service.setFavoriteTeam(
-        team?.id,
-        bettor?.userId
-      );
-      setFavoriteTeam(selecteTeam);
+      await service
+        .setFavoriteTeam(team?.id, bettor?.userId)
+        .then((resp) => setFavoriteTeam(resp));
     } else {
       service.removeFavoriteTeam(team?.id, bettor?.userId);
       setFavoriteTeam({} as ITeam);
     }
   };
 
-  useEffect(() => {
-    console.log("render component");
-  }, [favoriteTeam]);
+  useEffect(() => {}, [favoriteTeam]);
 
   return (
     <Card className={style.root}>

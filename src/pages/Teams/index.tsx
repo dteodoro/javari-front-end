@@ -10,13 +10,13 @@ import { useEffect, useState } from "react";
 
 import DivisionContainer from "../../containers/DivisionContainer";
 import api from "../../services/api";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { IConference } from "../../types/conference";
 import { API_CORE, CONFERENCES, DIVISIONS } from "../../types/constants";
 import style from "./styles.module.scss";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Teams = () => {
-  const { favoriteTeam } = useAuth();
+  const { favoriteTeam } = useBettorContext();
 
   const [conferences, setConferences] = useState<IConference[]>([]);
   const [conference, setConference] = useState<string>(() => {

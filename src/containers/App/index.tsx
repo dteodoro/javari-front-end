@@ -6,6 +6,7 @@ import AppRoutes from "../AppRoutes";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "../../commons/queryClient";
 import { AuthProvider } from "../../store/contexts/Auth/AuthContext";
+import { BettorProvider } from "../../store/contexts/Auth/BettorContext";
 
 const theme = createTheme({});
 
@@ -15,9 +16,11 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <CssBaseline />
         <AuthProvider>
-          <Layout>
-            <AppRoutes />
-          </Layout>
+          <BettorProvider>
+            <Layout>
+              <AppRoutes />
+            </Layout>
+          </BettorProvider>
         </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>

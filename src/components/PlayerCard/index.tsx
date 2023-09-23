@@ -5,14 +5,14 @@ import style from "./styles.module.scss";
 import { IPlayer } from "../../types/player";
 import RankStatus from "../RankStatus";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 interface Props {
   player: IPlayer;
 }
 
 const PlayerCard = ({ player }: Props) => {
-  const { bettor: currentPlayer } = useAuth();
+  const { bettor: currentPlayer } = useBettorContext();
   let navigate = useNavigate();
 
   const isCurrentPlayer = currentPlayer?.userId === player.bettorId;

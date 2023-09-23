@@ -13,9 +13,11 @@ import api from "../../services/api";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useNavigate } from "react-router-dom";
 import { API_CORE } from "../../types/constants";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Home: React.FC = () => {
-  const { bettor, favoriteTeam, userLogged } = useAuth();
+  const { userLogged } = useAuth();
+  const { bettor, favoriteTeam } = useBettorContext();
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
   const [rivals, setRivals] = useState<IPlayer[]>([]);
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (!userLogged) {
       navigate("/login");
+      return;
     }
     async function fetchData() {
       await api
@@ -36,9 +39,9 @@ const Home: React.FC = () => {
               })
               .then((resp) => {
                 currentPlayer.image = URL.createObjectURL(resp.data);
-                setPlayer(currentPlayer);
               });
           }
+          setPlayer(currentPlayer);
         });
 
       await api
@@ -59,7 +62,9 @@ const Home: React.FC = () => {
           setRivals(rivals);
         });
     }
-    fetchData();
+    if (bettor?.userId) {
+      fetchData();
+    }
   }, [bettor, userLogged, navigate]);
 
   return (
@@ -81,7 +86,6 @@ const Home: React.FC = () => {
           {player?.previousPosition}
         </Typography>
       </TeamHero>
-
       <Grid container wrap={"wrap"}>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <Box component="section" mr={1.5} ml={1.5} mt={2}>

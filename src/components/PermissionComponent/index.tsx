@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { API_CORE } from "../../types/constants";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 interface PermissionRole {
   role?: string;
 }
 
 const PermissionComponent: React.FC<PermissionRole> = ({ role, children }) => {
-  const { bettor } = useAuth();
+  const { bettor } = useBettorContext();
   const [hasPermission, setHasPermission] = useState<boolean>(false);
 
   useEffect(() => {

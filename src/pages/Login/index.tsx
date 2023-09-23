@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,9 +24,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { logIn, userLogged } = useAuth();
+  const { fetchBettor } = useBettorContext();
 
   const handleLogin = async () => {
     await logIn({ email, password });
+    fetchBettor();
     if (userLogged()) {
       navigate("/home");
     }

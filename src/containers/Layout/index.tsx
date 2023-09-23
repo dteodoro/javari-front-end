@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   ButtonGroup,
@@ -19,7 +20,7 @@ import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import GroupsIcon from "@mui/icons-material/Groups";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -29,15 +30,22 @@ import style from "./styles.module.scss";
 import { navItem } from "../../routes";
 import PermissionComponent from "../../components/PermissionComponent";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 interface Props {
   children?: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {
+  const { betsOpen } = useBettorContext();
   const [open, setOpen] = useState(false);
+  const [betOpenQty, setBetOpenQty] = useState(betsOpen);
   const navigate = useNavigate();
   const auth = useAuth();
+
+  useEffect(() => {
+    setBetOpenQty(betsOpen);
+  }, [betsOpen]);
 
   return (
     <Box className={style.root} minHeight="100vh">
@@ -138,7 +146,9 @@ export default function Layout({ children }: Props) {
                 className={style.action}
                 onClick={() => navigate("/bets")}
               >
-                <SportsFootballIcon fontSize="large" />
+                <Badge badgeContent={betOpenQty} color="secondary">
+                  <SportsFootballIcon fontSize="large" />
+                </Badge>
               </IconButton>
             </ButtonGroup>
           </AppBar>

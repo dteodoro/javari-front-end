@@ -1,16 +1,15 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import BetCardContainer from "../../containers/BetCardContainer";
 import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
 import api from "../../services/api";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { ISchedule, ISeasonFilter, IWeek } from "../../types/schedule";
 import style from "./styles.module.scss";
 import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
-import ISeason from "../../types/season";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Bets = () => {
   const year = "2023";
@@ -27,7 +26,7 @@ const Bets = () => {
   const [data, setData] = useState<ISchedule[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { bettor } = useAuth();
+  const { bettor } = useBettorContext();
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -17,15 +17,16 @@ import GppBadIcon from "@mui/icons-material/GppBad";
 import { useState } from "react";
 import { IBetting } from "../../types/betting";
 import BetCardTeam from "../BetCardTeam";
-import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import api from "../../services/api";
 import { API_CORE } from "../../types/constants";
+import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 interface Props {
   schedule: ISchedule | undefined;
 }
 
 const BetCard = ({ schedule }: Props) => {
+  const { updateBetsOpen } = useBettorContext();
   const [onError, setOnError] = useState(false);
   const getTeam = (teamType: string | undefined) => {
     return schedule?.competitors.find(
@@ -39,12 +40,15 @@ const BetCard = ({ schedule }: Props) => {
   const [selected, setSelected] = useState<IBetting | undefined | null>(
     schedule?.bet
   );
-  const { bettor } = useAuth();
+  const { bettor } = useBettorContext();
 
   const makeBet = async (bet: IBetting) => {
     return await api
       .post(`${API_CORE}/bets`, bet)
-      .then((response) => response.data)
+      .then((response) => {
+        updateBetsOpen();
+        return response.data;
+      })
       .catch(() => setOnError(true));
   };
 
@@ -74,6 +78,8 @@ const BetCard = ({ schedule }: Props) => {
   const handleBetClick = (bet: IBetting) => {
     if (selected?.bet === bet.bet) {
       setSelected(undefined);
+      bet.bet = undefined;
+      makeBet(bet);
     } else {
       setSelected(bet);
       makeBet(bet);
