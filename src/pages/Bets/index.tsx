@@ -1,6 +1,6 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import BetCardContainer from "../../containers/BetCardContainer";
 import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
@@ -10,13 +10,20 @@ import { ISchedule, ISeasonFilter, IWeek } from "../../types/schedule";
 import style from "./styles.module.scss";
 import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
+import ISeason from "../../types/season";
 
 const Bets = () => {
   const year = "2023";
   const [seasons, setSeasons] = useState<ISeasonFilter[]>([]);
   const [week, setWeek] = useState<IWeek[] | undefined>([]);
-  const [selectedSeason, setSelectedSeason] = useState<string>("");
-  const [selectedWeek, setSelectedWeek] = useState<string>("");
+  const [selectedSeason, setSelectedSeason] = useState<string>(() => {
+    let lsSeason = localStorage.getItem("seasonFilter");
+    return lsSeason ? (lsSeason as string) : "";
+  });
+  const [selectedWeek, setSelectedWeek] = useState<string>(() => {
+    let lsWeek = localStorage.getItem("weekFilter");
+    return lsWeek ? (lsWeek as string) : "";
+  });
   const [data, setData] = useState<ISchedule[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +38,8 @@ const Bets = () => {
         `${API_CORE}/schedules?bettor=${bettor?.userId}${seasonFilter}${weekFilter}`
       );
       setData(response.data);
+      localStorage.setItem("seasonFilter", selectedSeason);
+      localStorage.setItem("weekFilter", selectedWeek);
       setLoading(false);
     };
     fetchData();
@@ -39,7 +48,12 @@ const Bets = () => {
   useEffect(() => {
     const fetchData = async () => {
       const responseMenu = await api.get(`${API_CORE}/seasons/filters`);
-      setSeasons(responseMenu.data);
+      let seasons: ISeasonFilter[] = responseMenu.data;
+      setSeasons(seasons);
+      setSelectedSeason(selectedSeason);
+      let season = seasons.find((s) => s.seasonId === selectedSeason);
+      setWeek(season?.weeks);
+      setSelectedWeek(selectedWeek);
     };
     fetchData();
   }, []);

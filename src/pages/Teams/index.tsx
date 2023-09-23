@@ -40,10 +40,6 @@ const Teams = () => {
     fetchData();
   }, [conference, division]);
 
-  useEffect(() => {
-    console.log("render");
-  }, [favoriteTeam]);
-
   return (
     <Container className={style.root}>
       <Container className={style.filterBar}>
