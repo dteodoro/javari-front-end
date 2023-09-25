@@ -28,7 +28,10 @@ const BettorContext = createContext<BettorContextState>(
 );
 
 const BettorProvider: React.FC = ({ children }) => {
-  const [bettor, setBettor] = useState<IBettor>({} as IBettor);
+  let currentUser = localStorage.getItem("javari-bettor");
+  const [bettor, setBettor] = useState<IBettor>(
+    currentUser ? JSON.parse(currentUser) : ({} as IBettor)
+  );
   const [favoriteTeam, setFavoriteTeam] = useState<ITeam>({} as ITeam);
   const [betsOpen, setBetsOpen] = useState(0);
 
