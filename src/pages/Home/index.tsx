@@ -24,7 +24,7 @@ import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 import Loading from "../../components/Loading";
 
 const Home: React.FC = () => {
-  const { userLogged, setLoading, signOut } = useAuth();
+  const { userLogged, setLoading } = useAuth();
   const { bettor, favoriteTeam } = useBettorContext();
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
   const [rivals, setRivals] = useState<IPlayer[]>([]);
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
       fetchData();
       setLoading(false);
     }
-  }, [bettor, userLogged, navigate]);
+  }, [bettor, userLogged]);
 
   return (
     <Container className={style.root}>
@@ -140,13 +140,13 @@ const Home: React.FC = () => {
             {rivals.length > 0 && (
               <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                 <ListCardContainer title="Rank">
-                  {rivals.map((player) =>
-                    rivalsLoading ? (
-                      <Skeleton variant="rectangular" height={60} />
-                    ) : (
-                      <PlayerCard key={player.bettorId} player={player} />
-                    )
-                  )}
+                  {rivalsLoading
+                    ? [1, 2, 3, 4].map(() => (
+                        <Skeleton variant="rectangular" height={60} />
+                      ))
+                    : rivals.map((player) => (
+                        <PlayerCard key={player.bettorId} player={player} />
+                      ))}
                 </ListCardContainer>
               </Grid>
             )}
