@@ -8,6 +8,10 @@ interface AuthContextState {
   signIn({ email, password }: UserData): Promise<void>;
   signOut(): void;
   userLogged(): boolean;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  onError: boolean;
+  setOnError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface UserData {
@@ -25,6 +29,8 @@ interface TokenState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
+  const [onError, setOnError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<TokenState | undefined>(() => {
     const accessToken = localStorage.getItem("@PermissionYT:accessToken");
     const refreshToken = localStorage.getItem("@PermissionYT:refreshToken");
@@ -38,17 +44,25 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const logIn = useCallback(async ({ email, password }: UserData) => {
-    const responseAuth = await api.post(`${API_AUTH}/authenticate`, {
-      email,
-      password,
-    });
-    const { access_token, refresh_token } = responseAuth.data;
+    setLoading(true);
+    const responseAuth = await api
+      .post(`${API_AUTH}/authenticate`, {
+        email,
+        password,
+      })
+      .then((resp) => {
+        return resp.data;
+      })
+      .catch(() => setOnError(true));
+
+    const { access_token, refresh_token } = responseAuth;
 
     if (access_token && refresh_token) {
       setToken(access_token);
       localStorage.setItem("@PermissionYT:accessToken", access_token);
       api.defaults.headers.authorization = `Bearer ${access_token}`;
     }
+    setLoading(false);
   }, []);
 
   const signIn = useCallback(
@@ -97,6 +111,10 @@ const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         userLogged,
+        loading,
+        setLoading,
+        onError,
+        setOnError,
       }}
     >
       {children}

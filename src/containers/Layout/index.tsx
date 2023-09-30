@@ -31,6 +31,7 @@ import { navItem } from "../../routes";
 import PermissionComponent from "../../components/PermissionComponent";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
+import Loading from "../../components/Loading";
 
 interface Props {
   children?: React.ReactNode;
@@ -38,22 +39,26 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const { betsOpen } = useBettorContext();
+  const { loading, setLoading, userLogged, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [betOpenQty, setBetOpenQty] = useState(betsOpen);
   const navigate = useNavigate();
-  const auth = useAuth();
 
   useEffect(() => {
     setBetOpenQty(betsOpen);
   }, [betsOpen]);
 
+  useEffect(() => {
+    console.log("render", loading);
+  }, []);
+
   return (
     <Box className={style.root} minHeight="100vh">
-      {auth.userLogged() && (
+      {userLogged() && (
         <>
           <AppBar position="sticky" className={style.appBar}>
             <Toolbar>
-              {auth.userLogged() && (
+              {userLogged() && (
                 <IconButton
                   size="large"
                   edge="start"
@@ -115,7 +120,7 @@ export default function Layout({ children }: Props) {
               className={style.logoutButton}
               onClick={() => {
                 setOpen(!open);
-                auth.signOut();
+                signOut();
                 navigate("/");
                 window.location.reload();
               }}
@@ -125,8 +130,10 @@ export default function Layout({ children }: Props) {
           </Drawer>
         </>
       )}
-      <div className={style.page}>{children}</div>
-      {auth.userLogged() && (
+      <div className={style.page}>
+        {loading ? <Loading onLoading={loading} /> : <>{children}</>}
+      </div>
+      {userLogged() && (
         <Hidden smUp>
           <AppBar position="sticky" className={style.actionButtons}>
             <ButtonGroup className={style.actionsGroup}>

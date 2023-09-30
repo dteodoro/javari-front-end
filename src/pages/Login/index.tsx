@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import style from "./styles.module.scss";
 import {
+  Alert,
   Avatar,
   Button,
   Checkbox,
@@ -10,6 +11,7 @@ import {
   FormControlLabel,
   FormGroup,
   Link,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,25 +20,46 @@ import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Login = () => {
+  const { logIn, userLogged, setLoading, onError, setOnError } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const { logIn, userLogged } = useAuth();
   const { fetchBettor } = useBettorContext();
 
   const handleLogin = async () => {
-    await logIn({ email, password });
-    fetchBettor();
-    if (userLogged()) {
-      navigate("/home");
-    }
+    setLoading(true);
+    await logIn({ email, password })
+      .then((resp) => {
+        if (userLogged()) {
+          navigate("/home");
+        }
+        fetchBettor();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   return (
     <Container>
       <FormGroup className={style.root}>
+        <Snackbar
+          open={onError}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          sx={{ marginBottom: 12 }}
+          autoHideDuration={600}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOnError(!onError);
+            }}
+          >
+            Usuário ou senha inválidos!
+          </Alert>
+        </Snackbar>
         <Avatar
           alt="Remy Sharp"
           src="/login-avatar.svg"
@@ -53,6 +76,8 @@ const Login = () => {
           type="search"
           className={style.fieldText}
           onChange={(e) => setEmail(e.target.value)}
+          error={onError}
+          onFocus={() => (onError ? setOnError(false) : () => {})}
         />
         <TextField
           fullWidth
@@ -61,7 +86,9 @@ const Login = () => {
           type="password"
           label="Password"
           className={style.fieldText}
+          error={onError}
           onChange={(e) => setPassword(e.target.value)}
+          onFocus={() => (onError ? setOnError(false) : () => {})}
         />
 
         <FormControlLabel
