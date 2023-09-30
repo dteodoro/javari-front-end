@@ -137,19 +137,17 @@ const Home: React.FC = () => {
                 )}
               </Box>
             </Grid>
-            {rivals.length > 0 && (
-              <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-                <ListCardContainer title="Rank">
-                  {rivalsLoading
-                    ? [1, 2, 3, 4].map(() => (
-                        <Skeleton variant="rectangular" height={60} />
-                      ))
-                    : rivals.map((player) => (
-                        <PlayerCard key={player.bettorId} player={player} />
-                      ))}
-                </ListCardContainer>
-              </Grid>
-            )}
+            <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+              <ListCardContainer title="Rank">
+                {rivalsLoading
+                  ? [1, 2, 3, 4].map(() => (
+                      <Skeleton variant="rectangular" height={60} />
+                    ))
+                  : rivals.map((player) => (
+                      <PlayerCard key={player.bettorId} player={player} />
+                    ))}
+              </ListCardContainer>
+            </Grid>
           </Grid>
         </>
       )}
