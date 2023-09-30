@@ -56,12 +56,14 @@ const BettorProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await api
-        .get(`${API_CORE}/schedules/bettor/${bettor.userId}`)
-        .then((resp) => setBetsOpen(resp.data));
-      await api
-        .get(`${API_CORE}/bettor/${bettor.userId}/favoriteTeam`)
-        .then((resp) => setFavoriteTeam(resp.data));
+      if (bettor.userId) {
+        await api
+          .get(`${API_CORE}/schedules/bettor/${bettor.userId}`)
+          .then((resp) => setBetsOpen(resp.data));
+        await api
+          .get(`${API_CORE}/bettor/${bettor.userId}/favoriteTeam`)
+          .then((resp) => setFavoriteTeam(resp.data));
+      }
     };
     fetchData();
   }, [bettor]);
