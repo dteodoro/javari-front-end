@@ -21,13 +21,13 @@ import GroupsIcon from "@mui/icons-material/Groups";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import style from "./styles.module.scss";
-import { navItem } from "../../routes";
+import { RoutePath, navItem } from "../../routes";
 import PermissionComponent from "../../components/PermissionComponent";
 import { useAuth } from "../../store/contexts/Auth/AuthContext";
 import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
@@ -38,10 +38,12 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
+  const location = useLocation();
   const { betsOpen } = useBettorContext();
-  const { loading, setLoading, userLogged, signOut } = useAuth();
+  const { loading, userLogged, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [betOpenQty, setBetOpenQty] = useState(betsOpen);
+  const [currentPage, setCurrentPage] = useState<string>(location.pathname);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,8 +51,8 @@ export default function Layout({ children }: Props) {
   }, [betsOpen]);
 
   useEffect(() => {
-    console.log("render", loading);
-  }, []);
+    setCurrentPage(location.pathname);
+  }, [navigate]);
 
   return (
     <Box className={style.root} minHeight="100vh">
@@ -137,26 +139,55 @@ export default function Layout({ children }: Props) {
         <Hidden smUp>
           <AppBar position="sticky" className={style.actionButtons}>
             <ButtonGroup className={style.actionsGroup}>
-              <IconButton
-                className={style.action}
-                onClick={() => navigate("/teams")}
-              >
-                <GroupsIcon fontSize="large" />
-              </IconButton>
-              <IconButton
-                className={style.action}
-                onClick={() => navigate("/home")}
-              >
-                <HomeIcon fontSize="large" />
-              </IconButton>
-              <IconButton
-                className={style.action}
-                onClick={() => navigate("/bets")}
-              >
-                <Badge badgeContent={betOpenQty} color="secondary">
-                  <SportsFootballIcon fontSize="large" />
-                </Badge>
-              </IconButton>
+              {currentPage === RoutePath.TEAMS ? (
+                <Button
+                  className={`${style.action} ${style.selected}`}
+                  color="primary"
+                >
+                  <GroupsIcon fontSize="large" />
+                </Button>
+              ) : (
+                <Button
+                  className={style.action}
+                  onClick={() => navigate(RoutePath.TEAMS)}
+                >
+                  <GroupsIcon fontSize="large" />
+                </Button>
+              )}
+              {currentPage === RoutePath.HOME ? (
+                <Button
+                  className={`${style.action} ${style.selected}`}
+                  color="primary"
+                >
+                  <HomeIcon fontSize="large" />
+                </Button>
+              ) : (
+                <Button
+                  className={style.action}
+                  onClick={() => navigate(RoutePath.HOME)}
+                >
+                  <HomeIcon fontSize="large" />
+                </Button>
+              )}
+              {currentPage === RoutePath.BETS ? (
+                <Button
+                  className={`${style.action} ${style.selected}`}
+                  color="primary"
+                >
+                  <Badge badgeContent={betOpenQty} color="secondary">
+                    <SportsFootballIcon fontSize="large" />
+                  </Badge>
+                </Button>
+              ) : (
+                <Button
+                  className={style.action}
+                  onClick={() => navigate(RoutePath.BETS)}
+                >
+                  <Badge badgeContent={betOpenQty} color="secondary">
+                    <SportsFootballIcon fontSize="large" />
+                  </Badge>
+                </Button>
+              )}
             </ButtonGroup>
           </AppBar>
         </Hidden>
