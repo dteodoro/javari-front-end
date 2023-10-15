@@ -61,16 +61,13 @@ $drawer-width: 240px;
     width: auto;
     margin: 0 24px 8px 24px;
     color: gray;
-    border-top: 4px solid transparent;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
     padding-top: 12px;
+    border-top: 4px solid transparent !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
     &.selected {
-      border-top: 4px solid;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
+      border-top: 4px solid !important;
     }
   }
 }
