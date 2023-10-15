@@ -7,6 +7,20 @@ export interface ITeam {
   color?: string;
   alternativeColor?: string;
   slug?: string; //ex. las-vegas-raiders
-  logo: string;
+  logo?: string;
+  scoreWins?: number;
+  scoreLosses?: number;
+  scoreTies?: number;
+  scoreWinPercentage?: string;
+  scoreHome?: string;
+  scoreRoad?: string;
+  scoreVersusDiv?: string;
+  scoreVersusConf?: string;
+  scorePointsFor?: number;
+  scorePointsAgainst?: number;
+  scorePointDifferential?: number;
+  scoreStreak?: string;
   scoreScoreSummary?: string;
+  scoreSeasonYear?: number;
+  scoreSeasonName?: string;
 }

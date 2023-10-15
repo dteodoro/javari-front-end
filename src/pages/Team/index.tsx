@@ -20,12 +20,14 @@ import api from "../../services/api";
 import { IScheduleBySeason } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
 import NoContent from "../../components/NoContent";
+import StatsContainer from "../../containers/StatsContainer";
 
 const Team = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
   const [lastGames, setLastGames] = useState<IScheduleBySeason[]>([]);
+  const [stats, setStats] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,10 +70,22 @@ const Team = () => {
       </TeamHero>
       <Box>
         <NavigateButtons>
-          <Button>Last Games</Button>
-          <Button disabled>Stats</Button>
+          <Button
+            onClick={() => setStats(false)}
+            className={stats ? style.optSelected : ""}
+          >
+            Last Games
+          </Button>
+          <Button
+            onClick={() => setStats(true)}
+            className={!stats ? style.optSelected : ""}
+          >
+            Stats
+          </Button>
         </NavigateButtons>
-        {lastGames.length === 0 ? (
+        {stats ? (
+          <StatsContainer team={team} />
+        ) : lastGames.length === 0 ? (
           <NoContent label="No Results" />
         ) : (
           <Grid container className={style.divisionContainer}>
