@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://javari.ddns.net:8080",
+  baseURL: "http://darioteodoro.dev.br:8080",
   withCredentials: false,
   headers: {
     "Access-Control-Allow-Origin": "*",
