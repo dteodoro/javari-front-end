@@ -1,10 +1,16 @@
-FROM node:alpine AS development
-
-ENV NODE_ENV development
+# Build App
+FROM node:lts-alpine AS builder
 WORKDIR /app
-COPY package.json .
+COPY package*.json ./
 RUN npm install
-
 COPY . .
-EXPOSE  3000
-CMD npm start
+RUN npm run build
+
+# Build Image
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+#COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+
+# Comando padrão para iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]

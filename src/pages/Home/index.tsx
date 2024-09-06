@@ -24,7 +24,7 @@ import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 import Loading from "../../components/Loading";
 
 const Home: React.FC = () => {
-  const { userLogged, setLoading } = useAuth();
+  const { userLogged, setLoading, signOut } = useAuth();
   const { bettor, favoriteTeam } = useBettorContext();
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
   const [rivals, setRivals] = useState<IPlayer[]>([]);
@@ -54,7 +54,9 @@ const Home: React.FC = () => {
           setPlayer(currentPlayer);
           setPageLoading(false);
         })
-        .catch(() => {});
+        .catch(() => {
+          signOut();
+        });
 
       await api
         .get(`${API_CORE}/bettor/${bettor?.userId}/rivals`)
