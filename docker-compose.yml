@@ -5,11 +5,16 @@ services:
     image: node:alpine
     ports:
       - "3000:3000"
+    networks:
+      - javari-front
+      - javari-db
   javari-db:
     container_name: javari-db
     image: mysql:latest
     networks:
-      - javari-backend
+      - javari-db
 networks:
-  javari-backend:
+  javari-front:
+    driver: bridge
+  javari-db:
     driver: bridge

@@ -1,0 +1,60 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javari-front-end
+  #namespace: go
+  labels:
+    app: javari-front
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: javari-front
+  template:
+    metadata:
+      labels:
+        app: javari-front
+    spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+      - name: javari-front
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: javari-front-service
+  #namespace: go
+spec:
+  selector:
+    app: javari-front
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  #namespace: go
+  name: javari-front-ingress
+  annotations:
+    allow.http: "false"
+spec:
+  rules:
+  - host: darioteodoro.dev.br
+    http:
+      paths:
+        - path: /grolhas
+          backend:
+            serviceName: javari-front-service
+            servicePort: 80
