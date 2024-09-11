@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://darioteodoro.dev.br:8080",
+  baseURL: "http://javari-gateway",
   withCredentials: false,
   headers: {
     "Access-Control-Allow-Origin": "*",
