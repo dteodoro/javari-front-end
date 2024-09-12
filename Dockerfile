@@ -1,5 +1,5 @@
 # Build App
-FROM node:lts-alpine AS builder
+FROM node AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -9,7 +9,7 @@ RUN npm run build
 # Build Image
 FROM nginx:stable-alpine-perl
 COPY --from=builder /app/build /usr/share/nginx/html
-#COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 
 # Comando padrão para iniciar o Nginx
