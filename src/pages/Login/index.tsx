@@ -109,14 +109,14 @@ const Login = () => {
           Forgot password ?
         </Link>
         <Divider variant="middle" />
-        {/*         <Button
+        <Button
           variant="contained"
           size="large"
           className={style.buttonSignUp}
           onClick={() => navigate("/signup")}
         >
           Create New Account
-        </Button> */}
+        </Button> 
       </FormGroup>
     </Container>
   );
