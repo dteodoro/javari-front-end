@@ -10,7 +10,7 @@ RUN npm run build
 FROM nginx:latest
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
+EXPOSE 80/tcp
 
 # Comando padrão para iniciar o Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
