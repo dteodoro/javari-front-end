@@ -17,7 +17,7 @@ const AppRoutes: React.FC = () => {
         element={userLogged() ? <Navigate to={"/home"} /> : <Login />}
       />
       <Route key="signup" path="/signup" element={<SignUp />} />
-      <Route key="not-found" path="/*" element={<NotFound />} />
+      <Route key="not-found" path="/nfl/*" element={<NotFound />} />
       {routes.map((route) => {
         return (
           <Route

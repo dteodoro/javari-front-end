@@ -66,5 +66,6 @@
   "devDependencies": {
     "@types/react-avatar-editor": "^13.0.0",
     "typescript-plugin-css-modules": "^3.4.0"
-  }
+  },
+  "homepage": "/nfl"
 }
