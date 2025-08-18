@@ -57,9 +57,9 @@ const Bettor: React.FC = () => {
       </IconButton>
 
       <TeamHero
-        mainImage={rival.image ? rival.image : "avatar.svg"}
+        mainImage={rival.image ? rival.image : "/nfl/avatar.svg"}
         backgroundImage={
-          rival?.favoriteTeam ? rival.favoriteTeam.logo : "/SVG-rams-logo.svg"
+          rival?.favoriteTeam ? rival.favoriteTeam.logo : "/nfl/SVG-rams-logo.svg"
         }
       >
         <Typography mt={2} variant="h6">
