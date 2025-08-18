@@ -35,7 +35,7 @@ const SignUp = () => {
       <FormGroup className={style.root}>
         <Avatar
           alt="Remy Sharp"
-          src="/login-avatar.svg"
+          src="/nfl/login-avatar.svg"
           sx={{ width: 60, height: 60 }}
         />
         <Typography variant="h6" mb={2} mt={2}>

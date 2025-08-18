@@ -9,7 +9,7 @@ const Loading = ({ onLoading }: Props) => {
   return (
     <Box className={style.loadingContainer}>
       <Fade in={onLoading}>
-        <img src="/javari-loading.gif"></img>
+        <img src="/nfl/javari-loading.gif"></img>
       </Fade>
     </Box>
   );

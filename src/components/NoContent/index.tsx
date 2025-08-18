@@ -9,7 +9,7 @@ const NoContent = ({ label }: Props) => {
     <Box>
       <figure className={style.figure}>
         <figcaption className={style.figcaption}>{label}</figcaption>
-        <img src="/404.png" className={style.notfound} alt={label}></img>
+        <img src="/nfl/404.png" className={style.notfound} alt={label}></img>
       </figure>
     </Box>
   );

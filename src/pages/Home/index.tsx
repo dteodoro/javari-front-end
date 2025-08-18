@@ -96,7 +96,7 @@ const Home: React.FC = () => {
             backgroundImage={
               favoriteTeam?.id
                 ? player.favoriteTeam?.logo
-                : "/SVG-rams-logo.svg"
+                : "/nfl/SVG-rams-logo.svg"
             }
             editable
           >

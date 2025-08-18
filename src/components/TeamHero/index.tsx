@@ -44,7 +44,7 @@ const TeamHero = (props: Props) => {
     >
       {logoEdit && (
         <AvatarEditorModal
-          mainImage={props.mainImage ? props.mainImage : "/avatar.svg"}
+          mainImage={props.mainImage ? props.mainImage : "/nfl/avatar.svg"}
         />
       )}
       <Box className={style.teamInfo}>

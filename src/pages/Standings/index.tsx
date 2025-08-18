@@ -8,7 +8,7 @@ import { ITeam } from "../../types/team";
 const teamData: ITeam[] = [
   {
     id: "1",
-    logo: "/nfl.svg",
+    logo: "/nfl/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
@@ -17,7 +17,7 @@ const teamData: ITeam[] = [
   },
   {
     id: "2",
-    logo: "/nfl.svg",
+    logo: "/nfl/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
@@ -26,7 +26,7 @@ const teamData: ITeam[] = [
   },
   {
     id: "3",
-    logo: "/nfl.svg",
+    logo: "/nfl/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
@@ -35,7 +35,7 @@ const teamData: ITeam[] = [
   },
   {
     id: "4",
-    logo: "/nfl.svg",
+    logo: "/nfl/nfl.svg",
     name: "Raiders",
     shortDisplayName: "Las Vegas",
     displayName: "Las Vegas Raiders",
