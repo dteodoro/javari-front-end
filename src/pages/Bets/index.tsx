@@ -1,6 +1,6 @@
 import { Box, Container, MenuItem, Typography } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import BetCardContainer from "../../containers/BetCardContainer";
 import BetCardSkeletonContainer from "../../containers/BetCardContainer/BetCardSkeletonContainer";
@@ -12,7 +12,7 @@ import NoContent from "../../components/NoContent";
 import { useBettorContext } from "../../store/contexts/Auth/BettorContext";
 
 const Bets = () => {
-  const year = "2023";
+  const year = useMemo(() => new Date().getFullYear().toString(), []);  
   const [seasons, setSeasons] = useState<ISeasonFilter[]>([]);
   const [week, setWeek] = useState<IWeek[] | undefined>([]);
   const [selectedSeason, setSelectedSeason] = useState<string>(() => {
