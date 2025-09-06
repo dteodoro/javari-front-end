@@ -1,5 +1,5 @@
 import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import style from "./styles.module.scss";
@@ -15,6 +15,7 @@ import { IPlayer } from "../../types/player";
 import { API_CORE } from "../../types/constants";
 
 const Bettor: React.FC = () => {
+  const year = useMemo(() => new Date().getFullYear().toString(), []);  
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ const Bettor: React.FC = () => {
         }
       });
       const schedulesResp = await api.get(
-        `${API_CORE}/schedules/season/2023/bettor/${id}`
+        `${API_CORE}/schedules/season/${year}/bettor/${id}`
       );
       setLastGames(schedulesResp.data);
     }

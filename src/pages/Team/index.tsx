@@ -15,7 +15,7 @@ import ListCardContainer from "../../containers/ListCardContainer";
 import style from "./styles.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { ITeam } from "../../types/team";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import api from "../../services/api";
 import { IScheduleBySeason } from "../../types/schedule";
 import { API_CORE } from "../../types/constants";
@@ -23,6 +23,7 @@ import NoContent from "../../components/NoContent";
 import StatsContainer from "../../containers/StatsContainer";
 
 const Team = () => {
+  const year = useMemo(() => new Date().getFullYear().toString(), []);  
   const navigate = useNavigate();
   const { id } = useParams();
   const [team, setTeam] = useState<ITeam>({} as ITeam);
@@ -34,7 +35,7 @@ const Team = () => {
     async function fetchData() {
       const teamResp = await api.get(`${API_CORE}/teams/${id}`);
       const schedulesResp = await api.get(
-        `${API_CORE}/schedules/season/2023/team/${id}`
+        `${API_CORE}/schedules/season/${year}/team/${id}`
       );
       setTeam(teamResp.data);
       setLastGames(schedulesResp.data);
