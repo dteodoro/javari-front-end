@@ -1,5 +1,21 @@
+.root {
+  margin-left: 0;
+  margin-right: 0;
+}
 .pageButtons {
   position: fixed;
   width: 100%;
   height: 56px;
+}
+.optSelected {
+  background-color: #013369 !important;
+}
+.filterBarTitle {
+  padding: 8px 0 8px 0;
+  padding-bottom: 16px;
+}
+.standingsContainer {
+  padding-top: 16px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

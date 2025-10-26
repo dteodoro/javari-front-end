@@ -4,21 +4,21 @@ import { IDivision } from "../../types/division";
 import TeamCard from "../../components/TeamCard";
 import style from "./styles.module.scss";
 import ListCardContainer from "../ListCardContainer";
+import { IConference } from "../../types/conference";
 
 interface Props {
-  divisions: IDivision[];
-  conference?: string;
+  conferences: IConference[];
 }
 
-const DivisionContainer = ({ divisions, conference }: Props) => {
+const ConferenceContainer = ({ conferences }: Props) => {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={4}
       className={style.divisionContainer}
-      key={`${conference}-grid`}
+      key={`all-conference-grid`}
     >
-      {divisions.map((d) => (
+      {conferences.map((conf) => (
         <Grid
           container
           item
@@ -26,29 +26,24 @@ const DivisionContainer = ({ divisions, conference }: Props) => {
           xs={12}
           sm={6}
           md={6}
-          lg={4}
-          xl={4}
-          key={`${d.name}-grid`}
+          lg={6}
+          xl={6}
+          key={`${conf.name}-grid`}
         >
           <ListCardContainer
-            key={`${d.name}-${conference}`}
-            title={d.name}
-            subtitle={conference}
+            key={`${conf.name}`}
+            title={conf.name}
           >
-            {d.teams
+            {conf.divisions.flatMap((d) => d.teams)
               .slice()
               .sort((a, b) => {
                 const wpDiff =
                   (b.scoreWinPercentage ?? -Infinity) -
                   (a.scoreWinPercentage ?? -Infinity);
                 if (wpDiff !== 0) return wpDiff;
-                const wdDiff =
-                  (b.scoreWinDivPercentage ?? -Infinity) -
-                  (a.scoreWinDivPercentage ?? -Infinity);
-                if (wdDiff !== 0) return wdDiff;
                 return (b.scoreWinConfPercentage ?? -Infinity) -(a.scoreWinConfPercentage ?? -Infinity);
               }).map((team) => (
-              <TeamCard team={team} key={team.id} editable={true} />
+              <TeamCard team={team} key={team.id} editable={true}/>
             ))}
           </ListCardContainer>
         </Grid>
@@ -57,4 +52,4 @@ const DivisionContainer = ({ divisions, conference }: Props) => {
   );
 };
 
-export default DivisionContainer;
+export default ConferenceContainer;

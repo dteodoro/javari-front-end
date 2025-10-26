@@ -71,9 +71,6 @@ const Bets = () => {
   return (
     <Container>
       <Box className={style.filterBar}>
-        <Typography fontWeight="bold" variant="subtitle1" mb={2}>
-          NFL SCHEDULES - {year}
-        </Typography>
         <Box className={style.selectsGroup}>
           <Select
             className={`${style.selectItem} ${style.firstSelect}`}

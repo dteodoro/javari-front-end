@@ -11,7 +11,9 @@ export interface ITeam {
   scoreWins?: number;
   scoreLosses?: number;
   scoreTies?: number;
-  scoreWinPercentage?: string;
+  scoreWinPercentage?: number;
+  scoreWinDivPercentage?: number;
+  scoreWinConfPercentage?: number;
   scoreHome?: string;
   scoreRoad?: string;
   scoreVersusDiv?: string;
@@ -23,4 +25,5 @@ export interface ITeam {
   scoreScoreSummary?: string;
   scoreSeasonYear?: number;
   scoreSeasonName?: string;
+  scoreStrengthOfVictory?: number;
 }

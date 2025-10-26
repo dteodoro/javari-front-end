@@ -69,7 +69,7 @@ const Team = () => {
           {team.scoreScoreSummary}
         </Typography>
       </TeamHero>
-      <Box>
+      <Box width="100%">
         <NavigateButtons>
           <Button
             onClick={() => setStats(false)}

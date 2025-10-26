@@ -18,6 +18,7 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import GroupsIcon from "@mui/icons-material/Groups";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useEffect, useState } from "react";
@@ -76,7 +77,13 @@ export default function Layout({ children }: Props) {
                 </IconButton>
               )}
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                NFL
+                {currentPage === RoutePath.TEAMS
+                  ? "Teams"
+                  : currentPage === RoutePath.BETS
+                  ? "Schedules"
+                  : currentPage === RoutePath.STANDINGS
+                  ? "Standings"
+                  : "Home"}
               </Typography>
             </Toolbar>
           </AppBar>
@@ -139,19 +146,19 @@ export default function Layout({ children }: Props) {
         <Hidden smUp>
           <AppBar position="sticky" className={style.actionButtons}>
             <ButtonGroup className={style.actionsGroup}>
-              {currentPage === RoutePath.TEAMS ? (
+              {currentPage === RoutePath.STANDINGS ? (
                 <Button
                   className={`${style.action} ${style.selected}`}
                   color="primary"
                 >
-                  <GroupsIcon fontSize="large" />
+                  <EmojiEventsIcon fontSize="large" />
                 </Button>
               ) : (
                 <Button
                   className={style.action}
-                  onClick={() => navigate(RoutePath.TEAMS)}
+                  onClick={() => navigate(RoutePath.STANDINGS)}
                 >
-                  <GroupsIcon fontSize="large" />
+                  <EmojiEventsIcon fontSize="large" />
                 </Button>
               )}
               {currentPage === RoutePath.HOME ? (

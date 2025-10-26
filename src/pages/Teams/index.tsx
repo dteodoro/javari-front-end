@@ -43,13 +43,6 @@ const Teams = () => {
   return (
     <Container className={style.root}>
       <Container className={style.filterBar}>
-        <Typography
-          fontWeight="bold"
-          variant="h6"
-          className={style.filterBarTitle}
-        >
-          NFL TEAMS
-        </Typography>
         <Box className={style.selectsGroup}>
           <Select
             className={style.selectItem}
