@@ -118,11 +118,11 @@ const BetCard = ({ schedule }: Props) => {
       </Box>
 
       <CardContent className={style.cardContent}>
-        <BetCardTeam team={getTeam("AWAY")} />
+        <BetCardTeam team={getTeam("AWAY")} homeAway="away" />
         <Typography margin={0} variant="h6" textAlign={"center"}>
           @
         </Typography>
-        <BetCardTeam team={getTeam("HOME")} />
+        <BetCardTeam team={getTeam("HOME")} homeAway="home" />
         <div className={getClass()} style={getStyle()} />
       </CardContent>
 

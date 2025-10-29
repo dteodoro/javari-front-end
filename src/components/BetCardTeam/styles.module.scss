@@ -9,3 +9,36 @@
   text-align: center;
   z-index: 999;
 }
+%teamGroup {
+  width: 48px;
+  position: absolute;
+  top: 24px;
+  z-index: 1;
+  line-height: 0.9;
+  background-color: rgba(128, 128, 128, 0.15);
+  span {
+    font-size: 0.70rem;
+  }
+}
+
+.teamGroupHome {
+  @extend %teamGroup;
+  right: 0;
+  text-align: left;
+  border-radius: 4px 0 0 4px;
+  padding: 2px 8px 2px 4px;
+}
+
+.teamGroupAway {
+  @extend %teamGroup;
+  left: 0;
+  text-align: end;
+  border-radius: 0 4px 4px 0;
+  padding: 2px 4px 2px 8px;
+}
+.teamGroupAFC {
+  background-color: rgba(209, 13, 29, 0.1);
+}
+.teamGroupNFC {
+  background-color: rgba(0, 57, 104, 0.1);
+}

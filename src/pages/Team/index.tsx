@@ -68,6 +68,9 @@ const Team = () => {
         <Typography margin={0} variant="caption">
           {team.scoreScoreSummary}
         </Typography>
+        <Typography margin={0} variant="body2" className={style.teamGroupInfo}>
+          {team.conference} - {team.division}
+        </Typography>
       </TeamHero>
       <Box width="100%">
         <NavigateButtons>

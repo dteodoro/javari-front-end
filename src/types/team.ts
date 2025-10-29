@@ -1,13 +1,15 @@
 export interface ITeam {
   id: string;
-  name: string; //ex. Raiders
-  abbreviation: string; //ex. LV
-  displayName: string; //ex. Las Vegas Raiders
-  shortDisplayName: string; //ex. Las Vegas
+  name: string;
+  abbreviation: string;
+  displayName: string; 
+  shortDisplayName: string; 
   color?: string;
   alternativeColor?: string;
-  slug?: string; //ex. las-vegas-raiders
+  slug?: string; 
   logo?: string;
+  conference?: string; 
+  division?: string; 
   scoreWins?: number;
   scoreLosses?: number;
   scoreTies?: number;
